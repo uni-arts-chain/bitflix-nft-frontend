@@ -27,7 +27,7 @@
                 </li>
             </ul>
             <div class="session">
-                <router-link to="/" class="login"> LOG IN </router-link>
+                <router-link to="/login" class="login"> LOG IN </router-link>
                 <router-link to="/" class="sign-up"> SIGN UP </router-link>
             </div>
         </div>

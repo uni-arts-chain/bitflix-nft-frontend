@@ -1,11 +1,11 @@
 <template>
     <div id="app">
-        <Navbar class="navbar" />
+        <Navbar class="navbar" v-if="!isSession" />
         <main class="main" v-if="!isLoading">
             <router-view />
         </main>
         <main class="main loading" v-else v-loading="true"></main>
-        <Footer class="footer" />
+        <Footer class="footer" v-if="!isSession" />
     </div>
 </template>
 
@@ -27,6 +27,16 @@ export default {
         // await this.$extension.isReady();
         // await this.getInfo();
         // this.isLoading = false;
+    },
+    computed: {
+        isSession() {
+            switch (this.$route.path) {
+                case "/login":
+                case "/signup":
+                    return true;
+            }
+            return false;
+        },
     },
     methods: {
         async getInfo() {
