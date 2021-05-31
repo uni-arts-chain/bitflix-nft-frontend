@@ -15,6 +15,12 @@ const routes = [
                 /* webpackChunkName: "session" */ "@/views/Session/Login.vue"
             ),
     },
+    {
+        path: "/packs",
+        name: "Packs",
+        component: () =>
+            import(/* webpackChunkName: "packs" */ "@/views/Packs/Index.vue"),
+    },
 ];
 
 if (NODE_ENV !== "production" || window.NODE_CONFIG.env === "development") {

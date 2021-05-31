@@ -34,41 +34,39 @@
         </svg>
         <div class="card-cate-group container">
             <div class="card-cate-item">
-                <div class="img-wrapper">
-                    <img
-                        class="cover"
-                        src="@/assets/images/cate-card-item1.png"
-                    />
-                    <img class="coin" src="@/assets/images/cate-coin1.png" />
-                </div>
+                <ActionMovie
+                    title="STAR NFT"
+                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coinUrl="`${require('@/assets/images/cate-coin1.png')}`"
+                />
                 <span>STAR</span>
             </div>
             <div class="card-cate-item">
-                <div class="img-wrapper">
-                    <img
-                        class="cover"
-                        src="@/assets/images/cate-card-item2.png"
-                    />
-                    <img class="coin" src="@/assets/images/cate-coin2.png" />
-                </div>
+                <ActionMovie
+                    title="MOVIE NFT"
+                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coinUrl="`${require('@/assets/images/cate-coin2.png')}`"
+                />
                 <span>MOVIE</span>
             </div>
             <div class="card-cate-item">
-                <div class="img-wrapper">
-                    <img
-                        class="cover"
-                        src="@/assets/images/cate-card-item3.png"
-                    />
-                    <img class="coin" src="@/assets/images/cate-coin3.png" />
-                </div>
+                <ActionMovie
+                    title="ACTIVISE NFT"
+                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coinUrl="`${require('@/assets/images/cate-coin3.png')}`"
+                />
                 <span>ACTIVISE</span>
             </div>
         </div>
     </div>
 </template>
 <script>
+import ActionMovie from "@/components/ActionMovie";
 export default {
     name: "cate",
+    components: {
+        ActionMovie,
+    },
     data() {
         return {};
     },
@@ -140,6 +138,7 @@ export default {
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    padding-top: 23px;
     > span {
         font-size: 27px;
         font-family: "Montserrat-Medium";
@@ -148,23 +147,12 @@ export default {
         line-height: 61px;
         letter-spacing: 0px;
     }
-    .cover {
-        width: 100%;
-        height: 100%;
-    }
-    .coin {
-        position: absolute;
-        top: 97px;
-        right: 34px;
-        width: 58px;
-        height: 58px;
-    }
-    .img-wrapper {
-        position: relative;
-        width: 279px;
-        height: 292px;
+    .action-movie {
+        width: 239px;
+        height: 252px;
+        font-size: 30px;
         margin-top: 23px;
-        margin-bottom: 7px;
+        margin-bottom: 30px;
     }
 }
 </style>

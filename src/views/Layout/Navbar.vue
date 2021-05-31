@@ -6,7 +6,7 @@
             <ul class="link-group">
                 <li>
                     <router-link
-                        to="/"
+                        to="/packs"
                         :class="{ active: activeTab == 'PACKS' }"
                         >PACKS</router-link
                     >
