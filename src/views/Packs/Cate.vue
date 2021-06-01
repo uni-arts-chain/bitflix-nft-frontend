@@ -110,6 +110,7 @@ export default {
 <style lang="scss" scoped>
 .cate {
     position: relative;
+    overflow: hidden;
     .cate-top {
         background-color: black;
         position: relative;
@@ -147,7 +148,7 @@ export default {
 
 .line2 {
     position: absolute;
-    bottom: -500px;
+    bottom: -540px;
     width: 100%;
     left: 0;
     z-index: 0;
@@ -344,6 +345,9 @@ export default {
         text-align: center;
         color: #ffffff;
         margin-bottom: 54px;
+    }
+    .section-cate {
+        margin: 0 20px;
     }
     .section-cate-title,
     .section-cate-title > span {

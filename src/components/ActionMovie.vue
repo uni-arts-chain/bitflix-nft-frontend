@@ -55,7 +55,7 @@ export default {
         width: 60%;
         position: absolute;
         top: 40%;
-        left: 7%;
+        left: 21px;
         transform: rotateZ(-13deg);
         z-index: 2;
     }
@@ -72,9 +72,8 @@ export default {
         position: absolute;
         z-index: 1;
         top: 30%;
-        right: 5%;
+        right: 15px;
         width: 21%;
-        height: 19.5%;
     }
 }
 </style>
