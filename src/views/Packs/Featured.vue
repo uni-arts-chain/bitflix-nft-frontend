@@ -84,6 +84,7 @@ export default {
     min-width: 100%;
 }
 .action-movie {
+    cursor: pointer;
     margin-left: 10px;
     width: 100%;
     width: 219px;

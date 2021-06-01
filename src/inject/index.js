@@ -5,8 +5,8 @@ import Notification from "@/components/Notification";
 
 import detect from "@/plugins/detect";
 import http from "@/plugins/http";
-import extension from "@/plugins/extension";
-import rpc from "@/plugins/rpc";
+// import extension from "@/plugins/extension";
+// import rpc from "@/plugins/rpc";
 import element from "@/plugins/element";
 import copy from "clipboard-copy";
 
@@ -24,8 +24,8 @@ export default {
         vue.prototype.$uniDialog = Dialog;
         vue.prototype.$uniAlert = Alert;
         vue.prototype.$http = http;
-        vue.prototype.$extension = extension;
-        vue.prototype.$rpc = rpc;
+        // vue.prototype.$extension = extension;
+        // vue.prototype.$rpc = rpc;
         vue.prototype.$copy = copy;
     },
 };
