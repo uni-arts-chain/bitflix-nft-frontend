@@ -21,6 +21,12 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "packs" */ "@/views/Packs/Index.vue"),
     },
+    {
+        path: "/packs/detail/:id",
+        name: "Packs",
+        component: () =>
+            import(/* webpackChunkName: "packs" */ "@/views/Packs/Detail.vue"),
+    },
 ];
 
 if (NODE_ENV !== "production" || window.NODE_CONFIG.env === "development") {

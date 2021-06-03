@@ -8,6 +8,7 @@
                     <div class="label">DROPS 2:00 AM CST MAY 15</div>
                     <div class="recommend">RECOMMENDED PACK</div>
                     <ActionMovie
+                        @click.native="goDetail(v)"
                         title="MOVIE NFT"
                         :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
                         :coinUrl="`${require('@/assets/images/cate-coin2.png')}`"
@@ -34,6 +35,12 @@ export default {
         return {
             list: [1, 2, 3, 4],
         };
+    },
+    methods: {
+        goDetail(item) {
+            console.log(item);
+            this.$router.push("/packs/detail/" + item);
+        },
     },
 };
 </script>

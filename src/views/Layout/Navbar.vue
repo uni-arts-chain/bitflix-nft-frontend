@@ -85,6 +85,7 @@ nav.dark {
     background-image: url(~@/assets/images/logo.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    cursor: pointer;
 }
 
 .container {
