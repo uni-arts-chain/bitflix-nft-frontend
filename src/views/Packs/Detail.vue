@@ -26,9 +26,7 @@
                 <div class="form-wrapper">
                     <div class="form-content">
                         <div class="form-content-container">
-                            <div class="nft-name">
-                                BASE SET (SERIES 2, RELEASE 33)
-                            </div>
+                            <div class="nft-name">BITFLIX TEST</div>
                             <div class="total-amount">307500 Total</div>
                             <div class="nft-label">NOW ON SALE!</div>
                             <div class="price-body">
@@ -50,12 +48,7 @@
                                     Requirements
                                 </div>
                                 <div class="requirements-desc">
-                                    This pack release is only accessible to
-                                    those who reserved a slot earlier in the
-                                    week. If you didn't reserve your spot for
-                                    this week's release, make sure to reserve
-                                    your spot for the next Base Set Pack Release
-                                    on May 14!
+                                    Bitflix Test
                                 </div>
                             </div>
                             <div class="enter-button">
