@@ -22,7 +22,11 @@
                 :muted="isMute"
             ></video>
         </div>
-        <div class="video-control" v-if="isPlay && !isCover">
+        <div
+            class="video-control"
+            :style="`bottom: ${bottomHeight}px`"
+            v-if="isPlay && !isCover"
+        >
             <div class="icon" @click="replay">
                 <icon-svg icon-class="replay" />
             </div>
@@ -76,6 +80,7 @@ export default {
             isFullscreen: false,
             isLoading: true,
             isResponsiveHorizontal: false,
+            bottomHeight: 0,
         };
     },
     methods: {
@@ -139,6 +144,10 @@ export default {
                         height: this.$refs.videoContainer.offsetWidth / rato,
                         width: this.$refs.videoContainer.offsetWidth,
                     });
+                    this.bottomHeight =
+                        (this.$refs.videoContainer.offsetHeight -
+                            this.$refs.videoContainer.offsetWidth / rato) /
+                        2;
                 } else {
                     this.$emit("ImgLoaded", {
                         height: this.$refs.video.offsetHeight,
