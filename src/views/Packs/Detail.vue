@@ -86,52 +86,7 @@
                                         Pack details
                                     </div>
                                     <div class="info-sub-desc">
-                                        <p>
-                                            Nothing beats the NBA Top Shot pack
-                                            opening experience. This pack is
-                                            available for purchase by collectors
-                                            who reserved their spot between May
-                                            4-5. If you missed out on reserving
-                                            this base set pack don't worry! You
-                                            can reserve the next base set pack
-                                            here!
-                                        </p>
-                                        <p>
-                                            Read more about NBA Top Shot
-                                            reservations in our blog *Please
-                                            note that while all collectors are
-                                            eligible to reserve packs, our
-                                            compliance team will ensure that
-                                            only accounts in good standing will
-                                            be permitted to purchase packs when
-                                            the purchase window opens. Remember
-                                            that each collector may only have a
-                                            single NBA Top Shot account.
-                                        </p>
-                                        <p>
-                                            Base Set (Series 2, Release 33):
-                                            This is our thirty-third Series 2
-                                            release specifically dedicated to
-                                            the Base Set, an excellent value for
-                                            collectors of all levels. Each of
-                                            these packs contain 3 Moments from
-                                            the Series 2 Base Set. A perfect
-                                            place to start, or to complete, your
-                                            personal collection. (As a common
-                                            pack, when these sell out we may
-                                            make a new release available.)
-                                        </p>
-                                        <p>
-                                            What's Inside? <br />These Base Set
-                                            packs include 314 Moments, including
-                                            54 never-before-seen Moments, 32
-                                            Three-Star Rookie Moments, 87 other
-                                            Top Shot Debuts and a wide variety
-                                            of memorable highlights from the
-                                            stars you know and love. View a
-                                            complete list of the Moments
-                                            available in this drop
-                                        </p>
+                                        <p>Bitflix Test</p>
                                     </div>
                                 </div>
                             </div>
