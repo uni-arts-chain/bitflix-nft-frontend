@@ -83,7 +83,7 @@ export default {
 @import "@/assets/styles/index.scss";
 
 #app {
-    text-align: center;
+    // text-align: center;
     color: #020202;
     min-height: 100%;
     background: #0c1e33;

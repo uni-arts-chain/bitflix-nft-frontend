@@ -2,17 +2,17 @@
 <template>
     <div class="cate">
         <div class="cate-top">
-            <div class="cate-item" style="width: 32%">
+            <div class="cate-item" style="width: 32%" @click="goPacks">
                 <div class="item-title1">GRAB & OPEN</div>
                 <div class="item-title2">PACKS</div>
                 <img src="@/assets/images/cube.png" />
             </div>
-            <div class="cate-item">
+            <div class="cate-item" @click="goMarketplace">
                 <div class="item-title1">BUILD AN EPIC</div>
                 <div class="item-title2">COLLECTION</div>
                 <img src="@/assets/images/card.png" />
             </div>
-            <div class="cate-item" style="width: 32%">
+            <div class="cate-item" style="width: 32%" @click="goReward">
                 <div class="item-title1">WIN EXCLUSIVE</div>
                 <div class="item-title2">REWARDS</div>
                 <img
@@ -24,8 +24,8 @@
         <svg class="desc-title" id="s9" width="760" height="90">
             <defs>
                 <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="0">
-                    <stop offset="0%" stop-color="#ffbcfd"></stop>
-                    <stop offset="100%" stop-color="#529ae3"></stop>
+                    <stop offset="0%" stop-color="#ffbcfd" />
+                    <stop offset="100%" stop-color="#529ae3" />
                 </linearGradient>
             </defs>
             <text font-size="110" x="0" y="90" fill="url(#g3)">
@@ -70,6 +70,17 @@ export default {
     data() {
         return {};
     },
+    methods: {
+        goPacks() {
+            this.$router.push("/packs");
+        },
+        goMarketplace() {
+            this.$router.push("/marketplace");
+        },
+        goReward() {
+            this.$router.push("/reward");
+        },
+    },
 };
 </script>
 <style lang="scss" scoped>
@@ -91,6 +102,7 @@ export default {
     justify-content: space-between;
 }
 .cate-item {
+    cursor: pointer;
     width: 36%;
     height: 100%;
     display: flex;

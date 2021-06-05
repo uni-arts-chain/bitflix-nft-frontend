@@ -27,6 +27,38 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "packs" */ "@/views/Packs/Detail.vue"),
     },
+    {
+        path: "/reward",
+        name: "reward",
+        component: () =>
+            import(/* webpackChunkName: "reward" */ "@/views/reward/Index"),
+    },
+    {
+        path: "/nftdetail",
+        name: "nftdetail",
+        component: () =>
+            import(/* webpackChunkName: "myNFT" */ "@/views/myNFT/Detail"),
+    },
+    {
+        path: "/questions",
+        name: "questions",
+        component: () =>
+            import(
+                /* webpackChunkName: "questions" */ "@/views/questions/Index"
+            ),
+    },
+    {
+        path: "/signup",
+        name: "signup",
+        component: () =>
+            import(/* webpackChunkName: "signUp" */ "@/views/Session/SignUp"),
+    },
+    {
+        path: "/history",
+        name: "history",
+        component: () =>
+            import(/* webpackChunkName: "history" */ "@/views/history/Index"),
+    },
 ];
 
 if (NODE_ENV !== "production" || window.NODE_CONFIG.env === "development") {

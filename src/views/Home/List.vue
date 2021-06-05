@@ -2,7 +2,7 @@
 <template>
     <div class="list">
         <div class="container">
-            <div class="item" v-for="(v, i) in list" :key="i">
+            <div class="item" v-for="(v, i) in list" :key="i" @click="goNFT">
                 <img class="top" src="@/assets/images/border-arrow-top.png" />
                 <img
                     class="bottom"
@@ -92,6 +92,11 @@ export default {
                 },
             ],
         };
+    },
+    methods: {
+        goNFT() {
+            this.$router.push("/nftdetail");
+        },
     },
 };
 </script>
