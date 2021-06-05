@@ -59,6 +59,30 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "history" */ "@/views/history/Index"),
     },
+    {
+        path: "/marketplace",
+        name: "marketplace",
+        component: () =>
+            import(
+                /* webpackChunkName: "marketplace" */ "@/views/marketplace/Index"
+            ),
+    },
+    {
+        path: "/marketplaceSearch",
+        name: "marketplaceSearch",
+        component: () =>
+            import(
+                /* webpackChunkName: "marketplaceSearch" */ "@/views/marketplace/Search"
+            ),
+    },
+    {
+        path: "/marketplaceDetail/:id?",
+        name: "marketplaceDetail",
+        component: () =>
+            import(
+                /* webpackChunkName: "marketplaceDetail" */ "@/views/marketplace/Detail"
+            ),
+    },
 ];
 
 if (NODE_ENV !== "production" || window.NODE_CONFIG.env === "development") {

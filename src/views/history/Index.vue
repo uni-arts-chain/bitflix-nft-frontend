@@ -4,8 +4,7 @@
             <span class="back-btn" @click="goback"
                 >&lt; BACK TO THE LISTING</span
             >
-            <div class="page-title">SALES HISTORY</div>
-            <div class="short-line"></div>
+            <BaseTitle class="page-title">SALES HISTORY</BaseTitle>
             <button class="btn">VIEW TOP SALES OF THIS LISTING</button>
             <el-table
                 class="table"
@@ -73,12 +72,14 @@
 
 <script>
 import { Table, TableColumn } from "element-ui";
+import BaseTitle from "@/components/BaseTitle";
 
 export default {
     name: "History",
     components: {
         [Table.name]: Table,
         [TableColumn.name]: TableColumn,
+        BaseTitle,
     },
     data() {
         return {
@@ -163,16 +164,6 @@ export default {
     }
     .page-title {
         margin-top: 36px;
-        font-size: 45px;
-        font-family: Montserrat, Montserrat-ExtraBold;
-        // font-weight: ExtraBold;
-        font-weight: bolder;
-        color: #ffffff;
-    }
-    .short-line {
-        width: 38px;
-        height: 6px;
-        background-color: #ffffff;
     }
     .btn {
         margin-top: 23px;

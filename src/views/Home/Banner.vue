@@ -18,7 +18,9 @@
             quotes.If Terminator was the IMO (Initial Movie Offering) then the
             BTS video clip of him saying "I'll be back" would be the NFT.
         </p>
-        <button class="start-button">START YOUR COLLECTION</button>
+        <button class="start-button" @click="goMarketplace">
+            START YOUR COLLECTION
+        </button>
     </div>
 </template>
 <script>
@@ -33,6 +35,11 @@ export default {
         return {
             BannerMp4,
         };
+    },
+    methods: {
+        goMarketplace() {
+            this.$router.push("/marketplace");
+        },
     },
 };
 </script>

@@ -13,7 +13,7 @@
                 </li>
                 <li>
                     <router-link
-                        to="/"
+                        to="/marketplace"
                         :class="{ active: activeTab == 'PACKS' }"
                         >MARKETPLACE</router-link
                     >

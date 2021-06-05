@@ -3,7 +3,12 @@
     <div class="previous">
         <div class="container">
             <div class="list">
-                <div class="item" v-for="(v, i) in list" :key="i">
+                <div
+                    class="item"
+                    v-for="(v, i) in list"
+                    :key="i"
+                    @click="onClick(v)"
+                >
                     <!-- <div class="label">DROPS 2:00 AM CST MAY 15</div>
                     <div class="recommend">RECOMMENDED PACK</div>-->
                     <ActionMovie
@@ -39,6 +44,11 @@ export default {
     data() {
         return {};
     },
+    methods: {
+        onClick(item) {
+            this.$emit("onMovieClick", item);
+        },
+    },
 };
 </script>
 <style lang="scss" scoped>
@@ -47,7 +57,8 @@ export default {
 }
 .line-set {
     position: absolute;
-    bottom: 0;
+    // bottom: 0;
+    top: 150px;
     left: 0;
     width: 100%;
 }
@@ -65,6 +76,7 @@ export default {
     overflow: hidden;
 }
 .item {
+    cursor: pointer;
     width: 260px;
     margin-right: 50px;
     float: left;
