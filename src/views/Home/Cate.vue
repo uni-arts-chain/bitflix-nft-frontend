@@ -33,7 +33,7 @@
             </text>
         </svg>
         <div class="card-cate-group container">
-            <div class="card-cate-item">
+            <div class="card-cate-item" @click="goMarketplaceDetail">
                 <ActionMovie
                     title="STAR NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
@@ -41,7 +41,7 @@
                 />
                 <span>STAR</span>
             </div>
-            <div class="card-cate-item">
+            <div class="card-cate-item" @click="goMarketplaceDetail">
                 <ActionMovie
                     title="MOVIE NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
@@ -49,7 +49,7 @@
                 />
                 <span>MOVIE</span>
             </div>
-            <div class="card-cate-item">
+            <div class="card-cate-item" @click="goMarketplaceDetail">
                 <ActionMovie
                     title="ACTIVISE NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
@@ -79,6 +79,9 @@ export default {
         },
         goReward() {
             this.$router.push("/reward");
+        },
+        goMarketplaceDetail() {
+            this.$router.push("/marketplaceDetail");
         },
     },
 };

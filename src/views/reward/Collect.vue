@@ -1,11 +1,11 @@
 <template>
     <div class="collect">
         <div class="top-time">
-            <span class="time">01:08:37:15</span>
+            <span class="time" :style="colorStyle">{{ time }}</span>
         </div>
         <div class="collect-content">
-            <div class="title">Cool Cats Challenge 4</div>
-            <div class="sub-title">Collect 10 Moments to get this reward</div>
+            <div class="title">{{ title }}</div>
+            <div class="sub-title">{{ desc }}</div>
 
             <div class="poster">
                 <div class="poster-image">
@@ -28,7 +28,26 @@
 <script>
 export default {
     name: "Reward",
-    components: {},
+    props: {
+        colorStyle: {
+            type: Object,
+            default: () => ({
+                "background-color": "#d73cd6",
+            }),
+        },
+        time: {
+            type: String,
+            default: "",
+        },
+        title: {
+            type: String,
+            default: "",
+        },
+        desc: {
+            type: String,
+            default: "",
+        },
+    },
     data() {
         return {};
     },
@@ -44,7 +63,7 @@ export default {
     margin-left: 31px;
     .time {
         padding: 13px 20px 14px 27px;
-        background-color: #d73cd6;
+        // background-color: #d73cd6;
         font-size: 19px;
         color: #ffffff;
         letter-spacing: 1px;

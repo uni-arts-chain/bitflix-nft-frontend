@@ -3,8 +3,8 @@
         <div class="reward">
             <span class="title">AVAILABLE</span>
             <div class="collect-container">
-                <Collect />
-                <Collect />
+                <Collect v-bind="collect1" />
+                <Collect v-bind="collect2" />
             </div>
         </div>
     </div>
@@ -19,7 +19,21 @@ export default {
         Collect,
     },
     data() {
-        return {};
+        return {
+            collect1: {
+                time: "01:08:37:15",
+                title: "Cool Cats Challenge 4",
+                desc: "Collect 10 Moments to get this reward",
+            },
+            collect2: {
+                time: "01:08:37:15",
+                title: "Cool Cats Challenge 5",
+                desc: "Collect 10 Moments to get this reward",
+                colorStyle: {
+                    "background-color": "#6499E5",
+                },
+            },
+        };
     },
 };
 </script>

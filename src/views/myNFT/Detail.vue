@@ -11,7 +11,20 @@
                     </div>
                     <div class="poster">
                         <div class="poster-image">
-                            <img src="@/assets/images/reward/collect1@2x.png" />
+                            <!-- <img src="@/assets/images/reward/collect1@2x.png" /> -->
+                            <div class="video-con">
+                                <video
+                                    id="nftDetailVideo"
+                                    width="265"
+                                    height="158"
+                                    :src="videoUrl"
+                                    poster="@/assets/images/reward/collect1@2x.png"
+                                    autoplay
+                                    muted
+                                    controls
+                                    controlslist="nodownload"
+                                ></video>
+                            </div>
                         </div>
                         <div class="poster-slogan">REWARD</div>
                     </div>
@@ -59,6 +72,7 @@
 
 <script>
 import ActionMovieList from "@/components/ActionMovieList";
+import Mp4 from "@/assets/video/banner-mp4.mp4";
 
 export default {
     name: "NFTDetail",
@@ -66,7 +80,9 @@ export default {
         ActionMovieList,
     },
     data() {
-        return {};
+        return {
+            videoUrl: Mp4,
+        };
     },
     methods: {
         goback() {
@@ -77,6 +93,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#nftDetailVideo {
+    /* 全屏按钮 */
+    &::-webkit-media-controls-fullscreen-button {
+        display: none;
+    }
+    /* 播放按钮 */
+    // &::-webkit-media-controls-play-button {
+    //     display: none;
+    // }
+    /* 进度条 */
+    &::-webkit-media-controls-timeline {
+        display: none;
+    }
+    /* 观看的当前时间 */
+    &::-webkit-media-controls-current-time-display {
+        display: none;
+    }
+    /* 剩余时间 */
+    &::-webkit-media-controls-time-remaining-display {
+        display: none;
+    }
+    /* 音量按钮 */
+    // &::-webkit-media-controls-mute-button {
+    //     display: none;
+    // }
+    // &::-webkit-media-controls-toggle-closed-captions-button {
+    //     display: none;
+    // }
+    /* 音量的控制条 */
+    // &::-webkit-media-controls-volume-slider {
+    //     display: none;
+    // }
+    /* 所有控件 */
+    // &::-webkit-media-controls-enclosure {
+    //     display: none;
+    // }
+    /* 下载按钮 */
+    &::-webkit-media-controls-download-button {
+        display: none;
+    }
+}
 .nft-detail-page {
     margin-top: 80px;
     margin-bottom: 67px;
@@ -176,9 +233,9 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            img {
-                max-height: 100%;
-            }
+            // .video-con {
+            //     width: 265px;
+            // }
         }
         .poster-slogan {
             transform: rotateZ(-90deg) translateX(-60px);

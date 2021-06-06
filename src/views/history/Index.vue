@@ -119,7 +119,7 @@ export default {
     },
     methods: {
         goback() {
-            this.$router.push("/");
+            this.$router.push("/marketplaceDetail");
         },
         cellStyle({ rowIndex }) {
             const style = {
