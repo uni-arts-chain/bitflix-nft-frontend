@@ -12,17 +12,10 @@
                 </div>
                 <div class="question-right">
                     <div class="right-con">
-                        <div class="title">
-                            WITNESS HISTORY. OWN THE MOMENTS.
-                        </div>
-                        <p class="desc">
-                            It’s a new era in fandom. And it’s about more than
-                            repping your favorite teams and players. For the
-                            first time, you can own the NBA's greatest
-                            highlights.Ready?
-                        </p>
+                        <div class="title">To be added</div>
+                        <p class="desc">To be added</p>
                         <button class="start-button">
-                            LEARN MORE ABOUT TOP SHOT
+                            LEARN MORE ABOUT BITFLIX
                         </button>
                     </div>
                 </div>
@@ -30,14 +23,8 @@
             <div class="question question-odd">
                 <div class="question-left">
                     <div class="left-con">
-                        <div class="title">COLLECT EPIC NBA MOMENTS</div>
-                        <p class="desc">
-                            Giannis' slams. Luka's dimes. Kyrie's crossovers.
-                            Every night, It’s a new era in fandom. And it’s
-                            about more than repping your favorite teams and
-                            players. For the first time, you can own the NBA's
-                            greatest highlights.Ready?
-                        </p>
+                        <div class="title">COLLECT EPIC BITFLIX MOMENTS</div>
+                        <p class="desc">To be added</p>
                     </div>
                 </div>
                 <div class="question-right">
@@ -69,13 +56,7 @@
                 <div class="question-right">
                     <div class="right-con">
                         <div class="title">CLASSIC MOVIE SCENES</div>
-                        <p class="desc">
-                            Only a scarce number of Top Shot Moments are
-                            released, so buil It’s a new era in fandom. And it’s
-                            about more than repping your favorite teams and
-                            players. For the first time, you can own the NBA's
-                            greatest highlights.Ready?
-                        </p>
+                        <p class="desc">To be added</p>
                     </div>
                 </div>
             </div>

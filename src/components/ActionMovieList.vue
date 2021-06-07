@@ -18,7 +18,7 @@
                     />
                     <div class="info">
                         <div class="name">RESERVATION: BASE SET</div>
-                        <div class="series">Series 2 ⅠRelease 34</div>
+                        <div class="series">To be added</div>
                         <div class="price">USD $9.00</div>
                         <div class="notice">Only 1 left</div>
                     </div>

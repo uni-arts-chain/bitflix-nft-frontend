@@ -12,9 +12,7 @@
                             alt=""
                         />
                         <h2 class="item-h2-title">MOVIE NFT</h2>
-                        <p class="item-desc">
-                            Common | Release 34 | Cpmtains 3 Moments | Price: $9
-                        </p>
+                        <p class="item-desc">To be added</p>
                         <div class="label-text">
                             <span>RESERVE YOUR PACK NOW</span>
                         </div>
@@ -44,10 +42,7 @@
                         </div>
                         <div class="tilte-body">
                             <h2 class="item-h2-title">ACTIVIST NFT</h2>
-                            <p class="item-desc">
-                                Rare | Contains 6 Monments | Series 2 | Price:
-                                $99
-                            </p>
+                            <p class="item-desc">To be added</p>
                         </div>
                     </div>
                 </div>
@@ -62,33 +57,21 @@
                 </div>
                 <div class="section-cate-body">
                     <div class="section-cate">
-                        <div class="section-cate-title">
-                            When do new drops happen?
-                        </div>
-                        <div class="section-cate-desc">
-                            During our Beta, drop times will vary, so make sure
-                            you watch for announcements
-                        </div>
+                        <div class="section-cate-title">To be added</div>
+                        <div class="section-cate-desc"></div>
+                    </div>
+                    <div class="section-cate">
+                        <div class="section-cate-title">To be added</div>
+                        <div class="section-cate-desc"></div>
                     </div>
                     <div class="section-cate">
                         <div class="section-cate-title">
-                            Where are drop announcements?
-                        </div>
-                        <div class="section-cate-desc">
-                            Sign up via email or follow Top Shot on social to
-                            never miss a dro
-                        </div>
-                    </div>
-                    <div class="section-cate">
-                        <div class="section-cate-title">
-                            What about
+                            <!-- What about
                             <span style="color: #d73cd6">sold out</span>
-                            packs?
+                            packs? -->
+                            To be added
                         </div>
-                        <div class="section-cate-desc">
-                            You can still snag Moments from the packs in the
-                            Marketplace from other collectors
-                        </div>
+                        <div class="section-cate-desc"></div>
                     </div>
                 </div>
             </div>
@@ -225,12 +208,15 @@ export default {
     color: #ffffff;
     line-height: 41px;
     margin-left: 32px;
+    position: relative;
+    z-index: 3;
 }
 .label-text {
     width: 100%;
     font-size: 32px;
     height: 103px;
     display: flex;
+    z-index: 0;
     align-items: center;
     position: absolute;
     bottom: -4px;
@@ -348,6 +334,9 @@ export default {
     }
     .section-cate {
         margin: 0 20px;
+    }
+    .section-cate-title {
+        min-width: 380px;
     }
     .section-cate-title,
     .section-cate-title > span {

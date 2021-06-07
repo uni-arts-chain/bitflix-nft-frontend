@@ -30,7 +30,7 @@
                                 <dl>
                                     <dt>ABOUT</dt>
                                     <dd>Overview</dd>
-                                    <dd>What is Top Shot?</dd>
+                                    <dd>What is Bitflix?</dd>
                                     <dd>Ways to Collect: Sets</dd>
                                     <dd>FAQ</dd>
                                 </dl>
@@ -45,20 +45,25 @@
                             <div class="icon-menu-con">
                                 <div class="icon-menu">
                                     <div class="icon-desc">LEARN MORE</div>
-                                    <img
-                                        class="icon"
-                                        src="@/assets/images/layout/learn_more@2x.png"
-                                    />
+                                    <div class="icon-wrapper">
+                                        <img
+                                            class="icon"
+                                            src="@/assets/images/questions/question3.jpeg"
+                                        />
+                                    </div>
+
                                     <div class="icon-desc">
-                                        How to Play NBA Top Shot (video)
+                                        How to play Bitflix
                                     </div>
                                 </div>
                                 <div class="icon-menu">
                                     <div class="icon-desc">LATEST POST</div>
-                                    <img
-                                        class="icon"
-                                        src="@/assets/images/layout/latest_post@2x.png"
-                                    />
+                                    <div class="icon-wrapper">
+                                        <img
+                                            class="icon"
+                                            src="@/assets/images/questions/question2.png"
+                                        />
+                                    </div>
                                     <div class="icon-desc">Developer Diary</div>
                                 </div>
                             </div>
@@ -228,10 +233,19 @@ ul {
             display: flex;
             .icon-menu {
                 margin-left: 24px;
-                .icon {
+                .icon-wrapper {
                     width: 287px;
+                    height: 287px;
                     margin-top: 13px;
                     margin-bottom: 14px;
+                    overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .icon {
+                    min-width: 100%;
+                    min-height: 100%;
                 }
                 .icon-desc {
                     font-size: 14px;

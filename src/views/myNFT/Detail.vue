@@ -37,29 +37,10 @@
                     </div>
                 </div>
                 <div class="desc-con">
-                    <div class="title">Metallic Gold LE</div>
-                    <div class="sub-title">
-                        Collect 9 Moments to get this reward
-                    </div>
+                    <div class="title">To be added</div>
+                    <div class="sub-title">To be added</div>
                     <div class="h-br"></div>
-                    <p class="desc">
-                        “DeMar DeRozan! Strong to the rack, and draws the foul!”
-                        Vetera know how to put their team on their back and do
-                        what it takes to rally for the win. “DeMar DeRozan!
-                        Strong to the rack, and draws the foul!” Vetera know how
-                        to put their team on their back and do what it takes to
-                        rally for the win. “DeMar DeRozan! Strong to the rack,
-                        and draws the foul!” Vetera know how to put their team
-                        on their back and do what it takes to rally for the win.
-                        “DeMar DeRozan! Strong to the rack, and draws the foul!”
-                        Vetera know how to put their team on their back and do
-                        what it takes to rally for the win. “DeMar DeRozan!
-                        Strong to the rack, and draws the foul!” Vetera know how
-                        to put their team on their back and do what it takes to
-                        rally for the win. “DeMar DeRozan! Strong to the rack,
-                        and draws the foul!” Vetera know how to put their team
-                        on their back and do what it takes to rally for the win.
-                    </p>
+                    <p class="desc">To be added</p>
                 </div>
             </div>
             <div class="recommend-container">

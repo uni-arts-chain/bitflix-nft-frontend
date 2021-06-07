@@ -51,11 +51,11 @@
             </div>
             <div class="card-cate-item" @click="goMarketplaceDetail">
                 <ActionMovie
-                    title="ACTIVISE NFT"
+                    title="ACTIVIST NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
                     :coinUrl="`${require('@/assets/images/cate-coin3.png')}`"
                 />
-                <span>ACTIVISE</span>
+                <span>ACTIVIST</span>
             </div>
         </div>
     </div>

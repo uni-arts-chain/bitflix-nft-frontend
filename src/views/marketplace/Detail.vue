@@ -31,9 +31,9 @@
                 </div>
                 <div class="v-br"></div>
                 <div class="desc-con">
-                    <div class="title">GORDON HAYWARD</div>
-                    <div class="sub-title" style="margin-top: 8px">Dunk</div>
-                    <div class="sub-title">Base Set (Series 2)</div>
+                    <div class="title">To be added</div>
+                    <div class="sub-title" style="margin-top: 8px">To</div>
+                    <div class="sub-title">be added</div>
                     <div class="sub-title"># /35000+</div>
                     <div class="info-con">
                         <div>
