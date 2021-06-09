@@ -20,7 +20,7 @@
                 <div class="common-name">Common #9472/12000</div>
                 <div class="price">1200 USDT</div>
             </div>
-            <div class="item">
+            <div class="item" @click="goMyNFT">
                 <img class="top" src="@/assets/images/border-arrow-top.png" />
                 <img
                     class="bottom"
@@ -96,6 +96,9 @@ export default {
     methods: {
         goNFT() {
             this.$router.push("/nftdetail");
+        },
+        goMyNFT() {
+            this.$router.push("/mynft");
         },
     },
 };

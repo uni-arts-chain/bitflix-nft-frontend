@@ -6,7 +6,7 @@
             <img class="logo" src="@/assets/images/logo-login.png" />
             <div class="desc">Create Dapper Account</div>
             <span class="name">for BITFLIX</span>
-            <div class="email-btn">
+            <div class="email-btn" @click="goEmail">
                 <img
                     class="email-icon"
                     src="@/assets/images/register-email@2x.png"
@@ -44,8 +44,11 @@ export default {
         };
     },
     methods: {
-        submit() {
-            this.$router.push("/");
+        goEmail() {
+            this.$router.push("/email");
+        },
+        goBack() {
+            this.$router.push("/signup");
         },
     },
 };
@@ -133,66 +136,6 @@ export default {
         text-decoration: underline;
     }
 }
-// .el-form {
-//     margin-left: 63px;
-//     width: 322px;
-//     margin-top: 88px;
-//     .el-form-item {
-//     }
-//     ::v-deep .el-form-item__label {
-//         font-size: 17px;
-//         font-family: "Montserrat-Regular";
-//         font-weight: 600;
-//         text-align: left;
-//         color: #818394;
-//         letter-spacing: 1px;
-//         line-height: 17px;
-//     }
-//     input {
-//         border: 1px solid #818394;
-//         display: block;
-//         height: 51px;
-//         border-radius: 6px;
-//         width: 100%;
-//         padding: 5px 10px;
-//         font-size: 20px;
-//     }
-//     .forgot {
-//         font-size: 12px;
-//         font-family: "Montserrat-Regular";
-//         font-weight: 600;
-//         text-align: left;
-//         color: #818394;
-//         letter-spacing: 1px;
-//         line-height: 17px;
-//     }
-//     .submit {
-//         width: 149px;
-//         height: 50px;
-//         margin-top: 30px;
-//         border-radius: 5px;
-//         background: linear-gradient(to left, #d63ed5, #166dce);
-//         font-size: 15px;
-//         font-family: "Montserrat-Regular";
-//         font-weight: 600;
-//         text-align: left;
-//         color: #ffffff;
-//         cursor: pointer;
-//         text-align: center;
-//     }
-//     .go-login {
-//         font-size: 12px;
-//         font-family: "Montserrat-Regular";
-//         font-weight: 600;
-//         text-align: left;
-//         color: #818394;
-//         letter-spacing: 1px;
-//         line-height: 17px;
-//         a:hover {
-//             text-decoration: underline;
-//         }
-//     }
-// }
 .notice {
     margin-top: 20px;
     font-size: 13px;

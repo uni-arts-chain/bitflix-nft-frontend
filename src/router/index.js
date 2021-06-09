@@ -37,7 +37,13 @@ const routes = [
         path: "/nftdetail",
         name: "nftdetail",
         component: () =>
-            import(/* webpackChunkName: "myNFT" */ "@/views/myNFT/Detail"),
+            import(/* webpackChunkName: "nftdetail" */ "@/views/myNFT/Detail"),
+    },
+    {
+        path: "/mynft",
+        name: "mynft",
+        component: () =>
+            import(/* webpackChunkName: "myNFT" */ "@/views/myNFT/Index"),
     },
     {
         path: "/questions",
@@ -52,6 +58,12 @@ const routes = [
         name: "signup",
         component: () =>
             import(/* webpackChunkName: "signUp" */ "@/views/Session/SignUp"),
+    },
+    {
+        path: "/email",
+        name: "email",
+        component: () =>
+            import(/* webpackChunkName: "email" */ "@/views/Session/Email"),
     },
     {
         path: "/history",
@@ -76,12 +88,42 @@ const routes = [
             ),
     },
     {
+        path: "/marketplaceSearchList",
+        name: "marketplaceSearchList",
+        component: () =>
+            import(
+                /* webpackChunkName: "marketplaceSearchList" */ "@/views/marketplace/SearchList"
+            ),
+    },
+    {
         path: "/marketplaceDetail/:id?",
         name: "marketplaceDetail",
         component: () =>
             import(
                 /* webpackChunkName: "marketplaceDetail" */ "@/views/marketplace/Detail"
             ),
+    },
+    {
+        path: "/lockupBFX",
+        name: "lockupBFX",
+        component: () =>
+            import(
+                /* webpackChunkName: "lockupBFX" */ "@/views/lockupBFX/Index"
+            ),
+    },
+    {
+        path: "/lockupRecord",
+        name: "lockupRecord",
+        component: () =>
+            import(
+                /* webpackChunkName: "lockupRecord" */ "@/views/lockupBFX/Record"
+            ),
+    },
+    {
+        path: "/wallet",
+        name: "wallet",
+        component: () =>
+            import(/* webpackChunkName: "wallet" */ "@/views/Session/Wallet"),
     },
 ];
 

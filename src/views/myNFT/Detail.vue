@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         goback() {
-            this.$router.push("/");
+            this.$router.push("/mynft");
         },
     },
 };

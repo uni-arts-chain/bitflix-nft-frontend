@@ -70,6 +70,13 @@
                         </div>
                     </div>
                 </li>
+                <li>
+                    <router-link
+                        to="/lockupBFX"
+                        :class="{ active: activeTab == 'PACKS' }"
+                        >LOCK UP BFX</router-link
+                    >
+                </li>
             </ul>
             <div class="session">
                 <router-link to="/login" class="login">LOG IN</router-link>
@@ -119,6 +126,8 @@ export default {
 <style lang="scss" scoped>
 nav {
     min-height: 71px;
+    display: flex;
+    justify-content: center;
 }
 nav.dark {
     background-color: black;
@@ -151,7 +160,7 @@ ul {
     align-items: center;
     justify-content: flex-start;
     li {
-        padding-left: 71px;
+        padding-left: 45px;
         > a {
             font-family: "Montserrat-Bold";
             font-size: 20px;

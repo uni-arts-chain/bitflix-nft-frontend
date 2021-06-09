@@ -38,7 +38,9 @@
             <div class="latest-content">
                 <div class="latest-title-con">
                     <BaseTitle>LATEST LASTINGS</BaseTitle>
-                    <div class="more-btn">EXPLORE MARKETPLACE</div>
+                    <div class="more-btn" @click="goSearchList">
+                        EXPLORE MARKETPLACE
+                    </div>
                 </div>
                 <ActionMovieList class="latest-list" @onMovieClick="goDetail" />
             </div>
@@ -74,6 +76,9 @@ export default {
         },
         goDetail() {
             this.$router.push("/marketplaceDetail");
+        },
+        goSearchList() {
+            this.$router.push("/marketplaceSearchList");
         },
     },
 };
