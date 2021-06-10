@@ -17,10 +17,13 @@
                         :coinUrl="`${require('@/assets/images/cate-coin2.png')}`"
                     />
                     <div class="info">
-                        <div class="name">RESERVATION: BASE SET</div>
-                        <div class="series">To be added</div>
-                        <div class="price">USD $9.00</div>
-                        <div class="notice">Only 1 left</div>
+                        <div class="name">KHEM NIRCH</div>
+                        <div class="series webkit-ellipsis-2">
+                            To be addedo be addedo be addedo be addedo be addedo
+                            be addedo be added
+                        </div>
+                        <div class="price">1200 USDT</div>
+                        <!-- <div class="notice">Only 1 left</div> -->
                     </div>
                 </div>
             </div>
@@ -120,8 +123,9 @@ export default {
 }
 .info {
     margin-bottom: 60px;
+    margin-left: 36px;
     .name {
-        font-size: 13px;
+        font-size: 18px;
         font-family: "Montserrat-Bold";
         font-weight: Bold;
         text-align: left;
@@ -130,18 +134,20 @@ export default {
         margin-bottom: 5px;
     }
     .series {
+        margin-top: 10px;
         font-size: 12px;
         font-family: "Montserrat-Regular";
         font-weight: 400;
         text-align: left;
-        color: #c9caca;
+        // color: #c9caca;
+        color: #ffffff;
         letter-spacing: 1px;
         margin-bottom: 13px;
     }
     .price {
-        font-size: 19px;
-        font-family: "Montserrat-ExtraBold";
-        font-weight: Bold;
+        font-size: 15px;
+        font-family: Montserrat-SemiBold, Montserrat;
+        // font-weight: 600;
         text-align: left;
         color: #ffffff;
         letter-spacing: 1px;

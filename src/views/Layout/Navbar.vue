@@ -1,27 +1,27 @@
 /** * Created by Lay Hunt on 2020-11-17 18:22:12. */
 <template>
     <nav :class="theme">
-        <div class="container">
+        <div class="container nav-con">
             <div class="logo" @click="goHome"></div>
             <ul class="link-group">
                 <li>
                     <router-link
                         to="/packs"
-                        :class="{ active: activeTab == 'PACKS' }"
+                        :class="{ active: activeTab == 'Packs' }"
                         >PACKS</router-link
                     >
                 </li>
                 <li>
                     <router-link
                         to="/marketplace"
-                        :class="{ active: activeTab == 'PACKS' }"
+                        :class="{ active: activeTab == 'marketplace' }"
                         >MARKETPLACE</router-link
                     >
                 </li>
                 <li class="questions">
                     <router-link
                         to="/questions"
-                        :class="{ active: activeTab == 'PACKS' }"
+                        :class="{ active: activeTab == 'questions' }"
                         >COMMON QUESTIONS</router-link
                     >
                     <div class="questions-menu" @click="goQuestions">
@@ -72,8 +72,8 @@
                 </li>
                 <li>
                     <router-link
-                        to="/lockupBFX"
-                        :class="{ active: activeTab == 'PACKS' }"
+                        to="/lockup"
+                        :class="{ active: activeTab == 'lockup' }"
                         >LOCK UP BFX</router-link
                     >
                 </li>
@@ -90,7 +90,9 @@
 export default {
     name: "navbar",
     data() {
-        return {};
+        return {
+            activeTab: "home",
+        };
     },
     computed: {
         theme() {
@@ -99,15 +101,19 @@ export default {
         user() {
             return this.$store.state.user.info;
         },
-        activeTab() {
-            let routeName = "";
-            switch (this.$route.name) {
-                case "Home":
-                    routeName = "PACKS";
-                    break;
+    },
+    watch: {
+        "$route.name"(nav) {
+            const navNames = [
+                "Packs",
+                "marketplace",
+                "questions",
+                "lockup",
+                "Packs",
+            ];
+            if (navNames.includes(nav)) {
+                this.activeTab = nav;
             }
-
-            return routeName;
         },
     },
     methods: {
@@ -155,12 +161,14 @@ nav.dark {
 }
 
 ul {
+    margin-top: 9px;
     flex: 1 0 auto;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     li {
         padding-left: 45px;
+        padding-bottom: 4px;
         > a {
             font-family: "Montserrat-Bold";
             font-size: 20px;
@@ -169,10 +177,13 @@ ul {
             color: #ffffff;
             display: inline-block;
             letter-spacing: 0px;
+            padding-bottom: 2px;
+            border-bottom: 3px solid transparent;
         }
         .active {
             font-weight: 600;
             color: white;
+            border-bottom-color: #2b6bd2;
         }
     }
     li:last-child {
@@ -230,9 +241,9 @@ ul {
         display: flex;
         .footer-bar dl {
             font-size: 14px;
-            font-family: Montserrat, Montserrat-ExtraBold;
+            font-family: Montserrat-ExtraBold, Montserrat;
             // font-weight: ExtraBold;
-            font-weight: bolder;
+            // font-weight: bolder;
             color: #ffffff;
             line-height: 26px;
             letter-spacing: 1px;
@@ -258,8 +269,8 @@ ul {
                 }
                 .icon-desc {
                     font-size: 14px;
-                    font-family: Montserrat, Montserrat-Bold;
-                    font-weight: 700;
+                    font-family: Montserrat-Bold, Montserrat;
+                    // font-weight: 700;
                     color: #c9caca;
                     line-height: 26px;
                     letter-spacing: 1px;

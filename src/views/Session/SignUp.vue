@@ -116,8 +116,8 @@ export default {
     .btn-text {
         margin-left: 13px;
         font-size: 17px;
-        font-family: Montserrat, Montserrat-Regular;
-        font-weight: 400;
+        font-family: Montserrat-Regular, Montserrat;
+        // font-weight: 400;
         color: #ffffff;
     }
 }

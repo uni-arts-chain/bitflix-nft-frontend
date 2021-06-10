@@ -121,7 +121,7 @@ export default {
     align-items: center;
     .top-title {
         font-size: 45px;
-        font-family: Montserrat, Montserrat-ExtraBold;
+        font-family: Montserrat-ExtraBold, Montserrat;
         // font-weight: ExtraBold;
         font-weight: bolder;
         color: #ffffff;
@@ -139,6 +139,7 @@ export default {
             padding-left: 20px;
             color: #ffffff;
             height: 100%;
+            font-family: Montserrat-SemiBold, Montserra;
         }
         .v-br {
             width: 2px;
@@ -205,8 +206,8 @@ export default {
                 cursor: pointer;
                 border-bottom: 2px solid #ffffff;
                 font-size: 19px;
-                font-family: Montserrat, Montserrat-Medium;
-                font-weight: 500;
+                font-family: Montserrat-Medium, Montserrat;
+                // font-weight: 500;
                 color: #ffffff;
             }
         }

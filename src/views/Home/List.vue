@@ -16,8 +16,10 @@
                     />
                 </div>
                 <div class="title">{{ v.name.toUpperCase() }}</div>
-                <div class="set-name">Base Set</div>
-                <div class="common-name">Common #9472/12000</div>
+                <!-- <div class="set-name">Base Set</div> -->
+                <div class="common-name webkit-ellipsis-2">
+                    Common #9472/12000
+                </div>
                 <div class="price">1200 USDT</div>
             </div>
             <div class="item" @click="goMyNFT">

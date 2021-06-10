@@ -56,12 +56,12 @@ export default {
         flex-direction: column;
         align-items: center;
         .lockup-title {
-            font-family: "Montserrat-Bold";
+            font-family: Montserrat-SemiBold, Montserrat;
             font-size: 20px;
-            font-weight: 600;
+            // font-weight: 600;
         }
         .input-wrapper {
-            margin-top: 10px;
+            margin-top: 16px;
             width: 560px;
             height: 60px;
             border-radius: 10px;
@@ -73,12 +73,18 @@ export default {
             .input {
                 flex: 1;
                 font-size: 18px;
+                font-family: Montserrat-SemiBold, Montserrat;
+            }
+            .unit {
+                font-size: 18px;
+                font-family: Montserrat-SemiBold, Montserrat;
             }
         }
         .desc {
             margin-top: 4px;
             line-height: 1.5;
             font-size: 15px;
+            font-family: Montserrat-SemiBold, Montserrat;
         }
         .desc-1 {
             margin-top: 20px;
@@ -86,19 +92,20 @@ export default {
 
         .btn {
             cursor: pointer;
-            border-radius: 20px;
-            font-family: Adobe Heiti Std, Adobe Heiti Std-R;
-            font-size: 18px;
-            font-weight: 600;
-            padding: 12px;
+            border-radius: 30px;
+            font-family: Montserrat-SemiBold, Montserrat;
+            font-size: 20px;
+            padding: 16px;
             width: 360px;
             background: transparent;
 
             &.active {
                 background: linear-gradient(to right, #ba45c8, #2b6bd2);
+                font-weight: 600;
             }
             &:hover {
                 background: linear-gradient(to right, #ba45c8, #2b6bd2);
+                font-weight: 600;
             }
             &.btn-1 {
                 margin-top: 80px;

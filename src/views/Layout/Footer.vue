@@ -1,7 +1,7 @@
 /** * Created by Lay Hunt on 2020-11-17 18:22:12. */
 <template>
     <footer>
-        <div class="container">
+        <div class="container v-br">
             <span class="desc"
                 >Copyright © 2021 Bitflix Foundation -All Rights Reserved.</span
             >
@@ -31,6 +31,9 @@ footer {
 .container {
     height: 89px;
 }
+.v-br {
+    border-top: 2px solid #c9caca;
+}
 .desc {
     display: flex;
     align-items: center;
@@ -41,7 +44,7 @@ footer {
     margin: 0 auto;
     max-width: 808px;
     width: 100%;
-    border-top: 2px solid white;
+    // border-top: 2px solid white;
     font-size: 15px;
     font-family: "Montserrat-Regular";
     font-weight: 800;

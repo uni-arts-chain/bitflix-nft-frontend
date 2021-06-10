@@ -143,7 +143,7 @@ export default {
 
 .title {
     font-size: 47px;
-    font-family: Montserrat, Montserrat-ExtraBold;
+    font-family: Montserrat-ExtraBold, Montserrat;
     // font-weight: ExtraBold;
     font-weight: bolder;
     color: #ffffff;

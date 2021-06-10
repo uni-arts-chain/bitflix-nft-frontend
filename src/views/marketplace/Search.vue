@@ -120,7 +120,7 @@ export default {
 }
 .top-title {
     font-size: 45px;
-    font-family: Montserrat, Montserrat-ExtraBold;
+    font-family: Montserrat-ExtraBold, Montserrat;
     // font-weight: ExtraBold;
     font-weight: bolder;
     color: #ffffff;
@@ -146,11 +146,12 @@ export default {
             padding-left: 20px;
             color: #ffffff;
             height: 100%;
+            font-family: Montserrat-SemiBold, Montserra;
         }
         .search-text {
             font-size: 12px;
-            font-family: Montserrat, Montserrat-Medium;
-            font-weight: 500;
+            font-family: Montserrat-Medium, Montserrat;
+            // font-weight: 500;
             color: #ffffff;
             letter-spacing: 1px;
             margin-right: 18px;
@@ -169,8 +170,8 @@ export default {
         cursor: pointer;
         // text-align: center;
         font-size: 12px;
-        font-family: Montserrat, Montserrat-Medium;
-        font-weight: 500;
+        font-family: Montserrat-Medium, Montserrat;
+        // font-weight: 500;
         color: #ffffff;
         // line-height: 30px;
         letter-spacing: 1px;
@@ -190,6 +191,7 @@ export default {
         display: flex;
         align-items: center;
         .select-input {
+            font-family: Montserrat-SemiBold, Montserra;
             flex: 1;
             background-color: transparent;
             color: #ffffff;
@@ -220,8 +222,8 @@ export default {
         justify-content: center;
         border: 2px solid #ffffff;
         font-size: 12px;
-        font-family: Montserrat, Montserrat-Medium;
-        font-weight: 500;
+        font-family: Montserrat-Medium, Montserrat;
+        // font-weight: 500;
         color: #ffffff;
         letter-spacing: 1px;
     }
@@ -229,8 +231,8 @@ export default {
         // width: 60px;
         font-size: 12px;
         // line-height: 42px;
-        font-family: Montserrat, Montserrat-Medium;
-        font-weight: 500;
+        font-family: Montserrat-Medium, Montserrat;
+        // font-weight: 500;
         color: #ffffff;
         letter-spacing: 1px;
     }

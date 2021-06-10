@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         goBack() {
-            this.$router.push("/lockupBFX");
+            this.$router.push("/lockup");
         },
     },
 };
@@ -60,7 +60,7 @@ export default {
     .back-btn {
         cursor: pointer;
         font-size: 17px;
-        font-family: Adobe Heiti Std, Adobe Heiti Std-R;
+        font-family: Montserrat-SemiBold, Montserrat;
         // font-weight: R;
         color: #ffffff;
     }
@@ -77,25 +77,27 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 2px solid #c9caca;
+            border: 1px solid #c9caca;
             border-radius: 8px;
             color: #ffffff;
             background-color: #0c3061;
             .lab {
-                font-family: Adobe Heiti Std, Adobe Heiti Std-R;
+                font-family: Montserrat-SemiBold, Montserra;
+                font-weight: 500;
                 font-size: 15px;
             }
             .val {
-                font-family: Adobe Heiti Std, Adobe Heiti Std-R;
+                margin-top: 10px;
+                font-family: Montserrat-SemiBold, Montserra;
                 font-size: 13px;
             }
             .btn {
                 cursor: pointer;
                 border-radius: 20px;
-                font-family: Adobe Heiti Std, Adobe Heiti Std-R;
-                font-size: 16px;
-                font-weight: 500;
-                padding: 8px 24px;
+                // font-family: Montserrat-SemiBold, Montserra;
+                font-family: "Montserrat-Bold";
+                font-size: 14px;
+                padding: 8px 32px;
                 background: linear-gradient(to right, #ba45c8, #2b6bd2);
             }
         }

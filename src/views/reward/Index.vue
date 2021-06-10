@@ -53,7 +53,7 @@ export default {
         border-bottom: 4px #ffffff solid;
 
         font-size: 17px;
-        font-family: Montserrat, Montserrat-SemiBold;
+        font-family: Montserrat-SemiBold, Montserra;
         font-weight: SemiBold;
         color: #ffffff;
     }

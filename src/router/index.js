@@ -104,12 +104,10 @@ const routes = [
             ),
     },
     {
-        path: "/lockupBFX",
-        name: "lockupBFX",
+        path: "/lockup",
+        name: "lockup",
         component: () =>
-            import(
-                /* webpackChunkName: "lockupBFX" */ "@/views/lockupBFX/Index"
-            ),
+            import(/* webpackChunkName: "lockup" */ "@/views/lockupBFX/Index"),
     },
     {
         path: "/lockupRecord",

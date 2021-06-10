@@ -125,8 +125,8 @@ export default {
             const style = {
                 "background-color": rowIndex % 2 ? "#112440" : "#0D3060",
                 "font-size": "13px",
-                "font-family": "Montserrat, Montserrat-Bold",
-                "font-weight": "700",
+                "font-family": "Montserrat-Bold,Montserrat",
+                // "font-weight": "700",
                 color: "#ffffff",
                 border: "none",
             };
@@ -136,8 +136,8 @@ export default {
             const style = {
                 "background-color": "#112440",
                 "font-size": "13px",
-                "font-family": "Montserrat, Montserrat-Bold",
-                "font-weight": "700",
+                "font-family": "Montserrat-Bold, Montserrat",
+                // "font-weight": "700",
                 color: "#ffffff",
                 border: "none",
             };
@@ -169,8 +169,8 @@ export default {
         margin-top: 23px;
         padding: 13px 48px 12px 42px;
         font-size: 14px;
-        font-family: Montserrat, Montserrat-Regular;
-        font-weight: 400;
+        font-family: Montserrat-Regular, Montserrat;
+        // font-weight: 400;
         color: #ffffff;
         letter-spacing: 1px;
         border: 2px solid #ffffff;

@@ -16,10 +16,10 @@ export default {
 <style lang="scss" scoped>
 .page-title {
     // margin-top: 36px;
-    font-size: 45px;
-    font-family: Montserrat, Montserrat-ExtraBold;
+    font-size: 36px;
+    font-family: "Montserrat-Bold";
     // font-weight: ExtraBold;
-    font-weight: bolder;
+    // font-weight: bolder;
     color: #ffffff;
 }
 .short-line {

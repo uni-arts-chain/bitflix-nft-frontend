@@ -50,7 +50,7 @@ export default {
             bottom: 27px;
             .star-name {
                 font-size: 15px;
-                font-family: Montserrat, Montserrat-ExtraBold;
+                font-family: Montserrat-ExtraBold, Montserrat;
                 font-weight: bolder;
                 color: #ffffff;
             }

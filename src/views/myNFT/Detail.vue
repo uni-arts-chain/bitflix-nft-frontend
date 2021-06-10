@@ -154,7 +154,7 @@ export default {
     margin-top: 73px;
     .title {
         font-size: 42px;
-        font-family: Montserrat, Montserrat-ExtraBold;
+        font-family: Montserrat-ExtraBold, Montserrat;
         // font-weight: ExtraBold;
         font-weight: bolder;
 
@@ -191,7 +191,7 @@ export default {
             font-size: 19px;
             color: #ffffff;
             letter-spacing: 1px;
-            font-family: Montserrat, Montserrat-ExtraBold;
+            font-family: Montserrat-ExtraBold, Montserrat;
             // font-weight: ExtraBold;
             font-weight: bolder;
             display: inline-block;
@@ -222,7 +222,7 @@ export default {
             transform: rotateZ(-90deg) translateX(-60px);
             // margin-left: 59px;
             width: 22px;
-            font-family: Montserrat, Montserrat-ExtraBold;
+            font-family: Montserrat-ExtraBold, Montserrat;
             // font-weight: ExtraBold;
             font-weight: bolder;
             font-size: 31px;
@@ -246,7 +246,7 @@ export default {
             text-align: center;
             color: #ffffff;
             letter-spacing: 1px;
-            font-family: Montserrat, Montserrat-ExtraBold;
+            font-family: Montserrat-ExtraBold, Montserrat;
             // font-weight: ExtraBold;
             font-weight: bolder;
         }

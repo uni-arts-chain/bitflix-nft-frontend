@@ -76,7 +76,7 @@ export default {
     .back-btn {
         cursor: pointer;
         font-size: 17px;
-        font-family: Adobe Heiti Std, Adobe Heiti Std-R;
+        font-family: Montserrat-SemiBold, Montserra;
         // font-weight: R;
         color: #ffffff;
     }
@@ -106,6 +106,9 @@ export default {
                 height: 80px;
                 margin-top: 40px;
                 margin-bottom: 40px;
+            }
+            .wallet-name {
+                font-family: Montserrat-SemiBold, Montserra;
             }
         }
     }

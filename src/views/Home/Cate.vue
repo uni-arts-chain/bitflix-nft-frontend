@@ -2,6 +2,14 @@
 <template>
     <div class="cate">
         <div class="cate-top">
+            <div class="cate-item" style="width: 32%" @click="goLockUp">
+                <div class="item-title1">Lock up</div>
+                <div class="item-title2">BITFLIX</div>
+                <img
+                    src="@/assets/images/flower.png"
+                    style="width: auto; height: 80px; margin: 4px 0"
+                />
+            </div>
             <div class="cate-item" style="width: 32%" @click="goPacks">
                 <div class="item-title1">GRAB & OPEN</div>
                 <div class="item-title2">PACKS</div>
@@ -11,14 +19,6 @@
                 <div class="item-title1">BUILD AN EPIC</div>
                 <div class="item-title2">COLLECTION</div>
                 <img src="@/assets/images/card.png" />
-            </div>
-            <div class="cate-item" style="width: 32%" @click="goReward">
-                <div class="item-title1">WIN EXCLUSIVE</div>
-                <div class="item-title2">REWARDS</div>
-                <img
-                    src="@/assets/images/flower.png"
-                    style="width: auto; height: 80px; margin: 4px 0"
-                />
             </div>
         </div>
         <svg class="desc-title" id="s9" width="760" height="90">
@@ -77,8 +77,8 @@ export default {
         goMarketplace() {
             this.$router.push("/marketplace");
         },
-        goReward() {
-            this.$router.push("/reward");
+        goLockUp() {
+            this.$router.push("/lockup");
         },
         goMarketplaceDetail() {
             this.$router.push("/marketplaceDetail");

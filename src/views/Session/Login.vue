@@ -26,9 +26,8 @@
                     </button>
                 </el-form-item>
                 <p class="go-register">
-                    Don't have an account?<router-link to="/signup"
-                        >Register here</router-link
-                    >
+                    Don't have an account?
+                    <router-link to="/signup">Register here</router-link>
                 </p>
             </el-form>
         </div>
@@ -51,6 +50,7 @@ export default {
                 email: "",
                 password: "",
             },
+            rules: [],
         };
     },
     methods: {

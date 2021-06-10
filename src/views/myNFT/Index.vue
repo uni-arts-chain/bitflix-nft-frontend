@@ -45,8 +45,8 @@ export default {
             // cursor: pointer;
             // border-bottom: 2px solid #ffffff;
             font-size: 16px;
-            font-family: Montserrat, Montserrat-Medium;
-            font-weight: 500;
+            font-family: Montserrat-Medium, Montserrat;
+            // font-weight: 500;
             color: #c9caca;
         }
     }
