@@ -50,7 +50,7 @@
             <img class="line" src="@/assets/images/packs-line@2x.png" />
             <img class="line2" src="@/assets/images/packs-line2@2x.png" />
         </div>
-        <div class="section">
+        <!-- <div class="section">
             <div class="container">
                 <div class="section-title">
                     OPEN PACKS TO FIND EXCITING NEW MOMENTS
@@ -66,16 +66,13 @@
                     </div>
                     <div class="section-cate">
                         <div class="section-cate-title">
-                            <!-- What about
-                            <span style="color: #d73cd6">sold out</span>
-                            packs? -->
                             To be added
                         </div>
                         <div class="section-cate-desc"></div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>

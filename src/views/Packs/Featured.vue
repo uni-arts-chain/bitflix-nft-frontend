@@ -4,7 +4,8 @@
         <div class="container">
             <div class="title">FEATURED PACKS</div>
             <div class="list">
-                <div class="item" v-for="(v, i) in list" :key="i">
+                <ActionMovieList :list="movies" @onMovieClick="goDetail" />
+                <!-- <div class="item" v-for="(v, i) in list" :key="i">
                     <div class="label">DROPS 2:00 AM CST MAY 15</div>
                     <div class="recommend">RECOMMENDED PACK</div>
                     <ActionMovie
@@ -19,27 +20,57 @@
                         <div class="price">USD $9.00</div>
                         <div class="notice">Only 1 left</div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 </template>
 <script>
-import ActionMovie from "@/components/ActionMovie";
+import ActionMovieList from "@/components/ActionMovieList";
 export default {
     name: "featured",
     components: {
-        ActionMovie,
+        ActionMovieList,
     },
     data() {
         return {
-            list: [1, 2, 3, 4],
+            movies: [
+                {
+                    name: "KHEM NIRCH",
+                    series:
+                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
+                    price: "1200",
+                    id: 1,
+                },
+                {
+                    name: "KHEM NIRCH",
+                    series:
+                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
+                    price: "1200",
+                    id: 2,
+                },
+                {
+                    name: "KHEM NIRCH",
+                    series:
+                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
+                    price: "1200",
+                    status: "out",
+                    id: 3,
+                },
+                {
+                    name: "KHEM NIRCH",
+                    series:
+                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
+                    price: "1200",
+                    status: "out",
+                    id: 4,
+                },
+            ],
         };
     },
     methods: {
         goDetail(item) {
-            console.log(item);
-            this.$router.push("/packs/detail/" + item);
+            this.$router.push("/packs/detail/" + item.id);
         },
     },
 };

@@ -6,6 +6,7 @@
             <div class="title">{{ title }}</div>
             <img class="cover" :src="coverUrl" />
             <img class="coin" v-if="coinUrl" :src="coinUrl" />
+            <div class="status" v-if="status === 'out'">SOLD OUT</div>
         </div>
     </div>
 </template>
@@ -22,6 +23,10 @@ export default {
             required: true,
         },
         coinUrl: {
+            type: String,
+            default: "",
+        },
+        status: {
             type: String,
             default: "",
         },
@@ -74,6 +79,19 @@ export default {
         top: 30%;
         right: 15px;
         width: 21%;
+    }
+    .status {
+        position: absolute;
+        z-index: 2;
+        top: 80px;
+        left: 10px;
+        background-color: #ffffff;
+        font-size: 30px;
+        padding: 6px 20px;
+        text-align: center;
+        color: #000;
+        font-family: "Montserrat-Bold";
+        transform: rotateZ(-13deg) scale(1.15);
     }
 }
 </style>

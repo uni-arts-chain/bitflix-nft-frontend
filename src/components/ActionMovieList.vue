@@ -5,8 +5,8 @@
             <div class="list">
                 <div
                     class="item"
-                    v-for="(v, i) in list"
-                    :key="i"
+                    v-for="v in list"
+                    :key="v.id"
                     @click="onClick(v)"
                 >
                     <!-- <div class="label">DROPS 2:00 AM CST MAY 15</div>
@@ -15,14 +15,14 @@
                         title="MOVIE NFT"
                         :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
                         :coinUrl="`${require('@/assets/images/cate-coin2.png')}`"
+                        :status="v.status"
                     />
                     <div class="info">
-                        <div class="name">KHEM NIRCH</div>
+                        <div class="name">{{ v.name }}</div>
                         <div class="series webkit-ellipsis-2">
-                            To be addedo be addedo be addedo be addedo be addedo
-                            be addedo be added
+                            {{ v.series }}
                         </div>
-                        <div class="price">1200 USDT</div>
+                        <div class="price">{{ v.price }} USDT</div>
                         <!-- <div class="notice">Only 1 left</div> -->
                     </div>
                 </div>
@@ -41,7 +41,36 @@ export default {
     props: {
         list: {
             type: Array,
-            default: () => [..."123456"],
+            default: () => [
+                {
+                    name: "KHEM NIRCH",
+                    series:
+                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
+                    price: "1200",
+                    id: 1,
+                },
+                {
+                    name: "KHEM NIRCH",
+                    series:
+                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
+                    price: "1200",
+                    id: 2,
+                },
+                {
+                    name: "KHEM NIRCH",
+                    series:
+                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
+                    price: "1200",
+                    id: 3,
+                },
+                {
+                    name: "KHEM NIRCH",
+                    series:
+                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
+                    price: "1200",
+                    id: 4,
+                },
+            ],
         },
     },
     data() {

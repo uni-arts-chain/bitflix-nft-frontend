@@ -55,6 +55,7 @@
 
                 <div class="more-btn">
                     <img
+                        width="20"
                         class="search-icon"
                         src="@/assets/images/marketplace/more@2x.png"
                     />

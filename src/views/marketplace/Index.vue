@@ -12,7 +12,8 @@
                 <div class="search-icon-con" @click="goSearch">
                     <img
                         class="search-icon"
-                        src="@/assets/images/marketplace/search@2x.png"
+                        width="16px"
+                        src="@/assets/images/marketplace/search.png"
                     />
                 </div>
             </div>
@@ -121,7 +122,7 @@ export default {
     align-items: center;
     .top-title {
         font-size: 45px;
-        font-family: Montserrat-ExtraBold, Montserrat;
+        font-family: Montserrat-ExtraBold, Montserrat-Bold, Montserrat;
         // font-weight: ExtraBold;
         font-weight: bolder;
         color: #ffffff;

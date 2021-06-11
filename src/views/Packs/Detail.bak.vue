@@ -26,32 +26,33 @@
                 <div class="form-wrapper">
                     <div class="form-content">
                         <div class="form-content-container">
-                            <div class="nft-name">
-                                BASE SET (SERIES 2, RELEASE 33)
-                            </div>
-                            <div class="nft-desc">
-                                descdesc descdesc descdesc desc desc desc desc
-                                desc desc desc desc desc desc desc desc desc
-                                desc desc desc desc desc deesc desc desc esc
-                                desc desc deesc desc desc esc desc desc deesc
-                                desc desc
-                            </div>
+                            <div class="nft-name">BITFLIX TEST</div>
+                            <div class="total-amount">307500 Total</div>
+                            <div class="nft-label">NOW ON SALE!</div>
                             <div class="price-body">
                                 <div class="price">
-                                    <div class="value">9.00</div>
-                                    <div class="unit">USDT</div>
+                                    <div class="value">$9.00</div>
+                                    <div class="unit">USD</div>
                                 </div>
-                            </div>
-                            <div class="input-number-group">
-                                <div class="lab">QUANTITY</div>
-                                <el-input-number
-                                    v-model="num"
-                                    :min="1"
-                                    :max="1000"
-                                ></el-input-number>
+                                <div class="balance">307500 LEFT</div>
                             </div>
                             <div class="button-group">
-                                <button>BUY</button>
+                                <button>JOIN DROP</button>
+                                <div class="share"></div>
+                            </div>
+                            <div class="learn-about">
+                                LEARN ABOUT OUR DROP PROCESS
+                            </div>
+                            <div class="requirements">
+                                <div class="requirements-title">
+                                    Requirements
+                                </div>
+                                <div class="requirements-desc">
+                                    Bitflix Test
+                                </div>
+                            </div>
+                            <div class="enter-button">
+                                ENTER SHOWCASE CONTEST >
                             </div>
                         </div>
                     </div>
@@ -68,8 +69,8 @@
                             </template>
                             <div class="info-desc">
                                 <div class="info-sub-label">
-                                    <span>SOLD BY</span>
-                                    <span style="font-weight: 400"
+                                    <span>SOLD BY</span
+                                    ><span style="font-weight: 400"
                                         >Bitflix</span
                                     >
                                 </div>
@@ -92,18 +93,16 @@
 <script>
 import AdaptiveView from "@/components/AdaptiveView";
 import Mp4 from "@/assets/video/banner-mp4.mp4";
-import { Collapse, CollapseItem, InputNumber } from "element-ui";
+import { Collapse, CollapseItem } from "element-ui";
 export default {
     name: "detail",
     components: {
         AdaptiveView,
         [Collapse.name]: Collapse,
         [CollapseItem.name]: CollapseItem,
-        [InputNumber.name]: InputNumber,
     },
     data() {
         return {
-            num: "1",
             tabBgWidth: 0,
             activeNames: ["1"],
             BannerMp4: {
@@ -125,39 +124,6 @@ export default {
     },
 };
 </script>
-
-<style lang="scss">
-.input-number-group {
-    .lab {
-        margin-top: 20px;
-        font-size: 13px;
-        font-family: "Montserrat-Regular";
-        font-weight: 400;
-        color: #ffffff;
-    }
-    .el-input-number {
-        margin-top: 10px;
-        width: 100%;
-        border: 2px solid #ffff;
-    }
-    .el-input-number__increase,
-    .el-input-number__decrease {
-        background-color: #3e3a39;
-        border-width: 2px;
-        color: #ffffff;
-    }
-    .el-input-number__increase:hover,
-    .el-input-number__decrease:hover {
-        color: #ffffff;
-    }
-    .el-input-number .el-input__inner {
-        background-color: transparent;
-        border: none;
-        color: #ffffff;
-    }
-}
-</style>
-
 <style lang="scss" scoped>
 .detail {
     min-height: 1400px;
@@ -257,7 +223,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 60px;
+            margin-top: 33px;
             .price {
                 display: flex;
                 align-items: flex-start;
@@ -271,13 +237,11 @@ export default {
                     margin-right: 10px;
                 }
                 .unit {
-                    position: relative;
-                    top: 20px;
                     font-size: 13px;
                     font-family: "Montserrat-Regular";
                     font-weight: 400;
                     text-align: left;
-                    color: #ffffff;
+                    color: #c9caca;
                     letter-spacing: 0px;
                 }
             }
@@ -296,8 +260,7 @@ export default {
             justify-content: space-between;
             > button {
                 background: linear-gradient(to right, #ba45c8, #2b6bd2);
-                width: 265px;
-                margin-left: 45px;
+                width: 291px;
                 cursor: pointer;
                 height: 43px;
                 font-size: 14px;
@@ -384,15 +347,6 @@ export default {
         z-index: 1;
         padding: 37px 24px;
         text-align: left;
-        .nft-desc {
-            margin-top: 20px;
-            padding: 15px;
-            color: #3665d1;
-            font-family: "Montserrat-Medium";
-            font-size: 12px;
-            border: 3px solid #ddd;
-            border-image: linear-gradient(to right, #ba45c8, #2b6bd2) 20 20;
-        }
     }
     .bg-arrow {
         position: absolute;

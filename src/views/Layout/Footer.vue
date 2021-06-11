@@ -2,9 +2,8 @@
 <template>
     <footer>
         <div class="container v-br">
-            <span class="desc"
-                >Copyright © 2021 Bitflix Foundation -All Rights Reserved.</span
-            >
+            <!-- <span class="desc">Copyright © 2021 Bitflix Foundation -All Rights Reserved.</span> -->
+            <span class="desc">Power by UniArts Networks</span>
         </div>
     </footer>
 </template>

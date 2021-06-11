@@ -1,12 +1,12 @@
 <template>
     <div class="detail-page">
         <div class="detail">
-            <!-- <span class="back-btn" @click="goback">&lt; BACK TO CHALLENGES</span> -->
+            <span class="back-btn" @click="goback">&lt; BACK</span>
             <div class="detail-container">
                 <div class="poster-con">
-                    <div class="poster-time">
+                    <!-- <div class="poster-time">
                         <span class="time">MAR 15 2021</span>
-                    </div>
+                    </div>-->
                     <div class="poster-image">
                         <!-- <img src="@/assets/images/reward/collect1@2x.png" /> -->
                         <div class="video-con">
@@ -31,26 +31,29 @@
                 </div>
                 <div class="v-br"></div>
                 <div class="desc-con">
-                    <div class="title">To be added</div>
-                    <div class="sub-title" style="margin-top: 8px">To</div>
+                    <div class="title">GORDON HAYWARD</div>
+                    <!-- <div class="sub-title" style="margin-top: 8px">To</div>
                     <div class="sub-title">be added</div>
-                    <div class="sub-title"># /35000+</div>
+                    <div class="sub-title"># /35000+</div>-->
                     <div class="info-con">
                         <div>
-                            <div class="label">SOLD BY</div>
-                            <div class="label">2003 collectors</div>
+                            <div class="label">Transzction</div>
+                            <div class="label">number</div>
                         </div>
                         <div>
                             <div class="label2">2076</div>
-                            <div class="label">FOR SALE</div>
+                            <div class="label" style="text-align: center">
+                                Time
+                            </div>
                         </div>
                     </div>
                     <div class="price-con">
-                        $199.00
-                        <span class="price-unit">USD</span>
-                        <div class="price-desc">Top Sale</div>
+                        199.00
+                        <span class="price-unit">USDT</span>
+                        <!-- <div class="price-desc">Top Sale</div> -->
                     </div>
-                    <div class="share-con">
+                    <div class="buy-btn">BUY</div>
+                    <!-- <div class="share-con">
                         <div class="share-btn">BUYING AVAILABLE</div>
                         <div class="share-icon-con">
                             <img
@@ -58,7 +61,7 @@
                                 src="@/assets/images/marketplace/share@2x.png"
                             />
                         </div>
-                    </div>
+                    </div>-->
                     <div class="hash-con">
                         <div class="hash-text">
                             NFT HASH :
@@ -91,11 +94,11 @@
                             Hayward going to take is going to take the ball to
                             going to take is going to take the ball to
                         </div>
-                        <div class="base-set">Base set</div>
+                        <div class="base-set"></div>
                     </div>
                 </transition>
             </div>
-            <div class="expand-con">
+            <!-- <div class="expand-con">
                 <div class="expand">
                     <div class="expand-text">RECENT SALES HISTORY</div>
                     <img
@@ -106,12 +109,10 @@
                 </div>
                 <transition name="fade">
                     <div v-show="showHistorys" class="view-history">
-                        <span class="view-btn" @click="goHistory"
-                            >VIEW COMPLETE SALES HISTORY</span
-                        >
+                        <span class="view-btn" @click="goHistory">VIEW COMPLETE SALES HISTORY</span>
                     </div>
                 </transition>
-            </div>
+            </div> -->
             <div class="more-moments">
                 <div class="more-moments-title">MORE MOMENTS</div>
                 <ActionMovieList class="more-moments-list" />
@@ -139,7 +140,8 @@ export default {
     },
     methods: {
         goback() {
-            this.$router.push("/");
+            // this.$router.push("/");
+            history.go(-1);
         },
         goHistory() {
             this.$router.push("/history");
@@ -160,6 +162,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.back-btn {
+    cursor: pointer;
+    font-size: 17px;
+    font-family: Adobe Heiti Std, Adobe Heiti Std-R;
+    // font-weight: R;
+    color: #ffffff;
+}
 #marketplaceVideo {
     /* 全屏按钮 */
     // &::-webkit-media-controls-fullscreen-button {
@@ -292,20 +301,20 @@ export default {
         letter-spacing: -1px;
     }
     .info-con {
-        margin-top: 30px;
+        margin-top: 120px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding-bottom: 15px;
         border-bottom: 2px solid #c9caca;
         .label {
-            margin-top: 2px;
+            margin-top: 4px;
             font-size: 15px;
             font-family: Montserrat-Light, Montserrat;
             // font-weight: 300;
             color: #dcdddd;
             line-height: 15px;
-            letter-spacing: -1px;
+            // letter-spacing: -1px;
         }
         .label2 {
             font-size: 21px;
@@ -319,19 +328,20 @@ export default {
     }
     .price-con {
         margin-top: 90px;
-        font-size: 35px;
-        font-family: Montserrat-ExtraBold, Montserrat;
+        font-size: 32px;
+        // font-family: Montserrat-ExtraBold, Montserrat;
+        font-family: Montserrat-Bold;
         // font-weight: ExtraBold;
-        font-weight: bolder;
+        // font-weight: bolder;
         color: #ffffff;
         letter-spacing: -1px;
         .price-unit {
             font-size: 13px;
             font-family: Montserrat-Regular, Montserrat;
-            // font-weight: 400;
+            font-weight: 400;
             color: #c9caca;
             position: relative;
-            top: -16px;
+            top: -4px;
         }
         .price-desc {
             margin-top: 2px;
@@ -342,6 +352,19 @@ export default {
             line-height: 14px;
             letter-spacing: -1px;
         }
+    }
+    .buy-btn {
+        margin-top: 30px;
+        margin-right: 60px;
+        background: linear-gradient(to right, #ba45c8, #2b6bd2);
+        line-height: 47px;
+        font-size: 16px;
+        // font-family: Montserrat-ExtraBold, Montserrat;
+        font-family: Montserrat-Bold;
+        font-weight: 700;
+        text-align: center;
+        color: #ffffff;
+        letter-spacing: 1px;
     }
     .share-con {
         margin-top: 27px;
@@ -444,7 +467,7 @@ export default {
     .base-set {
         margin-left: 12px;
         margin-right: 12px;
-        margin-top: 58px;
+        margin-top: 38px;
         padding-bottom: 35px;
         border-bottom: 2px solid #c9caca;
 
