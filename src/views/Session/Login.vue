@@ -50,7 +50,7 @@ export default {
                 email: "",
                 password: "",
             },
-            rules: [],
+            rules: {},
         };
     },
     methods: {

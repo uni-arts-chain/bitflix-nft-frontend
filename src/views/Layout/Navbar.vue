@@ -105,6 +105,7 @@ export default {
     watch: {
         "$route.name"(nav) {
             const navNames = [
+                "Home",
                 "Packs",
                 "marketplace",
                 "questions",

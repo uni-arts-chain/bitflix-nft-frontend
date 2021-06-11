@@ -93,6 +93,7 @@ export default {
         justify-content: space-between;
         flex-wrap: wrap;
         .wallet {
+            cursor: pointer;
             border-radius: 10px;
             width: 150px;
             height: 210px;
