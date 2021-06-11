@@ -2,12 +2,23 @@
 <template>
     <div class="banner">
         <div class="wrapper-video">
-            <AdaptiveVideo
+            <!-- <AdaptiveVideo
                 :source="BannerMp4"
                 :isPlay="true"
                 :isCover="true"
                 :isLoop="true"
-            />
+            /> -->
+            <video
+                id="marketplaceVideo"
+                ref="video"
+                width="100%"
+                height="auto"
+                :src="videoUrl"
+                poster=""
+                autoplay
+                loop
+                muted
+            ></video>
         </div>
 
         <!-- <h2 class="second-title">MOVIE NFT & IMOs</h2> -->
@@ -24,16 +35,17 @@
     </div>
 </template>
 <script>
-import AdaptiveVideo from "@/components/AdaptiveVideo";
+// import AdaptiveVideo from "@/components/AdaptiveVideo";
 import BannerMp4 from "@/assets/video/banner-mp4.mp4";
 export default {
     name: "banner",
     components: {
-        AdaptiveVideo,
+        // AdaptiveVideo,
     },
     data() {
         return {
             BannerMp4,
+            videoUrl: BannerMp4,
         };
     },
     methods: {

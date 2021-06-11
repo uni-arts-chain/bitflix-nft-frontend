@@ -206,6 +206,7 @@ ul {
         white-space: nowrap;
     }
     .sign-up {
+        white-space: nowrap;
         margin-left: 26px;
         font-family: "Montserrat-Bold";
         font-size: 20px;
