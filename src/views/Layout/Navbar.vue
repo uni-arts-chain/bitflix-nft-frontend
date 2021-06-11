@@ -203,6 +203,7 @@ ul {
         text-align: center;
         color: #ffffff;
         padding: 8px 24px;
+        white-space: nowrap;
     }
     .sign-up {
         margin-left: 26px;
