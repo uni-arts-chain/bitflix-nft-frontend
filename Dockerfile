@@ -11,7 +11,7 @@ RUN yarn install
 COPY . $APP_ROOT
 RUN yarn build
 
-FROM alpine
+FROM nginx:1.18-alpine
 ENV APP_ROOT /app
-COPY --from=web_assets $APP_ROOT/dist $APP_ROOT/web_assets
-CMD sh
+COPY --from=web_assets $APP_ROOT/dist /usr/share/nginx/html
+#CMD ["/usr/sbin/nginx", "-g", "\'daemon off;\'"]
