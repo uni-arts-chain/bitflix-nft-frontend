@@ -65,7 +65,7 @@ jobs:
         # Use Docker `latest` tag convention
         [ "$VERSION" == "master" ] && VERSION=latest
         echo ::set-output name=tagged_image::${IMAGE_ID}:${VERSION}
-        echo ::set-output name=tag::${TAG}
+        echo ::set-output name=tag::${VERSION}
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
@@ -77,9 +77,9 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${VERSION} .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.prep.outputs.tag }} .
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:${VERSION}
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$${{ steps.prep.outputs.tag }}
         docker push $ECR_REGISTRY/$ECR_REPOSITORY
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
