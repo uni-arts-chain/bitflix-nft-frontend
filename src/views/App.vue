@@ -20,14 +20,7 @@ export default {
             isLoading: false,
         };
     },
-    async created() {
-        // this.isLoading = true;
-        // await this.$rpc.api.isReady;
-        // await this.initChainInfo();
-        // await this.$extension.isReady();
-        // await this.getInfo();
-        // this.isLoading = false;
-    },
+    async created() {},
     computed: {
         isSession() {
             switch (this.$route.path) {
@@ -38,44 +31,7 @@ export default {
             return false;
         },
     },
-    methods: {
-        async getInfo() {
-            if (this.$store.state.user.info.token) {
-                await this.$store.dispatch("user/GetInfo");
-            }
-            await this.$store.dispatch("art/GetCategories");
-            await this.$store.dispatch("art/GetThemes");
-            await this.$store.dispatch("art/GetMaterials");
-        },
-        async initChainInfo() {
-            let specVersion = await this.$rpc.api.runtimeVersion.specVersion;
-            let properties = await this.$rpc.api.rpc.system.properties();
-            properties = properties.toJSON();
-            let initialBlcok = await this.$rpc.api.rpc.chain.getBlock();
-            let blockHeight = initialBlcok.block.header.number.toString();
-            let timestamp = initialBlcok.block.extrinsics[0].method.args[0].toString();
-            properties.timestamp = timestamp;
-            properties.blockHeight = blockHeight;
-            await this.$store.dispatch("global/SetChain", {
-                specVersion: specVersion.toString(),
-                ...properties,
-            });
-            console.log(
-                "GenesisHash: ",
-                await this.$rpc.api.genesisHash.toHex()
-            );
-
-            this.$http
-                .globalGetCurrencies({})
-                .then((res) => {
-                    this.$store.dispatch("global/SetSymbol", res);
-                })
-                .catch((err) => {
-                    console.log(err);
-                    this.$notify.error(err.head ? err.head.msg : err);
-                });
-        },
-    },
+    methods: {},
 };
 </script>
 

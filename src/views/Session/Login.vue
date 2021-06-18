@@ -1,61 +1,38 @@
 /** * Created by Lay Hunt on 2021-05-24 18:16:31. */
 <template>
     <div class="login">
-        <div class="form" :model="form" submit.native>
+        <div class="form">
             <div class="top-line"></div>
             <img class="logo" src="@/assets/images/logo-login.png" />
             <div class="desc">Sigin in to dapper</div>
             <span class="name">for BITFLIX</span>
-            <el-form
-                ref="form"
-                :model="form"
-                label-position="top"
-                label-width="130px"
-                :rules="rules"
-            >
-                <el-form-item label="Email" prop="email">
-                    <input type="text" />
-                </el-form-item>
-                <el-form-item label="Password" prop="password">
-                    <input type="password" />
-                </el-form-item>
-                <router-link class="forgot" to="/">Forgot password</router-link>
-                <el-form-item style="margin-bottom: 5px">
-                    <button @click.prevent="submit" class="submit">
-                        Sign in
-                    </button>
-                </el-form-item>
-                <p class="go-register">
-                    Don't have an account?
-                    <router-link to="/signup">Register here</router-link>
-                </p>
-            </el-form>
+            <div class="wallet-list">
+                <div class="wallet" @click="connectMetaMask">
+                    <icon-svg
+                        class="icon"
+                        style="font-size: 70px"
+                        icon-class="metamask"
+                    />
+                    <span class="wallet-name">MetaMask</span>
+                </div>
+            </div>
         </div>
-        <router-link class="notice" to="/"
-            >What is Dapper and why do I need it?</router-link
-        >
     </div>
 </template>
 <script>
-import { Form, FormItem } from "element-ui";
 export default {
     name: "login",
-    components: {
-        [FormItem.name]: FormItem,
-        [Form.name]: Form,
-    },
     data() {
-        return {
-            form: {
-                email: "",
-                password: "",
-            },
-            rules: {},
-        };
+        return {};
     },
     methods: {
-        submit() {
-            this.$router.push("/");
+        connectMetaMask() {
+            this.$wallet
+                .connect()
+                .then(() => {
+                    this.notify.success("Success");
+                })
+                .catch(() => {});
         },
     },
 };
@@ -71,17 +48,24 @@ export default {
     justify-content: center;
 }
 .form {
-    width: 445px;
-    height: 627px;
+    display: inline-block;
+    min-width: 445px;
+    position: relative;
+    min-height: 327px;
     background-color: white;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     overflow: hidden;
     text-align: left;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 .top-line {
     width: 100%;
     height: 6px;
+    position: absolute;
+    left: 0;
+    top: 0;
     background: linear-gradient(to right, #d63ed5, #166dce);
 }
 .logo {
@@ -107,77 +91,30 @@ export default {
     text-align: left;
     color: #818394;
 }
-.el-form {
-    margin-left: 63px;
-    width: 322px;
-    margin-top: 88px;
-    .el-form-item {
-    }
-    ::v-deep .el-form-item__label {
-        font-size: 17px;
-        font-family: "Montserrat-Regular";
-        font-weight: 600;
-        text-align: left;
-        color: #818394;
-        letter-spacing: 1px;
-        line-height: 17px;
-    }
-    input {
-        border: 1px solid #818394;
-        display: block;
-        height: 51px;
-        border-radius: 6px;
-        width: 100%;
-        padding: 5px 10px;
-        font-size: 20px;
-    }
-    .forgot {
-        font-size: 12px;
-        font-family: "Montserrat-Regular";
-        font-weight: 600;
-        text-align: left;
-        color: #818394;
-        letter-spacing: 1px;
-        line-height: 17px;
-    }
-    .submit {
-        width: 149px;
-        height: 50px;
-        margin-top: 30px;
-        border-radius: 5px;
-        background: linear-gradient(to left, #d63ed5, #166dce);
-        font-size: 15px;
-        font-family: "Montserrat-Regular";
-        font-weight: 600;
-        text-align: left;
-        color: #ffffff;
-        cursor: pointer;
-        text-align: center;
-    }
-    .go-register {
-        font-size: 12px;
-        font-family: "Montserrat-Regular";
-        font-weight: 600;
-        text-align: left;
-        color: #818394;
-        letter-spacing: 1px;
-        line-height: 17px;
-        a:hover {
-            text-decoration: underline;
-        }
-    }
+
+.wallet-list {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
-.notice {
-    margin-top: 20px;
-    font-size: 13px;
-    font-family: "Montserrat-Regular";
-    font-weight: 600;
-    text-align: left;
-    color: #818394;
-    letter-spacing: 1px;
-    line-height: 17px;
-}
-.notice:hover {
-    text-decoration: underline;
+
+.wallet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 30px;
+    margin-right: 30px;
+    .icon {
+        font-size: 30px;
+    }
+    .wallet-name {
+        margin-top: 10px;
+        font-size: 22px;
+    }
 }
 </style>

@@ -80,7 +80,7 @@
             </ul>
             <div class="session">
                 <router-link to="/login" class="login">LOG IN</router-link>
-                <router-link to="/signup" class="sign-up">SIGN UP</router-link>
+                <!-- <router-link to="/signup" class="sign-up">SIGN UP</router-link> -->
             </div>
         </div>
     </nav>
@@ -197,15 +197,6 @@ ul {
     align-items: center;
     justify-content: space-between;
     .login {
-        font-family: "Montserrat-Bold";
-        font-size: 20px;
-        font-weight: 600;
-        text-align: center;
-        color: #ffffff;
-        padding: 8px 24px;
-        white-space: nowrap;
-    }
-    .sign-up {
         white-space: nowrap;
         margin-left: 26px;
         font-family: "Montserrat-Bold";
@@ -216,6 +207,17 @@ ul {
         padding: 8px 24px;
         background: linear-gradient(to right, #ba45c8, #2b6bd2);
     }
+    /* .sign-up {
+        white-space: nowrap;
+        margin-left: 26px;
+        font-family: "Montserrat-Bold";
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        color: #ffffff;
+        padding: 8px 24px;
+        background: linear-gradient(to right, #ba45c8, #2b6bd2);
+    } */
 }
 
 .questions {
