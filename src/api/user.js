@@ -13,6 +13,15 @@ const apiList = [
         options: {},
     },
     {
+        name: "loginMessage",
+        method: "GET",
+        desc: "获取登录凭证",
+        path: "/members/get_login_message",
+        mockPath: "/members/get_login_message",
+        params: {},
+        options: {},
+    },
+    {
         name: "getInfo",
         method: "GET",
         desc: "登录",
@@ -366,6 +375,15 @@ const apiList = [
         params: {
             id: "",
         },
+        options: {},
+    },
+    {
+        name: "getLockHistory",
+        method: "GET",
+        desc: "获取锁仓列表",
+        path: "/members/lock_history",
+        mockPath: "/members/lock_history",
+        params: {},
         options: {},
     },
 ];

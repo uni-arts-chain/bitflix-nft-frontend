@@ -83,7 +83,7 @@ module.exports = {
         port: 5100,
         proxy: {
             "/test/api": {
-                target: "192.168.0.128:5000", // 接口的域名 测试
+                target: "http://192.168.0.120:3000", // 接口的域名 测试
                 pathRewrite: {
                     "^/test/api": "/api",
                 },

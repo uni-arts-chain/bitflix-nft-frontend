@@ -6,14 +6,16 @@
                 <div class="record" v-for="record in records" :key="record.id">
                     <div>
                         <div class="lab">Time</div>
-                        <div class="val">{{ record.time }}</div>
+                        <div class="val">
+                            {{ record.time | dateFormat }}
+                        </div>
                     </div>
                     <div>
                         <div class="lab">Number</div>
-                        <div class="val">{{ record.number }} BFX</div>
+                        <div class="val">{{ record.amount }} BFX</div>
                     </div>
                     <div class="btn">
-                        {{ record.status === "lock" ? "Unlock" : "Lock" }}
+                        {{ record.redeemed ? "Unlock" : "Lock" }}
                     </div>
                 </div>
             </div>
@@ -22,29 +24,40 @@
 </template>
 
 <script>
+import config from "@/config/network";
+import { BigNumber } from "bignumber.js";
+
 export default {
     name: "record",
     data() {
         return {
-            records: [
-                {
-                    id: 1,
-                    time: "2020.08.30",
-                    number: "80000 ",
-                    status: "lock",
-                },
-                {
-                    id: 2,
-                    time: "2020.08.30",
-                    number: "80000 ",
-                    status: "lock",
-                },
-            ],
+            records: [],
         };
+    },
+    mounted() {
+        this.requestData();
     },
     methods: {
         goBack() {
             this.$router.push("/lockup");
+        },
+        requestData() {
+            let token = config.tokens.find(
+                (v) => v.symbol.toUpperCase() === "BTFLX"
+            );
+            this.$http.userGetLockHistory({}).then((res) => {
+                this.records = res.locks.map((v) => {
+                    return {
+                        id: v.id,
+                        time: v.startTime,
+                        redeemed: v.redeemed,
+                        amount: new BigNumber(v.amount).shiftedBy(
+                            -parseInt(token.decimals).toString()
+                        ),
+                        user: v.user,
+                    };
+                });
+            });
         },
     },
 };

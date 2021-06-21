@@ -3,17 +3,6 @@ export default {
     state: {
         lang: "en",
         theme: "light",
-        chain: {
-            genesisHash: "",
-            specVersion: "",
-            ss58Format: "",
-            tokenDecimals: "",
-            tokenSymbol: "",
-            blockHeight: "",
-            timestamp: "",
-        },
-        symbol: "usdt",
-        currencyId: window.NODE_CONFIG.currencyId,
     },
     mutations: {
         SET_CHAIN(state, data) {

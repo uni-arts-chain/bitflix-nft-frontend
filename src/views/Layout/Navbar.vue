@@ -79,7 +79,12 @@
                 </li>
             </ul>
             <div class="session">
-                <router-link to="/login" class="login">LOG IN</router-link>
+                <span class="user-address" v-if="connectedAccount">{{
+                    connectedAccount
+                }}</span>
+                <router-link v-else to="/login" class="login"
+                    >LOG IN</router-link
+                >
                 <!-- <router-link to="/signup" class="sign-up">SIGN UP</router-link> -->
             </div>
         </div>
@@ -98,8 +103,11 @@ export default {
         theme() {
             return this.$store.state.global.theme;
         },
-        user() {
-            return this.$store.state.user.info;
+        connectedAccount() {
+            let address = this.$store.state.user.info.address;
+            return address
+                ? address.substr(0, 6) + "..." + address.substr(-4, 4)
+                : "";
         },
     },
     watch: {
@@ -117,6 +125,7 @@ export default {
             }
         },
     },
+    mounted() {},
     methods: {
         goHome() {
             if (this.$route.path !== "/") {
@@ -206,6 +215,19 @@ ul {
         color: #ffffff;
         padding: 8px 24px;
         background: linear-gradient(to right, #ba45c8, #2b6bd2);
+    }
+    .user-address {
+        font-family: "Montserrat-Bold";
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff;
+        display: block;
+        width: 170px;
+        text-align: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        white-space: nowrap;
     }
     /* .sign-up {
         white-space: nowrap;

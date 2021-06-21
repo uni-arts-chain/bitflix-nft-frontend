@@ -25,14 +25,52 @@ export default {
     data() {
         return {};
     },
+    created() {
+        if (this.$store.state.user.info.token) {
+            this.$notify.success("Logged");
+            this.$router.push("/");
+        }
+    },
+    mounted() {},
     methods: {
         connectMetaMask() {
-            this.$wallet
-                .connect()
-                .then(() => {
-                    this.notify.success("Success");
+            this.$store
+                .dispatch("user/ConnectWallet")
+                .then(async () => {
+                    let response = await this.$http.userLoginMessage({});
+                    setTimeout(async () => {
+                        try {
+                            let signatureData = await this.$wallet.signature(
+                                response.message
+                            );
+                            let info = await this.$http.userLogin({
+                                address: this.$store.state.user
+                                    .connectedAccount,
+                                message: response.message,
+                                signature: signatureData,
+                            });
+                            await this.$store.dispatch("user/SetInfo", info);
+                            this.$notify.success("Logged");
+                            this.$router.push("/");
+                        } catch (error) {
+                            this.$notify.error(
+                                error.head ? error.head.msg : error.message
+                            );
+                        }
+                    }, 500);
                 })
-                .catch(() => {});
+                .catch((err) => {
+                    console.log(err);
+                    if (err.code === 100) {
+                        this.$notify.error(
+                            "Please install the selected wallet"
+                        );
+                    } else {
+                        this.$notify.error(
+                            err.head ? err.head.msg : err.message
+                        );
+                    }
+                });
         },
     },
 };

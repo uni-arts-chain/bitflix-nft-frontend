@@ -20,7 +20,13 @@ export default {
             isLoading: false,
         };
     },
-    async created() {},
+    mounted() {
+        this.$store.dispatch("user/InitWallet").catch((err) => {
+            if (err.code === 100) {
+                this.$store.dispatch("user/Quit");
+            }
+        });
+    },
     computed: {
         isSession() {
             switch (this.$route.path) {

@@ -1,4 +1,5 @@
 import { BigNumber } from "bignumber.js";
+import Web3Utils from "web3-utils";
 
 class Wallet {
     constructor() {
@@ -22,13 +23,17 @@ class Wallet {
     }
     async init() {
         if (!this.provider) {
-            throw new Error();
+            throw {
+                code: 100,
+            };
         }
         let account = await this.provider.request({
             method: "eth_accounts",
         });
         if (account.length <= 0) {
-            throw new Error();
+            throw {
+                code: 300,
+            };
         }
         let address = account[0];
         this.setConnectedAddress(address);
@@ -47,7 +52,9 @@ class Wallet {
     }
     async connect() {
         if (!this.provider) {
-            throw new Error();
+            throw {
+                code: 100,
+            };
         }
         if (this.provider.on) {
             this.provider.on("accountsChanged", (accounts) => {
@@ -61,6 +68,29 @@ class Wallet {
             method: "eth_requestAccounts",
         });
         await this.init();
+    }
+    async request(obj) {
+        console.log(obj);
+        let result = await this.provider.request({
+            method: obj.method,
+            params: obj.params,
+            from: this.connectedAddress,
+        });
+        console.log(result);
+        return result;
+    }
+    async signature(message) {
+        console.log(message);
+        var from = this.connectedAddress;
+        const msgParams = Web3Utils.utf8ToHex(message + "");
+        var params = [from, msgParams];
+        var method = "personal_sign";
+        console.log(from, params, method);
+        let result = await this.request({
+            method: method,
+            params: params,
+        });
+        return result;
     }
 }
 

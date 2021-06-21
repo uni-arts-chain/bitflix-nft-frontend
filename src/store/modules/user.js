@@ -4,11 +4,15 @@ import {
     removeLocalStore,
 } from "@/plugins/storage";
 import http from "@/plugins/http";
+import Wallet from "@/plugins/wallet";
 
 export default {
     namespaced: true,
     state: {
-        accounts: [],
+        connectedAccount: "",
+        isConnected: false,
+        // balance: "",
+        // provider: {},
         info: Object.assign(
             {},
             JSON.parse(
@@ -18,11 +22,28 @@ export default {
         ),
     },
     mutations: {
+        SET_ACCOUNT(state, wallet) {
+            state.connectedAccount = wallet.connectedAddress;
+            // state.balance = wallet.balance;
+            // state.provider = wallet.provider;
+        },
+        SET_IS_CONNECTED(state, status) {
+            state.isConnected = status;
+        },
         SET_INFO(state, info) {
             state.info = info;
         },
     },
     actions: {
+        async ConnectWallet({ commit }) {
+            await Wallet.connect();
+            commit("SET_ACCOUNT", Wallet);
+        },
+        async InitWallet({ commit }) {
+            await Wallet.init();
+            commit("SET_ACCOUNT", Wallet);
+            commit("SET_IS_CONNECTED", true);
+        },
         GetInfo({ commit }) {
             http.userGetInfo({}).then((info) => {
                 let tokens = {
