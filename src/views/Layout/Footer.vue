@@ -9,17 +9,17 @@
 </template>
 
 <script>
-import { NODE_ENV } from "@/config";
+// import { NODE_ENV } from "@/config";
 export default {
     name: "footerbar",
-    computed: {
-        isProd() {
-            return (
-                NODE_ENV === "production" &&
-                window.NODE_CONFIG.env !== "development"
-            );
-        },
-    },
+    // computed: {
+    //     isProd() {
+    //         return (
+    //             NODE_ENV === "production" &&
+    //             window.NODE_CONFIG.env !== "development"
+    //         );
+    //     },
+    // },
 };
 </script>
 

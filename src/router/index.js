@@ -1,4 +1,4 @@
-import { NODE_ENV } from "@/config";
+// import { NODE_ENV } from "@/config";
 
 const routes = [
     {
@@ -125,16 +125,16 @@ const routes = [
     },
 ];
 
-if (NODE_ENV !== "production" || window.NODE_CONFIG.env === "development") {
-    routes.push({
-        path: "/faucet",
-        name: "Faucet",
-        component: () =>
-            import(
-                /* webpackChunkName: "Session" */ "@/views/Session/Faucet.vue"
-            ),
-    });
-}
+// if (NODE_ENV !== "production" || window.NODE_CONFIG.env === "development") {
+//     routes.push({
+//         path: "/faucet",
+//         name: "Faucet",
+//         component: () =>
+//             import(
+//                 /* webpackChunkName: "Session" */ "@/views/Session/Faucet.vue"
+//             ),
+//     });
+// }
 
 routes.push({
     path: "*",
