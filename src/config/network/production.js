@@ -5,7 +5,7 @@ module.exports = {
     },
     tokens: [
         {
-            symbol: "BFX",
+            symbol: "BTFLX",
             decimals: 18,
             address: "0x2bDD4c2207837A3c82C65664cFE19889803de6D0",
         },
