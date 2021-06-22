@@ -188,6 +188,7 @@ export default {
                         this.isLocking = false;
                         if (!err) {
                             console.log(txHash);
+                            this.amount = "";
                             this.$notify.success("Locked successfully");
                         }
                     }

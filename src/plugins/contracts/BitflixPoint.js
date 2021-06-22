@@ -1,5 +1,5 @@
 import Web3 from "web3";
-// import { toBN, BN, isBN } from "web3-utils";
+import { toBN } from "web3-utils";
 // import { MAX_UINT256 } from "./constants";
 import { BigNumber } from "bignumber.js";
 import Wallet from "@/plugins/wallet";
@@ -23,7 +23,7 @@ export class BitflixPoint {
     async lock(sender, amount, callback) {
         var gasPrice = await this.gasPrice();
         var tx = this.contract.methods.lock(
-            new BigNumber(amount).shiftedBy(this.token.decimals)
+            toBN(new BigNumber(amount).shiftedBy(this.token.decimals))
         );
         var gasLimit = await tx.estimateGas({
             value: 0,
