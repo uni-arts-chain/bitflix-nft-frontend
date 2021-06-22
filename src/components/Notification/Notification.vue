@@ -59,7 +59,7 @@ export default {
     .logo {
         display: flex;
         align-items: center;
-        color: black;
+        color: white;
         font-size: 23px;
         margin-right: 20px;
         .success {
@@ -72,13 +72,13 @@ export default {
     .body {
         > h1 {
             font-size: 20px;
-            color: black;
+            color: white;
             font-weight: 500;
         }
         > p {
             margin-top: 5px;
             font-size: 18px;
-            color: black;
+            color: white;
         }
     }
 }

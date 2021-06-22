@@ -31,18 +31,18 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 .uniarts-toast {
     &.Vue-Toastification__toast {
-        background-color: white;
+        background-color: #225590;
         font-size: 20px;
-        color: black;
+        color: white;
     }
     &.Vue-Toastification__toast--error .Vue-Toastification__icon{
         color: red;
     }
     & .Vue-Toastification__close-button {
-        color: black;
+        color: white;
     }
     & .Vue-Toastification__progress-bar {
-        background-color: black;
+        background-color: white;
     }
 }
     

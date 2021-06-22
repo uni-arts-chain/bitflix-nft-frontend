@@ -5,24 +5,36 @@
             <div class="lockup">
                 <div>
                     <p class="lockup-title">
-                        Stake BTFLX to receive USDT spending quota
+                        Stake {{ token.symbol }} to receive USDT spending quota
                     </p>
                     <div class="input-wrapper">
                         <input class="input" v-model="amount" />
                         <span class="unit">{{ token.symbol }}</span>
                     </div>
-                    <!-- <p class="desc desc-1">{{ token.symbol }} Balance: 65413.2642</p> -->
-                    <!-- <p class="desc">{{ token.symbol }} Staked: 10000</p> -->
-                    <!-- <p class="desc">Spending Quota: $100</p> -->
+                    <p class="desc desc-1">
+                        {{ token.symbol }} Balance: {{ balance }}
+                    </p>
+                    <p class="desc">{{ token.symbol }} Staked: {{ staked }}</p>
+                    <p class="desc">Spending Quota: ${{ quote }}</p>
                 </div>
                 <button
                     class="btn active btn-1"
                     @click="lock"
                     v-if="isApproved"
+                    v-loading="isLocking"
+                    element-loading-spinner="el-icon-loading"
+                    element-loading-background="rgba(0, 0, 0, 0.8)"
                 >
                     Lock up
                 </button>
-                <button class="btn active btn-1" @click="approve" v-else>
+                <button
+                    class="btn active btn-1"
+                    v-loading="isApproving"
+                    element-loading-spinner="el-icon-loading"
+                    element-loading-background="rgba(0, 0, 0, 0.8)"
+                    @click="approve"
+                    v-else
+                >
                     Approve
                 </button>
                 <button class="btn btn-2" @click="goRecord">
@@ -45,8 +57,12 @@ export default {
         return {
             amount: "",
             token: {},
+            balance: 0,
+            lockRate: 0,
             allowance: 0,
+            staked: 0,
             tokenErc20: {},
+            lockDuration: 0,
             isApproving: false,
             isLocking: false,
         };
@@ -71,6 +87,9 @@ export default {
         isApproved() {
             return new BigNumber(this.allowance).gte(9999999);
         },
+        quote() {
+            return new BigNumber(this.staked).times(this.lockRate).toString();
+        },
     },
     mounted() {
         if (this.isConnected) {
@@ -87,9 +106,11 @@ export default {
                 this.token.symbol,
                 this.token.decimals
             );
-            let result = await this.getApproved();
-            console.log(result);
+            this.bitflixPoint = new BitflixPoint();
             this.allowance = await this.getApproved();
+            this.balance = await this.getBalance();
+            this.lockRate = await this.getLockRate();
+            this.getLockTotal();
         },
         goRecord() {
             this.$router.push("/lockupRecord");
@@ -102,6 +123,28 @@ export default {
                 )
             ).toString();
             return amount;
+        },
+        async getBalance() {
+            let balance = await this.tokenErc20.balanceOf(
+                this.connectedAccount
+            );
+            return balance.toString();
+        },
+        async getLockRate() {
+            let lockRate = await this.bitflixPoint.getLockRate();
+            return lockRate.toString();
+        },
+        getLockTotal() {
+            this.$http
+                .userGetLockTotal({})
+                .then((res) => {
+                    this.staked = new BigNumber(res.amount)
+                        .shiftedBy(-parseInt(this.token.decimals))
+                        .toString();
+                })
+                .catch((err) => {
+                    this.$notify.error(err.head ? err.head.msg : err.message);
+                });
         },
         approve() {
             if (!this.connectedAccount) {
@@ -131,18 +174,21 @@ export default {
                 });
         },
         lock() {
+            let amountNumber = new BigNumber(this.amount);
+            if (amountNumber.isZero() || amountNumber.isNaN()) {
+                this.$notify.error("Invalid input value");
+                return;
+            }
             this.isLocking = true;
-            let bitflixPoint = new BitflixPoint();
-            bitflixPoint
+            this.bitflixPoint
                 .lock(
                     this.connectedAccount,
                     this.amount || 0,
                     (err, txHash) => {
                         this.isLocking = false;
-                        if (err) {
-                            console.log(err);
-                        } else {
+                        if (!err) {
                             console.log(txHash);
+                            this.$notify.success("Locked successfully");
                         }
                     }
                 )
@@ -152,6 +198,7 @@ export default {
                 .catch((err) => {
                     this.isLocking = false;
                     console.log(err);
+                    this.$notify.error(err.message);
                 });
         },
     },
@@ -213,6 +260,7 @@ export default {
             border-radius: 30px;
             font-family: Montserrat-SemiBold, Montserrat;
             font-size: 20px;
+            overflow: hidden;
             padding: 16px;
             width: 360px;
             background: transparent;

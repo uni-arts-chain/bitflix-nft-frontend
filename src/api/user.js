@@ -386,6 +386,15 @@ const apiList = [
         params: {},
         options: {},
     },
+    {
+        name: "getLockTotal",
+        method: "GET",
+        desc: "获取锁仓总量",
+        path: "/members/lock_amount",
+        mockPath: "/members/lock_amount",
+        params: {},
+        options: {},
+    },
 ];
 
 export default apiList;

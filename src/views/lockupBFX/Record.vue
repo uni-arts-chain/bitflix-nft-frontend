@@ -2,7 +2,12 @@
     <div class="record-page">
         <div class="record-content">
             <span class="back-btn" @click="goBack">&lt; BACK</span>
-            <div class="record-list">
+            <div
+                class="record-list"
+                v-loading="isLoading"
+                element-loading-spinner="el-icon-loading"
+                element-loading-background="rgba(0, 0, 0, 0)"
+            >
                 <div class="record" v-for="record in records" :key="record.id">
                     <div>
                         <div class="lab">Time</div>
@@ -14,8 +19,13 @@
                         <div class="lab">Number</div>
                         <div class="val">{{ record.amount }} BFX</div>
                     </div>
-                    <div class="btn">
-                        {{ record.redeemed ? "Unlock" : "Lock" }}
+                    <div
+                        class="btn"
+                        :class="{
+                            disabled: !canRedeem(record) || record.redeemed,
+                        }"
+                    >
+                        {{ canRedeem(record) ? "Unlock" : "Lock" }}
                     </div>
                 </div>
             </div>
@@ -26,38 +36,81 @@
 <script>
 import config from "@/config/network";
 import { BigNumber } from "bignumber.js";
+import { BitflixPoint } from "@/plugins/contracts/BitflixPoint";
 
 export default {
     name: "record",
     data() {
         return {
             records: [],
+            lockDuration: 0,
+            isLoading: false,
+            bitflixPoint: {},
         };
     },
     mounted() {
-        this.requestData();
+        if (this.isConnected) {
+            this.init();
+        }
+    },
+    watch: {
+        isConnected(value) {
+            if (value) {
+                this.init();
+            }
+        },
+    },
+    computed: {
+        connectedAccount() {
+            return this.$store.state.user.connectedAccount;
+        },
+        isConnected() {
+            return this.$store.state.user.isConnected;
+        },
     },
     methods: {
+        async init() {
+            this.bitflixPoint = new BitflixPoint();
+            this.lockDuration = await this.getLockDuration().toString();
+            this.requestData();
+        },
+        async getLockDuration() {
+            let duration = await this.bitflixPoint.getLockDuration();
+            return duration.toString();
+        },
         goBack() {
             this.$router.push("/lockup");
         },
+        canRedeem(item) {
+            let now = +(new Date().getTime() / 1000);
+            let time = new BigNumber(item.time).plus(this.lockDuration);
+            return time.lt(now);
+        },
         requestData() {
+            this.isLoading = true;
             let token = config.tokens.find(
                 (v) => v.symbol.toUpperCase() === "BTFLX"
             );
-            this.$http.userGetLockHistory({}).then((res) => {
-                this.records = res.locks.map((v) => {
-                    return {
-                        id: v.id,
-                        time: v.startTime,
-                        redeemed: v.redeemed,
-                        amount: new BigNumber(v.amount).shiftedBy(
-                            -parseInt(token.decimals).toString()
-                        ),
-                        user: v.user,
-                    };
+            this.$http
+                .userGetLockHistory({})
+                .then((res) => {
+                    this.isLoading = false;
+                    this.records = res.list.locks.map((v) => {
+                        return {
+                            id: v.id,
+                            time: v.startTime,
+                            redeemed: v.redeemed,
+                            amount: new BigNumber(v.amount).shiftedBy(
+                                -parseInt(token.decimals).toString()
+                            ),
+                            user: v.user,
+                        };
+                    });
+                })
+                .catch((err) => {
+                    this.$notify.error(err.head ? err.head.msg : err.message);
+                    this.isLoading = false;
                 });
-            });
         },
     },
 };
@@ -113,7 +166,15 @@ export default {
                 padding: 8px 32px;
                 background: linear-gradient(to right, #ba45c8, #2b6bd2);
             }
+            .btn.disabled {
+                cursor: not-allowed;
+                opacity: 0.7;
+                background: linear-gradient(to right, #444444, #444444);
+            }
         }
     }
+}
+.record-content ::v-deep .el-loading-mask {
+    font-size: 24px;
 }
 </style>

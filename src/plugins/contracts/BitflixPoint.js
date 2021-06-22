@@ -40,29 +40,15 @@ export class BitflixPoint {
         );
     }
 
-    async cancel(sender, orderId, callback) {
-        console.log(sender, orderId);
-        console.log(this.address);
-        var gasPrice = await this.gasPrice();
-        var tx = this.contract.methods.cancel(orderId);
-        var gasLimit = await tx.estimateGas({
-            value: 0,
-            from: sender,
-            to: this.address,
-        });
-        return tx.send(
-            {
-                from: sender,
-                gasPrice: gasPrice,
-                gas: Math.round(gasLimit * 1.1),
-            },
-            callback
-        );
+    async getLockRate() {
+        let lockRate = await this.contract.methods.lockRate().call();
+        let lockRateMax = await this.contract.methods.lockRateMax().call();
+        return new BigNumber(lockRate).div(lockRateMax);
     }
 
-    async getBorrowerOffers(sender) {
-        var list = await this.contract.methods.getBorrowerOffers(sender).call();
-        return list;
+    async getLockDuration() {
+        let lockDuration = await this.contract.methods.lockDuration().call();
+        return lockDuration;
     }
 
     async gasPrice() {
