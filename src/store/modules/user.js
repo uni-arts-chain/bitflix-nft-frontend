@@ -35,9 +35,9 @@ export default {
         },
     },
     actions: {
-        async ConnectWallet({ commit }) {
+        async ConnectWallet({ dispatch }) {
             await Wallet.connect();
-            commit("SET_ACCOUNT", Wallet);
+            dispatch("InitWallet");
         },
         async InitWallet({ commit }) {
             await Wallet.init();

@@ -37,7 +37,7 @@ class Wallet {
         }
         let address = account[0];
         this.setConnectedAddress(address);
-        this.setChainId(parseInt(this.provider.chainId, 16));
+        this.setChainId(parseInt(this.provider.chainId));
         let balance = await this.provider.request({
             method: "eth_getBalance",
             params: [address, "latest"],
@@ -61,7 +61,7 @@ class Wallet {
                 this.setConnectedAddress(accounts[0]);
             });
             this.provider.on("chainChanged", (chainId) => {
-                this.setChainId(parseInt(chainId, 16));
+                this.setChainId(parseInt(chainId));
             });
         }
         await this.provider.request({
@@ -70,6 +70,7 @@ class Wallet {
         await this.init();
     }
     async request(obj) {
+        debugger;
         console.log(obj);
         let result = await this.provider.request({
             method: obj.method,

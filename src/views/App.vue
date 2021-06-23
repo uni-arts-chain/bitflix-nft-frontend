@@ -22,6 +22,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch("user/InitWallet").catch((err) => {
+            console.log(err);
             if (err.code === 100) {
                 this.$store.dispatch("user/Quit");
             }
