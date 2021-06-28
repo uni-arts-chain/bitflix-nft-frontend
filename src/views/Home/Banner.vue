@@ -57,7 +57,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .banner {
-    height: 780px;
+    height: 714px;
     width: 100%;
     color: white;
     overflow: hidden;
@@ -73,7 +73,7 @@ export default {
 }
 .desc {
     margin: 0 auto;
-    margin-top: 565px;
+    margin-top: 515px;
     max-width: 930px;
     font-size: 17px;
     font-family: "Montserrat-Regular";
@@ -101,11 +101,16 @@ export default {
     z-index: 2;
 }
 .wrapper-video {
+    background-color: black;
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     z-index: 1;
+    video {
+        height: 100%;
+        width: auto;
+    }
 }
 </style>
