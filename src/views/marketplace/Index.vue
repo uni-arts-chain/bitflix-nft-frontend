@@ -1,11 +1,11 @@
 <template>
     <div class="marketplace-page">
         <div class="top-container">
-            <div class="top-title">EXPLORE THE MARKETPLACE</div>
+            <div class="top-title">EXPLORE MARKETPLACE</div>
             <div class="search-container">
                 <input
                     class="search-input"
-                    placeholder="Search by stars, movies, and sets"
+                    placeholder="Search by Actor, Director, Movie title and genre, and NFT type"
                     v-model="searchVal"
                 />
                 <div class="v-br"></div>
@@ -21,14 +21,14 @@
 
         <div class="move-container">
             <div class="move-content">
-                <BaseTitle>SEARCH BY MOVIE</BaseTitle>
+                <BaseTitle>SEARCH BY MOVIE AND GENRE</BaseTitle>
                 <MovieList class="move-list" @handleClick="goSearch" />
             </div>
         </div>
 
         <div class="star-container">
             <div class="star-content">
-                <BaseTitle>SEARCH BY STAR</BaseTitle>
+                <BaseTitle>SEARCH BY ACTOR AND DIRECTOR</BaseTitle>
                 <StarList class="star-list" @handleClick="goSearch" />
             </div>
             <img class="line" src="@/assets/images/packs-line@2x.png" />
@@ -38,10 +38,16 @@
         <div class="latest-container">
             <div class="latest-content">
                 <div class="latest-title-con">
+                    <BaseTitle>SEARCH BY NFT TYPE</BaseTitle>
+                </div>
+                <ActionMovieList class="latest-list" @onMovieClick="goDetail" />
+            </div>
+        </div>
+        <div class="latest-container">
+            <div class="latest-content">
+                <div class="latest-title-con">
                     <BaseTitle>LATEST LASTINGS</BaseTitle>
-                    <div class="more-btn" @click="goSearchList">
-                        EXPLORE MARKETPLACE
-                    </div>
+                    <div class="more-btn" @click="goSearchList">EXPLORE MARKETPLACE</div>
                 </div>
                 <ActionMovieList class="latest-list" @onMovieClick="goDetail" />
             </div>

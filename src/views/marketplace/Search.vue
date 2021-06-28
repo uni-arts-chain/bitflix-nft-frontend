@@ -6,7 +6,7 @@
                 <div class="search-content">
                     <input
                         class="search-input"
-                        placeholder="Search by stars, movies, and sets"
+                        placeholder="Search by Actor, Director, Movie title and genre, and NFT type"
                         v-model="searchVal"
                     />
                     <div class="search-text">LEARN MORE</div>
@@ -40,11 +40,7 @@
 
                 <span class="sort-by">SORT BY</span>
 
-                <el-select
-                    class="select-container custom-input"
-                    clearable
-                    v-model="selectVal"
-                >
+                <el-select class="select-container custom-input" clearable v-model="selectVal">
                     <el-option
                         v-for="item in options"
                         :key="item.value"

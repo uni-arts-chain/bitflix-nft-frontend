@@ -8,11 +8,7 @@
             <span class="name">for BITFLIX</span>
             <div class="wallet-list">
                 <div class="wallet" @click="connectMetaMask">
-                    <icon-svg
-                        class="icon"
-                        style="font-size: 70px"
-                        icon-class="metamask"
-                    />
+                    <icon-svg class="icon" style="font-size: 70px" icon-class="metamask" />
                     <span class="wallet-name">MetaMask</span>
                 </div>
             </div>
@@ -40,12 +36,9 @@ export default {
                     let response = await this.$http.userLoginMessage({});
                     setTimeout(async () => {
                         try {
-                            let signatureData = await this.$wallet.signature(
-                                response.message
-                            );
+                            let signatureData = await this.$wallet.signature(response.message);
                             let info = await this.$http.userLogin({
-                                address: this.$store.state.user
-                                    .connectedAccount,
+                                address: this.$wallet.connectedAccount,
                                 message: response.message,
                                 signature: signatureData,
                             });
@@ -53,22 +46,16 @@ export default {
                             this.$notify.success("Logged");
                             this.$router.push("/");
                         } catch (error) {
-                            this.$notify.error(
-                                error.head ? error.head.msg : error.message
-                            );
+                            this.$notify.error(error.head ? error.head.msg : error.message);
                         }
                     }, 500);
                 })
                 .catch((err) => {
                     console.log(err);
                     if (err.code === 100) {
-                        this.$notify.error(
-                            "Please install the selected wallet"
-                        );
+                        this.$notify.error("Please install the selected wallet");
                     } else {
-                        this.$notify.error(
-                            err.head ? err.head.msg : err.message
-                        );
+                        this.$notify.error(err.head ? err.head.msg : err.message);
                     }
                 });
         },

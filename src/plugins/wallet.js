@@ -1,25 +1,28 @@
 import { BigNumber } from "bignumber.js";
 import Web3Utils from "web3-utils";
+import Vue from "vue";
 
 class Wallet {
     constructor() {
         this.provider = window.ethereum || window.BinanceChain;
-        this.connectedAddress = "";
-        this.chainId = "";
-        this.accountBalance = 0;
-        this.isConnected = false;
+        this.state = Vue.observable({
+            connectedAccount: "",
+            chainId: "",
+            accountBalance: "",
+            isConnected: false,
+        });
     }
-    setIsConnected(status) {
-        this.isConnected = status;
+    get connectedAccount() {
+        return this.state.connectedAccount;
     }
-    setChainId(id) {
-        this.chainId = id;
+    get chainId() {
+        return this.state.chainId;
     }
-    setConnectedAddress(address) {
-        this.connectedAddress = address;
+    get accountBalance() {
+        return this.state.accountBalance;
     }
-    setAccountBalance(balance) {
-        this.accountBalance = balance;
+    get isConnected() {
+        return this.state.isConnected;
     }
     async init() {
         if (!this.provider) {
@@ -36,18 +39,16 @@ class Wallet {
             };
         }
         let address = account[0];
-        this.setConnectedAddress(address);
-        this.setChainId(parseInt(this.provider.chainId));
+        this.state.connectedAccount = address;
+        this.state.chainId = parseInt(this.provider.chainId);
         let balance = await this.provider.request({
             method: "eth_getBalance",
             params: [address, "latest"],
         });
         if (balance) {
-            this.setAccountBalance(
-                new BigNumber(balance).shiftedBy(-18).toString()
-            );
+            this.state.accountBalance = new BigNumber(balance).shiftedBy(-18).toString();
         }
-        this.setIsConnected(true);
+        this.state.isConnected = true;
         return;
     }
     async connect() {
@@ -58,10 +59,10 @@ class Wallet {
         }
         if (this.provider.on) {
             this.provider.on("accountsChanged", (accounts) => {
-                this.setConnectedAddress(accounts[0]);
+                this.state.connectedAccount = accounts[0];
             });
             this.provider.on("chainChanged", (chainId) => {
-                this.setChainId(parseInt(chainId));
+                this.state.chainId = parseInt(chainId);
             });
         }
         await this.provider.request({
@@ -70,19 +71,18 @@ class Wallet {
         await this.init();
     }
     async request(obj) {
-        debugger;
         console.log(obj);
         let result = await this.provider.request({
             method: obj.method,
             params: obj.params,
-            from: this.connectedAddress,
+            from: this.state.connectedAccount,
         });
         console.log(result);
         return result;
     }
     async signature(message) {
         console.log(message);
-        var from = this.connectedAddress;
+        var from = this.state.connectedAccount;
         const msgParams = Web3Utils.utf8ToHex(message + "");
         var params = [from, msgParams];
         var method = "personal_sign";

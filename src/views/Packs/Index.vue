@@ -5,7 +5,6 @@
         <Featured />
         <Previous />
         <div class="more-body">
-            <!-- <div class="more">VIEW MORE</div> -->
             <img class="line3" src="@/assets/images/packs-line3@2x.png" />
             <img class="line4" src="@/assets/images/packs-line-set2@2x.png" />
         </div>

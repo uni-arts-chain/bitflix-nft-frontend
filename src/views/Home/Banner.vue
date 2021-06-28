@@ -23,15 +23,11 @@
 
         <!-- <h2 class="second-title">MOVIE NFT & IMOs</h2> -->
         <p class="desc">
-            A Movie NFT (Non-Fungible Token) is a collectible behind the
-            scenes(BTS) video clip of an iconic scene or line of dialogue in a
-            movie.Everyone remembers Arnold Schwarzenegger's famous movie
-            quotes.If Terminator was the IMO (Initial Movie Offering) then the
-            BTS video clip of him saying "I'll be back" would be the NFT.
+            A Movie NFT is a collectible behind-the-scenes moment from a movie. If Terminator was
+            the BITFLIX IMO, then the BTS video clip of Arnold Schwarzenegger’s iconic phrase “I’ll
+            be back” would be the Movie NFT.
         </p>
-        <button class="start-button" @click="goMarketplace">
-            START YOUR COLLECTION
-        </button>
+        <button class="start-button" @click="goMarketplace">START YOUR COLLECTION</button>
     </div>
 </template>
 <script>

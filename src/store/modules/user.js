@@ -1,35 +1,30 @@
-import {
-    setLocalStore,
-    getLocalStore,
-    removeLocalStore,
-} from "@/plugins/storage";
+import { setLocalStore, getLocalStore, removeLocalStore } from "@/plugins/storage";
 import http from "@/plugins/http";
 import Wallet from "@/plugins/wallet";
 
 export default {
     namespaced: true,
     state: {
-        connectedAccount: "",
-        isConnected: false,
+        // connectedAccount: "",
+        // isConnected: false,
         // balance: "",
         // provider: {},
         info: Object.assign(
             {},
             JSON.parse(
-                getLocalStore("user_token") ||
-                    '{ "token": "", "expire_at": "", "address": "" }'
+                getLocalStore("user_token") || '{ "token": "", "expire_at": "", "address": "" }'
             )
         ),
     },
     mutations: {
-        SET_ACCOUNT(state, wallet) {
-            state.connectedAccount = wallet.connectedAddress;
-            // state.balance = wallet.balance;
-            // state.provider = wallet.provider;
-        },
-        SET_IS_CONNECTED(state, status) {
-            state.isConnected = status;
-        },
+        // SET_ACCOUNT(state, wallet) {
+        //     state.connectedAccount = wallet.connectedAddress;
+        //     // state.balance = wallet.balance;
+        //     // state.provider = wallet.provider;
+        // },
+        // SET_IS_CONNECTED(state, status) {
+        //     state.isConnected = status;
+        // },
         SET_INFO(state, info) {
             state.info = info;
         },
@@ -39,10 +34,10 @@ export default {
             await Wallet.connect();
             dispatch("InitWallet");
         },
-        async InitWallet({ commit }) {
+        async InitWallet() {
             await Wallet.init();
-            commit("SET_ACCOUNT", Wallet);
-            commit("SET_IS_CONNECTED", true);
+            // commit("SET_ACCOUNT", Wallet);
+            // commit("SET_IS_CONNECTED", true);
         },
         GetInfo({ commit }) {
             http.userGetInfo({}).then((info) => {

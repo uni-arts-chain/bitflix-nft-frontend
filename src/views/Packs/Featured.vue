@@ -2,6 +2,12 @@
 <template>
     <div class="featured">
         <div class="container">
+            <div class="title">PURCHASE YOUR MYSTERY NFT PACK !</div>
+            <div class="desc">
+                *NFT Pack includes 1x Movie… 1x Star… 1x Activist… and 1x Music… with a chance to
+                win an additional Trophy NFT! A physical prop or memorabilia from the IMO,
+                autographed by the star and shipped to your home address.
+            </div>
             <div class="title">FEATURED PACKS</div>
             <div class="list">
                 <ActionMovieList :list="movies" @onMovieClick="goDetail" />
@@ -76,6 +82,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.desc {
+    font-size: 22px;
+    font-family: "Montserrat";
+    margin-top: 51px;
+    margin-bottom: 105px;
+    text-align: left;
+    color: #ffffff;
+}
 .title {
     font-size: 27px;
     font-family: "Montserrat-Bold";

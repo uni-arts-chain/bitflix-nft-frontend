@@ -51,11 +51,27 @@
             </div>
             <div class="card-cate-item" @click="goMarketplaceDetail">
                 <ActionMovie
+                    title="MUISC NFT"
+                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coinUrl="`${require('@/assets/images/cate-coin3.png')}`"
+                />
+                <span>MUISC</span>
+            </div>
+            <div class="card-cate-item" @click="goMarketplaceDetail">
+                <ActionMovie
                     title="ACTIVIST NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
                     :coinUrl="`${require('@/assets/images/cate-coin3.png')}`"
                 />
                 <span>ACTIVIST</span>
+            </div>
+            <div class="card-cate-item" @click="goMarketplaceDetail">
+                <ActionMovie
+                    title="TROPHY NFT"
+                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coinUrl="`${require('@/assets/images/cate-coin3.png')}`"
+                />
+                <span>TROPHY</span>
             </div>
         </div>
     </div>
@@ -139,20 +155,22 @@ export default {
     }
 }
 .card-cate-group {
-    height: 418px;
-    background-image: url(~@/assets/images/card-group.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    height: 328px;
     display: flex;
     justify-content: space-between;
 }
+.card-cate-group.container {
+    width: 1200px;
+}
 .card-cate-item {
-    width: 29%;
-    height: 100%;
+    width: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    background-image: url(~@/assets/images/card-bg.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     padding-top: 23px;
     > span {
         font-size: 27px;
@@ -163,9 +181,9 @@ export default {
         letter-spacing: 0px;
     }
     .action-movie {
-        width: 239px;
-        height: 252px;
-        font-size: 30px;
+        width: 170px;
+        height: 170px;
+        font-size: 19px;
         margin-top: 23px;
         margin-bottom: 30px;
     }

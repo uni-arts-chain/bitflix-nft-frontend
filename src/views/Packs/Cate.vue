@@ -6,7 +6,14 @@
                 <div class="title">PACKS</div>
                 <div class="cate-wrapper">
                     <div class="item">
-                        <img
+                        <AdaptiveVideo
+                            width="100%"
+                            height="100%"
+                            :isLoop="true"
+                            :source="packVideo"
+                            :isPlay="true"
+                        />
+                        <!-- <img
                             class="item-title"
                             src="@/assets/images/packs-cate-title@2x.png"
                             alt=""
@@ -20,30 +27,26 @@
                             title="MOVIE NFT"
                             :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
                             :coinUrl="`${require('@/assets/images/cate-coin2.png')}`"
-                        />
+                        /> -->
                     </div>
                     <div class="item">
-                        <div class="action-movie-wrapper">
+                        <img
+                            style="height: 100%"
+                            src="@/assets/images/packs/banner-item.jpeg"
+                            alt=""
+                        />
+                        <!-- <div class="action-movie-wrapper">
                             <div class="wrapper">
-                                <img
-                                    class="bg"
-                                    src="@/assets/images/action-bg@2x.png"
-                                />
+                                <img class="bg" src="@/assets/images/action-bg@2x.png" />
                                 <div class="title">ACTIVIST NFT</div>
-                                <img
-                                    class="cover"
-                                    src="@/assets/images/action-cover@2x.png"
-                                />
-                                <img
-                                    class="coin"
-                                    src="@/assets/images/cate-coin2.png"
-                                />
+                                <img class="cover" src="@/assets/images/action-cover@2x.png" />
+                                <img class="coin" src="@/assets/images/cate-coin2.png" />
                             </div>
                         </div>
                         <div class="tilte-body">
                             <h2 class="item-h2-title">ACTIVIST NFT</h2>
                             <p class="item-desc">To be added</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -76,14 +79,19 @@
     </div>
 </template>
 <script>
-import ActionMovie from "@/components/ActionMovie";
+// import ActionMovie from "@/components/ActionMovie";
+import AdaptiveVideo from "@/components/AdaptiveVideo";
+import packVideo from "@/assets/video/pack-item.mp4";
 export default {
     name: "cate",
     components: {
-        ActionMovie,
+        // ActionMovie,
+        AdaptiveVideo,
     },
     data() {
-        return {};
+        return {
+            packVideo,
+        };
     },
 };
 </script>
@@ -136,7 +144,7 @@ export default {
 
 .item {
     height: 416px;
-    float: left;
+    /* float: left; */
     cursor: pointer;
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -144,17 +152,13 @@ export default {
     position: relative;
 }
 .item:nth-child(1) {
-    background-image: url(~@/assets/images/cate-bg@2x.png);
-    width: calc(62% - 10px);
+    /* background-image: url(~@/assets/images/cate-bg@2x.png); */
+    width: 700px;
 }
 .item:nth-child(2) {
     margin-left: 10px;
-    background: linear-gradient(
-        to top,
-        rgba(186, 69, 200, 1),
-        rgba(43, 107, 210, 1)
-    );
-    width: calc(38%);
+    /* background: linear-gradient(to top, rgba(186, 69, 200, 1), rgba(43, 107, 210, 1)); */
+    width: 278px;
 }
 .item:nth-child(2)::after {
     content: "";
@@ -168,7 +172,8 @@ export default {
 .cate-wrapper {
     overflow: hidden;
     margin-bottom: 52px;
-    text-align: left;
+    display: flex;
+    justify-content: center;
 }
 .item-title {
     width: 261px;

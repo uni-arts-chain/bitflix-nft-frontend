@@ -11,10 +11,8 @@
                 :src="source"
                 ref="video"
                 :class="{
-                    'responsive-horizontal':
-                        isResponsive && isResponsiveHorizontal,
-                    'responsive-vertical':
-                        isResponsive && !isResponsiveHorizontal,
+                    'responsive-horizontal': isResponsive && isResponsiveHorizontal,
+                    'responsive-vertical': isResponsive && !isResponsiveHorizontal,
                     horizontal: isHorizontal && !isResponsive,
                 }"
                 @canplay="canplay"
@@ -22,11 +20,7 @@
                 :muted="isMute"
             ></video>
         </div>
-        <div
-            class="video-control"
-            :style="`bottom: ${bottomHeight}px`"
-            v-if="isPlay && !isCover"
-        >
+        <div class="video-control" :style="`bottom: ${bottomHeight}px`" v-if="isPlay && !isCover">
             <div class="icon" @click="replay">
                 <icon-svg icon-class="replay" />
             </div>
@@ -96,18 +90,12 @@ export default {
                 let height = obj ? obj.offsetHeight : "230px";
                 let boxWidth = this.width;
                 let boxHeight = this.height;
-                boxWidth = this.$refs.videoContainer
-                    ? this.$refs.videoContainer.offsetWidth
-                    : 0;
-                boxHeight = this.$refs.videoContainer
-                    ? this.$refs.videoContainer.offsetHeight
-                    : 0;
+                boxWidth = this.$refs.videoContainer ? this.$refs.videoContainer.offsetWidth : 0;
+                boxHeight = this.$refs.videoContainer ? this.$refs.videoContainer.offsetHeight : 0;
                 if (width < height) {
-                    this.isResponsiveHorizontal =
-                        height <= boxHeight ? false : true;
+                    this.isResponsiveHorizontal = height <= boxHeight ? false : true;
                 } else {
-                    this.isResponsiveHorizontal =
-                        width <= boxWidth ? true : false;
+                    this.isResponsiveHorizontal = width <= boxWidth ? true : false;
                 }
                 this.isLoading = false;
             }
@@ -115,13 +103,8 @@ export default {
             let height = this.$refs.video.offsetHeight;
 
             if (width < height) {
-                if (
-                    this.$refs.video.offsetHeight >
-                    this.$refs.videoContainer.offsetHeight
-                ) {
-                    let rato =
-                        this.$refs.video.offsetHeight /
-                        this.$refs.video.offsetWidth;
+                if (this.$refs.video.offsetHeight > this.$refs.videoContainer.offsetHeight) {
+                    let rato = this.$refs.video.offsetHeight / this.$refs.video.offsetWidth;
                     this.$emit("ImgLoaded", {
                         height: this.$refs.videoContainer.offsetHeight,
                         width: this.$refs.videoContainer.offsetHeight / rato,
@@ -133,13 +116,8 @@ export default {
                     });
                 }
             } else {
-                if (
-                    this.$refs.video.offsetWidth >
-                    this.$refs.videoContainer.offsetWidth
-                ) {
-                    let rato =
-                        this.$refs.video.offsetWidth /
-                        this.$refs.video.offsetHeight;
+                if (this.$refs.video.offsetWidth > this.$refs.videoContainer.offsetWidth) {
+                    let rato = this.$refs.video.offsetWidth / this.$refs.video.offsetHeight;
                     this.$emit("ImgLoaded", {
                         height: this.$refs.videoContainer.offsetWidth / rato,
                         width: this.$refs.videoContainer.offsetWidth,
@@ -181,6 +159,7 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
 .video-player-container {
     display: flex;

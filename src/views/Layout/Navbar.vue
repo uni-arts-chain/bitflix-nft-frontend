@@ -5,23 +5,17 @@
             <div class="logo" @click="goHome"></div>
             <ul class="link-group">
                 <li>
-                    <router-link
-                        to="/packs"
-                        :class="{ active: activeTab == 'Packs' }"
+                    <router-link to="/packs" :class="{ active: activeTab == 'Packs' }"
                         >PACKS</router-link
                     >
                 </li>
                 <li>
-                    <router-link
-                        to="/marketplace"
-                        :class="{ active: activeTab == 'marketplace' }"
+                    <router-link to="/marketplace" :class="{ active: activeTab == 'marketplace' }"
                         >MARKETPLACE</router-link
                     >
                 </li>
                 <li class="questions">
-                    <router-link
-                        to="/questions"
-                        :class="{ active: activeTab == 'questions' }"
+                    <router-link to="/questions" :class="{ active: activeTab == 'questions' }"
                         >COMMON QUESTIONS</router-link
                     >
                     <div class="questions-menu" @click="goQuestions">
@@ -52,9 +46,7 @@
                                         />
                                     </div>
 
-                                    <div class="icon-desc">
-                                        How to play Bitflix
-                                    </div>
+                                    <div class="icon-desc">How to play Bitflix</div>
                                 </div>
                                 <div class="icon-menu">
                                     <div class="icon-desc">LATEST POST</div>
@@ -71,20 +63,14 @@
                     </div>
                 </li>
                 <li>
-                    <router-link
-                        to="/lockup"
-                        :class="{ active: activeTab == 'lockup' }"
+                    <router-link to="/lockup" :class="{ active: activeTab == 'lockup' }"
                         >LOCK UP BFX</router-link
                     >
                 </li>
             </ul>
             <div class="session">
-                <span class="user-address" v-if="connectedAccount">{{
-                    connectedAccount
-                }}</span>
-                <router-link v-else to="/login" class="login"
-                    >LOG IN</router-link
-                >
+                <span class="user-address" v-if="connectedAccount">{{ connectedAccount }}</span>
+                <router-link v-else to="/login" class="login">LOG IN</router-link>
                 <!-- <router-link to="/signup" class="sign-up">SIGN UP</router-link> -->
             </div>
         </div>
@@ -105,21 +91,12 @@ export default {
         },
         connectedAccount() {
             let address = this.$store.state.user.info.address;
-            return address
-                ? address.substr(0, 6) + "..." + address.substr(-4, 4)
-                : "";
+            return address ? address.substr(0, 6) + "..." + address.substr(-4, 4) : "";
         },
     },
     watch: {
         "$route.name"(nav) {
-            const navNames = [
-                "Home",
-                "Packs",
-                "marketplace",
-                "questions",
-                "lockup",
-                "Packs",
-            ];
+            const navNames = ["Home", "Packs", "marketplace", "questions", "lockup", "Packs"];
             if (navNames.includes(nav)) {
                 this.activeTab = nav;
             }

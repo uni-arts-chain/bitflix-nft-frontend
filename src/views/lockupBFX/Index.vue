@@ -11,9 +11,7 @@
                         <input class="input" v-model="amount" />
                         <span class="unit">{{ token.symbol }}</span>
                     </div>
-                    <p class="desc desc-1">
-                        {{ token.symbol }} Balance: {{ balance }}
-                    </p>
+                    <p class="desc desc-1">{{ token.symbol }} Balance: {{ balance }}</p>
                     <p class="desc">{{ token.symbol }} Staked: {{ staked }}</p>
                     <p class="desc">Spending Quota: ${{ quote }}</p>
                 </div>
@@ -37,9 +35,7 @@
                 >
                     Approve
                 </button>
-                <button class="btn btn-2" @click="goRecord">
-                    Lock up record
-                </button>
+                <button class="btn btn-2" @click="goRecord">Lock up record</button>
             </div>
         </div>
     </div>
@@ -79,10 +75,10 @@ export default {
     },
     computed: {
         connectedAccount() {
-            return this.$store.state.user.connectedAccount;
+            return this.$wallet.connectedAccount;
         },
         isConnected() {
-            return this.$store.state.user.isConnected;
+            return this.$wallet.isConnected;
         },
         isApproved() {
             return new BigNumber(this.allowance).gte(9999999);
@@ -98,14 +94,8 @@ export default {
     },
     methods: {
         async init() {
-            this.token = config.tokens.find(
-                (v) => v.symbol.toUpperCase() === "BTFLX"
-            );
-            this.tokenErc20 = new Erc20(
-                this.token.address,
-                this.token.symbol,
-                this.token.decimals
-            );
+            this.token = config.tokens.find((v) => v.symbol.toUpperCase() === "BTFLX");
+            this.tokenErc20 = new Erc20(this.token.address, this.token.symbol, this.token.decimals);
             this.bitflixPoint = new BitflixPoint();
             this.allowance = await this.getApproved();
             this.balance = await this.getBalance();
@@ -125,9 +115,7 @@ export default {
             return amount;
         },
         async getBalance() {
-            let balance = await this.tokenErc20.balanceOf(
-                this.connectedAccount
-            );
+            let balance = await this.tokenErc20.balanceOf(this.connectedAccount);
             return balance.toString();
         },
         async getLockRate() {
@@ -153,18 +141,14 @@ export default {
             }
             this.isApproving = true;
             this.tokenErc20
-                .approveMax(
-                    this.connectedAccount,
-                    config.contracts.BitflixPoint,
-                    (err, txHash) => {
-                        this.isApproving = false;
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            console.log(txHash);
-                        }
+                .approveMax(this.connectedAccount, config.contracts.BitflixPoint, (err, txHash) => {
+                    this.isApproving = false;
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(txHash);
                     }
-                )
+                })
                 .then((receipt) => {
                     console.log("receipt: ", receipt);
                 })
@@ -181,18 +165,14 @@ export default {
             }
             this.isLocking = true;
             this.bitflixPoint
-                .lock(
-                    this.connectedAccount,
-                    this.amount || 0,
-                    (err, txHash) => {
-                        this.isLocking = false;
-                        if (!err) {
-                            console.log(txHash);
-                            this.amount = "";
-                            this.$notify.success("Locked successfully");
-                        }
+                .lock(this.connectedAccount, this.amount || 0, (err, txHash) => {
+                    this.isLocking = false;
+                    if (!err) {
+                        console.log(txHash);
+                        this.amount = "";
+                        this.$notify.success("Locked successfully");
                     }
-                )
+                })
                 .then((receipt) => {
                     console.log("receipt: ", receipt);
                 })

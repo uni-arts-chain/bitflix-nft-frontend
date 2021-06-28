@@ -14,10 +14,7 @@ module.exports = {
             options[0].title = process.env.VUE_APP_NAME;
             return options;
         });
-        config.module
-            .rule("svg")
-            .exclude.add(resolve("src/assets/icons"))
-            .end();
+        config.module.rule("svg").exclude.add(resolve("src/assets/icons")).end();
         config.module
             .rule("svgSpriteLoader")
             .test(/\.svg$/)
@@ -44,9 +41,7 @@ module.exports = {
                 new CompressionWebpackPlugin({
                     filename: "[path].gz[query]",
                     algorithm: "gzip",
-                    test: new RegExp(
-                        "\\.(" + productionGzipExtensions.join("|") + ")$"
-                    ),
+                    test: new RegExp("\\.(" + productionGzipExtensions.join("|") + ")$"),
                     threshold: 10240,
                     minRatio: 0.8,
                 })
@@ -83,13 +78,13 @@ module.exports = {
         port: 5100,
         proxy: {
             "/test/api": {
-                target: "http://192.168.0.118:3000", // 接口的域名 测试
+                target: "https://dapp.btflx.com", // 接口的域名 测试
                 pathRewrite: {
                     "^/test/api": "/api",
                 },
             },
             "/api": {
-                target: "https://app.uniarts.me", // 接口的域名 测试
+                target: "https://dapp.btflx.com", // 接口的域名 测试
                 pathRewrite: {
                     "^api": "/api",
                 },

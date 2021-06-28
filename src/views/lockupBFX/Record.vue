@@ -62,10 +62,10 @@ export default {
     },
     computed: {
         connectedAccount() {
-            return this.$store.state.user.connectedAccount;
+            return this.$wallet.connectedAccount;
         },
         isConnected() {
-            return this.$store.state.user.isConnected;
+            return this.$wallet.isConnected;
         },
     },
     methods: {
@@ -88,9 +88,7 @@ export default {
         },
         requestData() {
             this.isLoading = true;
-            let token = config.tokens.find(
-                (v) => v.symbol.toUpperCase() === "BTFLX"
-            );
+            let token = config.tokens.find((v) => v.symbol.toUpperCase() === "BTFLX");
             this.$http
                 .userGetLockHistory({})
                 .then((res) => {
@@ -110,6 +108,10 @@ export default {
                 .catch((err) => {
                     this.$notify.error(err.head ? err.head.msg : err.message);
                     this.isLoading = false;
+                    if (err.head && err.head.code == 1032) {
+                        this.$router.push("/login");
+                        this.$store.dispatch("user/Quit");
+                    }
                 });
         },
     },
