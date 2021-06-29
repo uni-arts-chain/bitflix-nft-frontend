@@ -1,10 +1,6 @@
 /** * Created by Lay Hunt on 2021-04-15 15:30:17. */
 <template>
-    <div
-        class="adaptive-view"
-        ref="adaptiveView"
-        :style="`width: ${width};height: ${height}`"
-    >
+    <div class="adaptive-view" ref="adaptiveView" :style="`width: ${width};height: ${height}`">
         <div class="img-container" :class="{ preview: isPreview }">
             <AdaptiveImage
                 @click.native="showPreview"
@@ -13,7 +9,7 @@
                 :height="height"
                 :isOrigin="!isResponsive"
                 v-if="viewType == 'img'"
-                :url="nft.img_main_file1 ? nft.img_main_file1.url : ''"
+                :url="nft.property_url"
             />
             <AdaptiveVideo
                 @click.native="showPreview"
@@ -24,7 +20,7 @@
                 v-else-if="viewType == 'video'"
                 :isResponsive="isResponsive"
                 :isPlay="!isPreview"
-                :source="nft.img_main_file1 ? nft.img_main_file1.url : ''"
+                :source="nft.property_url"
             />
             <div
                 class="auction-label"
@@ -33,10 +29,7 @@
             >
                 IN AUCTION
             </div>
-            <div
-                class="auction-date"
-                v-if="!isPreview && (isAuction || isWaiting)"
-            >
+            <div class="auction-date" v-if="!isPreview && (isAuction || isWaiting)">
                 <div class="auction-data-pick">
                     {{ isWaiting ? "Start after" : "End after" }}
                     <span>{{ countdown }}</span>
@@ -56,11 +49,7 @@
                 icon-class="video"
             />
         </div>
-        <Dialog
-            :visible.sync="isDialogPreview"
-            type="fullscreen"
-            :close="handlePreviewClose"
-        >
+        <Dialog :visible.sync="isDialogPreview" type="fullscreen" :close="handlePreviewClose">
             <div class="dialog-content">
                 <AdaptiveImage
                     v-if="viewType == 'img'"
@@ -147,9 +136,9 @@ export default {
     computed: {
         viewType() {
             if (
-                this.nft.img_main_file1 &&
-                (/\.mp4$/.test(this.nft.img_main_file1.url) ||
-                    /^data:video\/mp4;/.test(this.nft.img_main_file1.url))
+                /\.mp4$/.test(
+                    this.nft.property_url || /^data:video\/mp4;/.test(this.nft.property_url)
+                )
             ) {
                 return "video";
             } else {
@@ -166,10 +155,10 @@ export default {
             if (this.isPreview) return;
             switch (this.viewType) {
                 case "img":
-                    this.dialogPreviewUrl = this.nft.img_main_file1.url;
+                    this.dialogPreviewUrl = this.nft.property_url;
                     break;
                 case "video":
-                    this.dialogPreviewUrl = this.nft.img_main_file1.url;
+                    this.dialogPreviewUrl = this.nft.property_url;
                     break;
             }
             this.isDialogPreview = true;

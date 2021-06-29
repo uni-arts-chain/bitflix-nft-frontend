@@ -22,14 +22,14 @@
         <div class="move-container">
             <div class="move-content">
                 <BaseTitle>SEARCH BY MOVIE AND GENRE</BaseTitle>
-                <MovieList class="move-list" @handleClick="goSearch" />
+                <MovieList class="move-list" :list="movieList" @handleClick="goSearch" />
             </div>
         </div>
 
         <div class="star-container">
             <div class="star-content">
                 <BaseTitle>SEARCH BY ACTOR AND DIRECTOR</BaseTitle>
-                <StarList class="star-list" @handleClick="goSearch" />
+                <StarList :list="startList" class="star-list" @handleClick="goSearch" />
             </div>
             <img class="line" src="@/assets/images/packs-line@2x.png" />
             <img class="line2" src="@/assets/images/packs-line2@2x.png" />
@@ -40,7 +40,7 @@
                 <div class="latest-title-con">
                     <BaseTitle>SEARCH BY NFT TYPE</BaseTitle>
                 </div>
-                <ActionMovieList class="latest-list" @onMovieClick="goDetail" />
+                <ActionMovieList :list="nftList" class="latest-list" @onMovieClick="goDetail" />
             </div>
         </div>
         <div class="latest-container">
@@ -49,7 +49,7 @@
                     <BaseTitle>LATEST LASTINGS</BaseTitle>
                     <div class="more-btn" @click="goSearchList">EXPLORE MARKETPLACE</div>
                 </div>
-                <ActionMovieList class="latest-list" @onMovieClick="goDetail" />
+                <ActionMovieList :list="latestList" class="latest-list" @onMovieClick="goDetail" />
             </div>
         </div>
         <div style="position: relative; height: 330px; margin-bottom: 160px">
@@ -75,9 +75,42 @@ export default {
     data() {
         return {
             searchVal: "",
+
+            movieList: [],
+            startList: [],
+            nftList: [],
+            latestList: [],
         };
     },
+    mounted() {
+        this.requestData("movie");
+    },
     methods: {
+        requestData(type) {
+            let params = {
+                sort_type: "create_lth",
+            };
+            if (type) {
+                params.art_type = type;
+            }
+            this.$http
+                .globalGetMarketList(params)
+                .then((res) => {
+                    if (type == "movie") {
+                        this.movieList.splice(0, 0, ...res.list.filter((_, i) => i < 3));
+                        this.startList.splice(0, 0, ...res.list.filter((_, i) => i >= 3 && i < 8));
+                        this.nftList.splice(0, 0, ...res.list.reverse());
+                        this.latestList.splice(0, 0, ...res.list);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.code);
+                });
+        },
+        requestMovie() {
+            this.$requestMoive("movie");
+        },
         goSearch() {
             this.$router.push("/marketplaceSearch");
         },

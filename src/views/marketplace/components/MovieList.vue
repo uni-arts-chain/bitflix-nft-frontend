@@ -1,14 +1,20 @@
 <template>
     <div class="movie-list">
-        <div v-for="(item, index) in 3" :key="index" @click="onClick(item)">
+        <div v-for="(item, index) in list" :key="index" @click="onClick(item)">
             <div class="movie">
-                <img
-                    class="movie-poster"
-                    src="@/assets/images/marketplace/movie2@2x.png"
+                <!-- <img class="movie-poster" src="@/assets/images/marketplace/movie2@2x.png" /> -->
+                <!-- <img class="movie-poster" :src="item.img_main_file1.url" /> -->
+                <AdaptiveImage
+                    :isOrigin="false"
+                    :url="item.img_main_file1.url"
+                    width="341px"
+                    height="175px"
                 />
-                <div class="movie-tire">COMMON TIER</div>
-                <div class="movie-size">Contains 5 Moments</div>
-                <div class="size-value">Price: 14-1200USDT</div>
+                <div class="movie-tire">{{ item.name.toUpperCase() }}</div>
+                <div class="movie-size"></div>
+                <div class="size-value">
+                    Price: {{ item.price }} {{ item.currency_code.toUpperCase() }}
+                </div>
                 <!-- <div class="value-unit">MIN</div> -->
             </div>
         </div>
@@ -16,10 +22,20 @@
 </template>
 
 <script>
+import AdaptiveImage from "@/components/AdaptiveImage";
 export default {
     name: "MovieList",
+    components: {
+        AdaptiveImage,
+    },
     data() {
         return {};
+    },
+    props: {
+        list: {
+            type: Array,
+            default: () => [],
+        },
     },
     methods: {
         onClick(item) {
@@ -60,6 +76,7 @@ export default {
         }
         .movie-size {
             margin-top: 16px;
+            min-height: 18px;
             font-size: 13px;
             font-family: Montserrat-SemiBold;
             color: #b2b3b7;

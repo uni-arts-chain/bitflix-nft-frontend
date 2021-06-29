@@ -4,15 +4,28 @@
         <div class="wrapper">
             <img class="bg" src="@/assets/images/action-bg@2x.png" />
             <div class="title">{{ title }}</div>
-            <img class="cover" :src="coverUrl" />
+            <!-- <img class="cover" :src="coverUrl" /> -->
+            <div class="cover">
+                <AdaptiveImage
+                    class="cover"
+                    width="100%"
+                    height="100%"
+                    :url="coverUrl"
+                    :isOrigin="false"
+                />
+            </div>
             <img class="coin" v-if="coinUrl" :src="coinUrl" />
             <div class="status" v-if="status === 'out'">SOLD OUT</div>
         </div>
     </div>
 </template>
 <script>
+import AdaptiveImage from "@/components/AdaptiveImage";
 export default {
     name: "action-movie",
+    components: {
+        AdaptiveImage,
+    },
     props: {
         title: {
             type: String,
@@ -69,8 +82,8 @@ export default {
         height: 68%;
         position: absolute;
         bottom: 0%;
-        left: 8%;
-        transform: rotateZ(-13deg);
+        left: 3.1%;
+        transform: rotateZ(-6.5deg);
         z-index: 1;
     }
     .coin {

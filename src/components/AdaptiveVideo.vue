@@ -1,6 +1,12 @@
 /** * Created by Lay Hunt on 2021-01-26 10:20:17. */
 <template>
-    <div class="video" ref="videoPlay" v-loading="isLoading">
+    <div
+        class="video"
+        ref="videoPlay"
+        v-loading="isLoading"
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0)"
+    >
         <div
             class="video-player-container"
             :class="{ responsive: isResponsive }"

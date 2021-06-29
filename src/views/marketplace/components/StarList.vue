@@ -1,13 +1,16 @@
 <template>
     <div class="star-list">
-        <div v-for="(item, index) in 5" :key="index" @click="onClick(item)">
+        <div v-for="(item, index) in list" :key="index" @click="onClick(item)">
             <div class="star">
-                <img
-                    class="star-image"
-                    src="@/assets/images/marketplace/star.png"
+                <!-- <img class="star-image" src="@/assets/images/marketplace/star.png" /> -->
+                <AdaptiveImage
+                    :isOrigin="false"
+                    :url="item.img_main_file1.url"
+                    width="230px"
+                    height="333px"
                 />
                 <div class="star-name-con">
-                    <div class="star-name">COMMON TIER</div>
+                    <div class="star-name">{{ item.name.toUpperCase() }}</div>
                     <div class="short-line"></div>
                 </div>
             </div>
@@ -16,10 +19,20 @@
 </template>
 
 <script>
+import AdaptiveImage from "@/components/AdaptiveImage";
 export default {
     name: "StarList",
     data() {
         return {};
+    },
+    props: {
+        list: {
+            type: Array,
+            default: () => [],
+        },
+    },
+    components: {
+        AdaptiveImage,
     },
     methods: {
         onClick(item) {

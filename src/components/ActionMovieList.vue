@@ -3,19 +3,13 @@
     <div class="previous">
         <div class="container">
             <div class="list">
-                <div
-                    class="item"
-                    v-for="v in list"
-                    :key="v.id"
-                    @click="onClick(v)"
-                >
+                <div class="item" v-for="v in list" :key="v.id" @click="onClick(v)">
                     <!-- <div class="label">DROPS 2:00 AM CST MAY 15</div>
                     <div class="recommend">RECOMMENDED PACK</div>-->
                     <ActionMovie
                         title="MOVIE NFT"
-                        :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                        :coverUrl="v.img_main_file1.url"
                         :coinUrl="`${require('@/assets/images/cate-coin2.png')}`"
-                        :status="v.status"
                     />
                     <div class="info">
                         <div class="name">{{ v.name }}</div>

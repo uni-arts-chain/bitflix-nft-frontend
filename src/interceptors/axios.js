@@ -27,8 +27,8 @@ export function requestSuccessFunc(config) {
     }
     if (!config.unSignature && tokenObj) {
         let url =
-            (config.baseURL.replace("/test/api/", "/api/") ||
-                HTTP_DEFAULT_CONFIG.baseURL) + config.url;
+            (config.baseURL.replace("/test/api/", "/api/") || HTTP_DEFAULT_CONFIG.baseURL) +
+            config.url;
         let queryStr = "";
         let tonce = Date.parse(new Date()) / 1000;
         if (method === "GET" || method === "DELETE") {
@@ -60,12 +60,7 @@ export function requestSuccessFunc(config) {
         queryStr = queryStr.substr(0, queryStr.length - 1);
         config.headers["Authorization"] = tokenObj.token;
         config.headers["Tonce"] = tonce;
-        config.headers["Sign"] = _getHmacSHA256(
-            method,
-            url,
-            queryStr,
-            tokenObj.expire_at
-        );
+        config.headers["Sign"] = _getHmacSHA256(method, url, queryStr, tokenObj.expire_at);
     }
     let languageStr = "en";
     // switch (store.state.global.language) {
@@ -87,10 +82,7 @@ export function requestFailFunc(requestError) {
 }
 
 export function responseSuccessFunc(responseObj) {
-    if (
-        responseObj.data.head.total_count === 0 ||
-        responseObj.data.head.total_count
-    ) {
+    if (responseObj.data.head.total_count === 0 || responseObj.data.head.total_count) {
         return Promise.resolve({
             total_count: responseObj.data.head.total_count,
             list: responseObj.data.body,
@@ -126,10 +118,7 @@ export function responseFailFunc(responseError) {
         }
         return Promise.reject(responseError.response.data);
     } else {
-        if (
-            responseError.code === "ECONNABORTED" &&
-            responseError.config.method === "get"
-        ) {
+        if (responseError.code === "ECONNABORTED" && responseError.config.method === "get") {
             // 请求超时了
             const config = responseError.config;
             // 配置不存在或者未设置retry属性
@@ -174,9 +163,6 @@ export function responseFailFunc(responseError) {
 function _getHmacSHA256(method, url, fields, expire_at) {
     let message = method + "|" + url + "|" + fields;
     console.log(message);
-    let str = crypto
-        .createHmac("sha256", expire_at)
-        .update(message)
-        .digest("hex");
+    let str = crypto.createHmac("sha256", expire_at).update(message).digest("hex");
     return str;
 }
