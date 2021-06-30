@@ -4,30 +4,18 @@
         <div class="container">
             <div class="item" v-for="(v, i) in list" :key="i" @click="goNFT">
                 <img class="top" src="@/assets/images/border-arrow-top.png" />
-                <img
-                    class="bottom"
-                    src="@/assets/images/border-arrow-bottom.png"
-                />
+                <img class="bottom" src="@/assets/images/border-arrow-bottom.png" />
                 <div class="cover">
-                    <AdaptiveView
-                        :nft="v"
-                        :isResponsive="true"
-                        :isPreview="true"
-                    />
+                    <AdaptiveView :nft="v" :isResponsive="true" :isPreview="true" />
                 </div>
                 <div class="title">{{ v.name.toUpperCase() }}</div>
                 <!-- <div class="set-name">Base Set</div> -->
-                <div class="common-name webkit-ellipsis-2">
-                    Common #9472/12000
-                </div>
+                <div class="common-name webkit-ellipsis-2">Common #9472/12000</div>
                 <div class="price">1200 USDT</div>
             </div>
             <div class="item" @click="goMyNFT">
                 <img class="top" src="@/assets/images/border-arrow-top.png" />
-                <img
-                    class="bottom"
-                    src="@/assets/images/border-arrow-bottom.png"
-                />
+                <img class="bottom" src="@/assets/images/border-arrow-bottom.png" />
                 <div class="more">MORE ></div>
             </div>
         </div>
@@ -45,52 +33,38 @@ export default {
             list: [
                 {
                     name: "NOMANKIND",
-                    img_main_file1: {
-                        url:
-                            "https://ipfs.pixura.io/ipfs/QmYD7vv6g7UoWrx2t1ru9aKwH6Lituuy6Gi6bxr4b7BgLY/nomankind.jpg",
-                    },
+                    property_url:
+                        "https://ipfs.pixura.io/ipfs/QmYD7vv6g7UoWrx2t1ru9aKwH6Lituuy6Gi6bxr4b7BgLY/nomankind.jpg",
                 },
                 {
                     name: "Lost In The Data Flow",
-                    img_main_file1: {
-                        url:
-                            "https://ipfs.pixura.io/ipfs/QmVtPmHik3zgm4QSUL22Kp8HALgUMUTBTbK777JEXUyZzz/lost-in-the-data-flow.jpg",
-                    },
+                    property_url:
+                        "https://ipfs.pixura.io/ipfs/QmVtPmHik3zgm4QSUL22Kp8HALgUMUTBTbK777JEXUyZzz/lost-in-the-data-flow.jpg",
                 },
                 {
                     name: "Paradise",
-                    img_main_file1: {
-                        url:
-                            "https://ipfs.pixura.io/ipfs/QmVx6RZW6CQcSK47ZWUaXQt86HEMBVQcrxYf74JkHsUABv/paradise.jpg",
-                    },
+                    property_url:
+                        "https://ipfs.pixura.io/ipfs/QmVx6RZW6CQcSK47ZWUaXQt86HEMBVQcrxYf74JkHsUABv/paradise.jpg",
                 },
                 {
                     name: "TRANSHUMAN ROMANCE",
-                    img_main_file1: {
-                        url:
-                            "https://ipfs.pixura.io/ipfs/QmXMKBFnr5oceJhrZJ2k23tPUqXFfiCGE6pBbGo9QJ5dFj/transhuman-romance.png",
-                    },
+                    property_url:
+                        "https://ipfs.pixura.io/ipfs/QmXMKBFnr5oceJhrZJ2k23tPUqXFfiCGE6pBbGo9QJ5dFj/transhuman-romance.png",
                 },
                 {
                     name: "NOMANKIND",
-                    img_main_file1: {
-                        url:
-                            "https://ipfs.pixura.io/ipfs/QmYD7vv6g7UoWrx2t1ru9aKwH6Lituuy6Gi6bxr4b7BgLY/nomankind.jpg",
-                    },
+                    property_url:
+                        "https://ipfs.pixura.io/ipfs/QmYD7vv6g7UoWrx2t1ru9aKwH6Lituuy6Gi6bxr4b7BgLY/nomankind.jpg",
                 },
                 {
                     name: "Lost In The Data Flow",
-                    img_main_file1: {
-                        url:
-                            "https://ipfs.pixura.io/ipfs/QmVtPmHik3zgm4QSUL22Kp8HALgUMUTBTbK777JEXUyZzz/lost-in-the-data-flow.jpg",
-                    },
+                    property_url:
+                        "https://ipfs.pixura.io/ipfs/QmVtPmHik3zgm4QSUL22Kp8HALgUMUTBTbK777JEXUyZzz/lost-in-the-data-flow.jpg",
                 },
                 {
                     name: "Paradise",
-                    img_main_file1: {
-                        url:
-                            "https://ipfs.pixura.io/ipfs/QmVx6RZW6CQcSK47ZWUaXQt86HEMBVQcrxYf74JkHsUABv/paradise.jpg",
-                    },
+                    property_url:
+                        "https://ipfs.pixura.io/ipfs/QmVx6RZW6CQcSK47ZWUaXQt86HEMBVQcrxYf74JkHsUABv/paradise.jpg",
                 },
             ],
         };

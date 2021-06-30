@@ -136,9 +136,8 @@ export default {
     computed: {
         viewType() {
             if (
-                /\.mp4$/.test(
-                    this.nft.property_url || /^data:video\/mp4;/.test(this.nft.property_url)
-                )
+                /\.mp4$/.test(this.nft.property_url) ||
+                /^data:video\/mp4;/.test(this.nft.property_url)
             ) {
                 return "video";
             } else {

@@ -22,14 +22,24 @@
         <div class="move-container">
             <div class="move-content">
                 <BaseTitle>SEARCH BY MOVIE AND GENRE</BaseTitle>
-                <MovieList class="move-list" :list="movieList" @handleClick="goSearch" />
+                <MovieList
+                    :isLoading="isMovieLoading"
+                    class="move-list"
+                    :list="movieList"
+                    @onItemClick="goDetail"
+                />
             </div>
         </div>
 
         <div class="star-container">
             <div class="star-content">
                 <BaseTitle>SEARCH BY ACTOR AND DIRECTOR</BaseTitle>
-                <StarList :list="startList" class="star-list" @handleClick="goSearch" />
+                <StarList
+                    :isLoading="isActorLoading"
+                    :list="starList"
+                    class="star-list"
+                    @onItemClick="goDetail"
+                />
             </div>
             <img class="line" src="@/assets/images/packs-line@2x.png" />
             <img class="line2" src="@/assets/images/packs-line2@2x.png" />
@@ -40,7 +50,12 @@
                 <div class="latest-title-con">
                     <BaseTitle>SEARCH BY NFT TYPE</BaseTitle>
                 </div>
-                <ActionMovieList :list="nftList" class="latest-list" @onMovieClick="goDetail" />
+                <ActionMovieList
+                    :isLoading="isTypeLoading"
+                    :list="nftList"
+                    class="latest-list"
+                    @onItemClick="goDetail"
+                />
             </div>
         </div>
         <div class="latest-container">
@@ -49,7 +64,12 @@
                     <BaseTitle>LATEST LASTINGS</BaseTitle>
                     <div class="more-btn" @click="goSearchList">EXPLORE MARKETPLACE</div>
                 </div>
-                <ActionMovieList :list="latestList" class="latest-list" @onMovieClick="goDetail" />
+                <ActionMovieList
+                    :isLoading="isLastLoading"
+                    :list="latestList"
+                    class="latest-list"
+                    @onItemClick="goDetail"
+                />
             </div>
         </div>
         <div style="position: relative; height: 330px; margin-bottom: 160px">
@@ -75,9 +95,13 @@ export default {
     data() {
         return {
             searchVal: "",
+            isMovieLoading: false,
+            isActorLoading: false,
+            isTypeLoading: false,
+            isLastLoading: false,
 
             movieList: [],
-            startList: [],
+            starList: [],
             nftList: [],
             latestList: [],
         };
@@ -93,12 +117,20 @@ export default {
             if (type) {
                 params.art_type = type;
             }
+            this.isMovieLoading = true;
+            this.isActorLoading = true;
+            this.isTypeLoading = true;
+            this.isLastLoading = true;
             this.$http
                 .globalGetMarketList(params)
                 .then((res) => {
                     if (type == "movie") {
+                        this.isMovieLoading = false;
+                        this.isActorLoading = false;
+                        this.isTypeLoading = false;
+                        this.isLastLoading = false;
                         this.movieList.splice(0, 0, ...res.list.filter((_, i) => i < 3));
-                        this.startList.splice(0, 0, ...res.list.filter((_, i) => i >= 3 && i < 8));
+                        this.starList.splice(0, 0, ...res.list.filter((_, i) => i >= 3 && i < 8));
                         this.nftList.splice(0, 0, ...res.list.reverse());
                         this.latestList.splice(0, 0, ...res.list);
                     }
@@ -112,10 +144,14 @@ export default {
             this.$requestMoive("movie");
         },
         goSearch() {
-            this.$router.push("/marketplaceSearch");
+            let path = "/marketplaceSearch";
+            if (this.searchVal) {
+                path = "/marketplaceSearch?keyword=" + encodeURIComponent(this.searchVal);
+            }
+            this.$router.push(path);
         },
-        goDetail() {
-            this.$router.push("/marketplaceDetail");
+        goDetail(item) {
+            this.$router.push("/marketplaceDetail/" + item.id);
         },
         goSearchList() {
             this.$router.push("/marketplaceSearchList");

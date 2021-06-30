@@ -2,36 +2,26 @@
     <div class="detail-page">
         <div class="detail">
             <span class="back-btn" @click="goback">&lt; BACK</span>
-            <div class="detail-container">
+            <div
+                class="detail-container"
+                v-loading="isLoading"
+                element-loading-spinner="el-icon-loading"
+                element-loading-background="rgba(0, 0, 0, 0)"
+            >
                 <div class="poster-con">
                     <!-- <div class="poster-time">
                         <span class="time">MAR 15 2021</span>
                     </div>-->
                     <div class="poster-image">
-                        <!-- <img src="@/assets/images/reward/collect1@2x.png" /> -->
-                        <div class="video-con">
-                            <video
-                                id="marketplaceVideo"
-                                ref="video"
-                                width="442"
-                                height="296"
-                                :src="videoUrl"
-                                poster="@/assets/images/reward/collect1@2x.png"
-                                autoplay
-                                muted
-                                controls
-                                controlslist="nodownload"
-                            ></video>
-                            <!-- <div class="mute-control" @click="controlMute">开</div> -->
-                        </div>
+                        <AdaptiveView width="100%" height="100%" :nft="info" />
                     </div>
-                    <div class="zoom-btn" @click="showImage">
+                    <!-- <div class="zoom-btn" @click="showImage">
                         <img src="@/assets/images/marketplace/zoom@2x.png" />
-                    </div>
+                    </div> -->
                 </div>
-                <div class="v-br"></div>
-                <div class="desc-con">
-                    <div class="title">GORDON HAYWARD</div>
+                <div class="v-br" v-if="!isLoading"></div>
+                <div class="desc-con" v-if="!isLoading">
+                    <div class="title">{{ info.name }}</div>
                     <!-- <div class="sub-title" style="margin-top: 8px">To</div>
                     <div class="sub-title">be added</div>
                     <div class="sub-title"># /35000+</div>-->
@@ -41,15 +31,15 @@
                             <div class="label">number</div>
                         </div>
                         <div>
-                            <div class="label2">2076</div>
-                            <div class="label" style="text-align: center">
-                                Time
-                            </div>
+                            <div class="label2">0</div>
+                            <div class="label" style="text-align: center">Time</div>
                         </div>
                     </div>
                     <div class="price-con">
-                        199.00
-                        <span class="price-unit">USDT</span>
+                        {{ info.price }}
+                        <span class="price-unit">{{
+                            info.currency_code ? info.currency_code.toUpperCase() : "USDT"
+                        }}</span>
                         <!-- <div class="price-desc">Top Sale</div> -->
                     </div>
                     <div class="buy-btn">BUY</div>
@@ -63,15 +53,9 @@
                         </div>
                     </div>-->
                     <div class="hash-con">
-                        <div class="hash-text">
-                            NFT HASH :
-                            fe48302kfh4indjrk3jufqp2020383nkdh20383nkdh20383nkdh20383nkdh
-                        </div>
-                        <div class="hash-icon-con">
-                            <img
-                                class="hash-icon"
-                                src="@/assets/images/marketplace/hash@2x.png"
-                            />
+                        <div class="hash-text">NFT HASH : {{ info.tx_hash }}</div>
+                        <div class="hash-icon-con" @click="copy(info.tx_hash)">
+                            <img class="hash-icon" src="@/assets/images/marketplace/hash@2x.png" />
                         </div>
                     </div>
                 </div>
@@ -88,11 +72,7 @@
                 <transition name="fade">
                     <div v-show="showDetails">
                         <div class="detail-desc">
-                            Contested or not, Gordon Hayward is going to take
-                            the ball toContested or not, Contested or not,
-                            Gordon Hayward is going to take the ball to Gordon
-                            Hayward going to take is going to take the ball to
-                            going to take is going to take the ball to
+                            {{ info.details }}
                         </div>
                         <div class="base-set"></div>
                     </div>
@@ -113,9 +93,9 @@
                     </div>
                 </transition>
             </div> -->
-            <div class="more-moments">
+            <div class="more-moments" v-if="isLogin">
                 <div class="more-moments-title">MORE MOMENTS</div>
-                <ActionMovieList class="more-moments-list" />
+                <ActionMovieList :list="momentList" class="more-moments-list" />
             </div>
         </div>
     </div>
@@ -124,11 +104,13 @@
 <script>
 import ActionMovieList from "@/components/ActionMovieList";
 import Mp4 from "@/assets/video/banner-mp4.mp4";
+import AdaptiveView from "@/components/AdaptiveView";
 
 export default {
     name: "MarketplaceDetail",
     components: {
         ActionMovieList,
+        AdaptiveView,
     },
     data() {
         return {
@@ -136,12 +118,61 @@ export default {
             showHistorys: true,
             videoUrl: Mp4,
             isMuted: true,
+            id: this.$route.params.id,
+            isLoading: false,
+            isMomentLoading: false,
+            info: {
+                property_url: "",
+            },
+            momentList: [],
         };
+    },
+    mounted() {
+        this.isLoading = true;
+        this.$http
+            .globalGetArtInfo(
+                {},
+                {
+                    id: this.id,
+                }
+            )
+            .then((res) => {
+                this.isLoading = false;
+                this.info = res;
+            })
+            .catch((err) => {
+                this.isLoading = false;
+                console.log(err);
+                this.$notify.error(err.head && err.head.code);
+            });
+        if (this.isLogin) {
+            this.isMomentLoading = true;
+            this.$http
+                .userGetArtSimilar({})
+                .then((res) => {
+                    this.isMomentLoading = false;
+                    this.momentList = res.list;
+                })
+                .catch((err) => {
+                    this.isMomentLoading = false;
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.code);
+                });
+        }
+    },
+    computed: {
+        isLogin() {
+            return this.$store.state.user.info.token;
+        },
     },
     methods: {
         goback() {
             // this.$router.push("/");
             history.go(-1);
+        },
+        copy(str) {
+            this.$copy(str);
+            this.$notify.success("Copied");
         },
         goHistory() {
             this.$router.push("/history");
@@ -168,43 +199,6 @@ export default {
     font-family: Adobe Heiti Std, Adobe Heiti Std-R;
     // font-weight: R;
     color: #ffffff;
-}
-#marketplaceVideo {
-    /* 全屏按钮 */
-    // &::-webkit-media-controls-fullscreen-button {
-    //     display: none;
-    // }
-    /* 播放按钮 */
-    // &::-webkit-media-controls-play-button {
-    //     display: none;
-    // }
-    /* 进度条 */
-    &::-webkit-media-controls-timeline {
-        display: none;
-    }
-    /* 观看的当前时间 */
-    &::-webkit-media-controls-current-time-display {
-        display: none;
-    }
-    /* 剩余时间 */
-    &::-webkit-media-controls-time-remaining-display {
-        display: none;
-    }
-    /* 音量按钮 */
-    // &::-webkit-media-controls-mute-button {
-    //     display: none;
-    // }
-    // &::-webkit-media-controls-toggle-closed-captions-button {
-    //     display: none;
-    // }
-    /* 音量的控制条 */
-    // &::-webkit-media-controls-volume-slider {
-    //     display: none;
-    // }
-    /* 所有控件 */
-    // &::-webkit-media-controls-enclosure {
-    //     display: none;
-    // }
 }
 .detail-page {
     margin-top: 74px;
@@ -289,7 +283,8 @@ export default {
         font-family: Montserrat-ExtraBold, Montserrat;
         // font-weight: ExtraBold;
         font-weight: bolder;
-
+        max-width: 100%;
+        word-break: break-word;
         color: #ffffff;
     }
     .sub-title {

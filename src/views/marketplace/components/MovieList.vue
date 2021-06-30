@@ -39,7 +39,7 @@ export default {
     },
     methods: {
         onClick(item) {
-            this.$emit("handleClick", item);
+            this.$emit("onItemClick", item);
         },
     },
 };

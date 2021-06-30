@@ -38,6 +38,17 @@ const apiList = [
             unSignature: false,
         },
     },
+    {
+        name: "GetArtInfo",
+        method: "GET",
+        desc: "艺术品详情",
+        path: "/arts/{:id}",
+        mockPath: "/arts/{:id}",
+        params: {},
+        options: {
+            unSignature: false,
+        },
+    },
 ];
 
 export default apiList;

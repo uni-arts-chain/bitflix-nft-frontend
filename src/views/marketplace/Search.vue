@@ -34,7 +34,7 @@
                     </div>-->
                 </div>
 
-                <div class="filters">FILTERS (1)</div>
+                <div class="filters" @click="requestSeach">FILTERS</div>
 
                 <span class="sort-by">SORT BY</span>
 
@@ -56,15 +56,11 @@
                 </div>
             </div>
             <ActionMovieList
-                element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(0, 0, 0, 0)"
                 class="list-container"
-                v-if="list.length > 0"
-                v-loading="isLoading"
+                :isLoading="isLoading"
                 :list="list"
                 @onMovieClick="goDetail"
             />
-            <div v-else style="color: white; text-align: center">NO DATA</div>
         </div>
     </div>
 </template>
@@ -83,7 +79,7 @@ export default {
     data() {
         return {
             isLoading: false,
-            searchVal: "",
+            searchVal: this.$route.query.keyword ? this.$route.query.keyword : "",
             selectFilter: "",
             selectSorter: "",
             options: [],
@@ -97,6 +93,15 @@ export default {
         this.requestSeach();
     },
     methods: {
+        replace() {
+            let path = "/marketplaceSearch";
+            if (this.searchVal) {
+                path += "?keyword=" + encodeURIComponent(this.searchVal);
+            }
+            if (path != this.$route.path + "?keyword=" + this.$route.query.keyword) {
+                this.$router.replace(path);
+            }
+        },
         requestSeach() {
             let params = {
                 sort_type: "create_lth",
@@ -108,7 +113,8 @@ export default {
                 params.sort_type = this.selectSorter;
             }
             if (this.searchVal) {
-                params.keyword = encodeURIComponent(this.searchVal);
+                params.keyword = this.searchVal;
+                this.replace();
             }
             this.list = [];
             this.isLoading = true;
@@ -128,7 +134,12 @@ export default {
             this.$http
                 .globalGetFilterCate({})
                 .then((res) => {
-                    this.options = res;
+                    this.options = [
+                        {
+                            id: "",
+                            title: "Default",
+                        },
+                    ].concat(res);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -139,7 +150,12 @@ export default {
             this.$http
                 .globalGetSortCate({})
                 .then((res) => {
-                    this.sorts = res;
+                    this.sorts = [
+                        {
+                            id: "",
+                            title: "Default",
+                        },
+                    ].concat(res);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -258,6 +274,7 @@ export default {
         width: 133px;
         height: 100%;
         display: flex;
+        cursor: pointer;
         align-items: center;
         justify-content: center;
         border: 2px solid #ffffff;

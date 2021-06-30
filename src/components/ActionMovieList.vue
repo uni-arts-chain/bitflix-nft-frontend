@@ -1,9 +1,14 @@
 /** * Created by Lay Hunt on 2021-06-01 15:09:30. */
 <template>
     <div class="previous">
-        <div class="container">
-            <div class="list">
-                <div class="item" v-for="v in list" :key="v.id" @click="onClick(v)">
+        <div
+            class="container"
+            v-loading="isLoading"
+            element-loading-spinner="el-icon-loading"
+            element-loading-background="rgba(0, 0, 0, 0)"
+        >
+            <div class="list" v-if="list.length > 0">
+                <div class="item" v-for="v in list" :key="v.id" @click="goDetail(v)">
                     <!-- <div class="label">DROPS 2:00 AM CST MAY 15</div>
                     <div class="recommend">RECOMMENDED PACK</div>-->
                     <ActionMovie
@@ -21,6 +26,12 @@
                     </div>
                 </div>
             </div>
+            <div
+                v-if="list.length <= 0 && !isLoading"
+                style="min-height: 100px; line-height: 100px; color: white; text-align: center"
+            >
+                NO DATA
+            </div>
         </div>
     </div>
 </template>
@@ -36,13 +47,17 @@ export default {
             type: Array,
             default: () => [],
         },
+        isLoading: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {};
     },
     methods: {
-        onClick(item) {
-            this.$emit("onMovieClick", item);
+        goDetail(item) {
+            this.$emit("onItemClick", item);
         },
     },
 };
@@ -76,6 +91,8 @@ export default {
     width: 260px;
     margin-right: 50px;
     float: left;
+    margin-top: 64px;
+    margin-bottom: 60px;
     text-align: left;
 }
 .item:nth-child(4n) {
@@ -111,11 +128,9 @@ export default {
     width: 219px;
     height: 221px;
     font-size: 26px;
-    margin-top: 64px;
     margin-bottom: 60px;
 }
 .info {
-    margin-bottom: 60px;
     margin-left: 36px;
     .name {
         font-size: 18px;
