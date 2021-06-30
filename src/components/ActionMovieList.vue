@@ -22,7 +22,6 @@
                 </div>
             </div>
         </div>
-        <img class="line-set" src="@/assets/images/packs-line-set@2x.png" />
     </div>
 </template>
 <script>
@@ -35,36 +34,7 @@ export default {
     props: {
         list: {
             type: Array,
-            default: () => [
-                {
-                    name: "KHEM NIRCH",
-                    series:
-                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
-                    price: "1200",
-                    id: 1,
-                },
-                {
-                    name: "KHEM NIRCH",
-                    series:
-                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
-                    price: "1200",
-                    id: 2,
-                },
-                {
-                    name: "KHEM NIRCH",
-                    series:
-                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
-                    price: "1200",
-                    id: 3,
-                },
-                {
-                    name: "KHEM NIRCH",
-                    series:
-                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
-                    price: "1200",
-                    id: 4,
-                },
-            ],
+            default: () => [],
         },
     },
     data() {

@@ -46,6 +46,7 @@ export default {
                     series:
                         " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
                     price: "1200",
+                    img_main_file1: { url: "" },
                     id: 1,
                 },
                 {
@@ -53,6 +54,7 @@ export default {
                     series:
                         " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
                     price: "1200",
+                    img_main_file1: { url: "" },
                     id: 2,
                 },
                 {
@@ -61,6 +63,7 @@ export default {
                         " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
                     price: "1200",
                     status: "out",
+                    img_main_file1: { url: "" },
                     id: 3,
                 },
                 {
@@ -69,6 +72,7 @@ export default {
                         " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
                     price: "1200",
                     status: "out",
+                    img_main_file1: { url: "" },
                     id: 4,
                 },
             ],

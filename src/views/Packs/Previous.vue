@@ -44,6 +44,7 @@ export default {
                         " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
                     price: "1200",
                     status: "out",
+                    img_main_file1: { url: "" },
                     id: 1,
                 },
                 {
@@ -52,6 +53,7 @@ export default {
                         " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
                     price: "1200",
                     status: "out",
+                    img_main_file1: { url: "" },
                     id: 2,
                 },
                 {
@@ -60,6 +62,7 @@ export default {
                         " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
                     price: "1200",
                     status: "out",
+                    img_main_file1: { url: "" },
                     id: 3,
                 },
                 {
@@ -68,6 +71,7 @@ export default {
                         " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
                     price: "1200",
                     status: "out",
+                    img_main_file1: { url: "" },
                     id: 4,
                 },
             ],
@@ -84,10 +88,15 @@ export default {
 .previous {
     position: relative;
 }
+.container {
+    position: relative;
+    z-index: 1;
+}
 .line-set {
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 0;
     width: 100%;
 }
 .title {

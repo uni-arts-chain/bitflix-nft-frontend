@@ -11,23 +11,21 @@
                     />
                     <div class="search-text">LEARN MORE</div>
                 </div>
-                <div class="start-button">BUYING AVAILABLE</div>
+                <div class="start-button" @click="requestSeach">SERACH</div>
             </div>
             <div class="filter-container">
                 <div class="input-container">
                     <el-select
                         class="select-input custom-input"
                         clearable
-                        v-model="selectVals"
-                        multiple
-                        collapse-tags
-                        placeholder="请选择"
+                        v-model="selectFilter"
+                        placeholder="Select"
                     >
                         <el-option
                             v-for="item in options"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value"
+                            :key="item.id"
+                            :label="item.title"
+                            :value="item.id"
                         ></el-option>
                     </el-select>
                     <!-- <div class="v-br"></div>
@@ -40,12 +38,12 @@
 
                 <span class="sort-by">SORT BY</span>
 
-                <el-select class="select-container custom-input" clearable v-model="selectVal">
+                <el-select class="select-container custom-input" clearable v-model="selectSorter">
                     <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
+                        v-for="item in sorts"
+                        :key="item.id"
+                        :label="item.title"
+                        :value="item.id"
                     ></el-option>
                 </el-select>
 
@@ -57,7 +55,16 @@
                     />
                 </div>
             </div>
-            <ActionMovieList class="list-container" @onMovieClick="goDetail" />
+            <ActionMovieList
+                element-loading-spinner="el-icon-loading"
+                element-loading-background="rgba(0, 0, 0, 0)"
+                class="list-container"
+                v-if="list.length > 0"
+                v-loading="isLoading"
+                :list="list"
+                @onMovieClick="goDetail"
+            />
+            <div v-else style="color: white; text-align: center">NO DATA</div>
         </div>
     </div>
 </template>
@@ -75,34 +82,70 @@ export default {
     },
     data() {
         return {
+            isLoading: false,
             searchVal: "",
-            selectVal: "",
-            selectVals: [],
-            options: [
-                {
-                    value: "选项1",
-                    label: "黄金糕",
-                },
-                {
-                    value: "选项2",
-                    label: "双皮奶",
-                },
-                {
-                    value: "选项3",
-                    label: "蚵仔煎",
-                },
-                {
-                    value: "选项4",
-                    label: "龙须面",
-                },
-                {
-                    value: "选项5",
-                    label: "北京烤鸭",
-                },
-            ],
+            selectFilter: "",
+            selectSorter: "",
+            options: [],
+            sorts: [],
+            list: [],
         };
     },
+    mounted() {
+        this.requestFilter();
+        this.requestSort();
+        this.requestSeach();
+    },
     methods: {
+        requestSeach() {
+            let params = {
+                sort_type: "create_lth",
+            };
+            if (this.selectFilter) {
+                params.art_type = this.selectFilter;
+            }
+            if (this.selectSorter) {
+                params.sort_type = this.selectSorter;
+            }
+            if (this.searchVal) {
+                params.keyword = encodeURIComponent(this.searchVal);
+            }
+            this.list = [];
+            this.isLoading = true;
+            this.$http
+                .globalGetMarketList(params)
+                .then((res) => {
+                    this.list = res.list;
+                    this.isLoading = false;
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.isLoading = false;
+                    this.$notify.error(err.head && err.head.code);
+                });
+        },
+        requestFilter() {
+            this.$http
+                .globalGetFilterCate({})
+                .then((res) => {
+                    this.options = res;
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.code);
+                });
+        },
+        requestSort() {
+            this.$http
+                .globalGetSortCate({})
+                .then((res) => {
+                    this.sorts = res;
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.code);
+                });
+        },
         goDetail() {
             this.$router.push("/marketplaceDetail");
         },
@@ -249,10 +292,9 @@ export default {
 .list-container {
     margin-top: 80px;
 }
-</style>
 
-<style>
-.custom-input .el-input__inner {
+.custom-input ::v-deep .el-input__inner {
     background-color: transparent;
+    color: white;
 }
 </style>
