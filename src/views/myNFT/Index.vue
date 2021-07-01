@@ -3,7 +3,7 @@
         <div class="list-content">
             <div class="list-title-con">
                 <BaseTitle>MY NFT</BaseTitle>
-                <div class="display-name">yin**yang@amazon.com</div>
+                <div class="display-name">{{ connectedAccount }}</div>
             </div>
             <ActionMovieList class="list" @onMovieClick="goDetail" />
         </div>
@@ -19,6 +19,11 @@ export default {
     components: {
         BaseTitle,
         ActionMovieList,
+    },
+    computed: {
+        connectedAccount() {
+            return this.$store.state.user.connectedAccount;
+        },
     },
     methods: {
         goDetail() {

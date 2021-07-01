@@ -1,6 +1,6 @@
 <template>
     <div class="star-list">
-        <div v-for="(item, index) in list" :key="index" @click="onClick(item)">
+        <div class="item-wrapper" v-for="(item, index) in list" :key="index" @click="onClick(item)">
             <div class="star">
                 <!-- <img class="star-image" src="@/assets/images/marketplace/star.png" /> -->
                 <AdaptiveImage
@@ -48,6 +48,13 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     // overflow: hidden;
+    .item-wrapper {
+        margin-right: 23px;
+        margin-bottom: 20px;
+    }
+    .item-wrapper:nth-child(3n) {
+        margin-right: 0;
+    }
     .star {
         cursor: pointer;
         width: 230px;

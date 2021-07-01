@@ -2,7 +2,7 @@
 <template>
     <div class="list">
         <div class="container">
-            <div class="item" v-for="(v, i) in list" :key="i" @click="goNFT">
+            <div class="item" v-for="(v, i) in list" :key="i" @click="goNFT(v.id)">
                 <img class="top" src="@/assets/images/border-arrow-top.png" />
                 <img class="bottom" src="@/assets/images/border-arrow-bottom.png" />
                 <div class="cover">
@@ -10,10 +10,12 @@
                 </div>
                 <div class="title">{{ v.name.toUpperCase() }}</div>
                 <!-- <div class="set-name">Base Set</div> -->
-                <div class="common-name webkit-ellipsis-2">Common #9472/12000</div>
-                <div class="price">1200 USDT</div>
+                <div class="common-name webkit-ellipsis-2">{{ v.details }}</div>
+                <div class="price">
+                    {{ v.price }} {{ v.currency_code ? v.currency_code.toUpperCase() : "" }}
+                </div>
             </div>
-            <div class="item" @click="goMyNFT">
+            <div class="item" @click="goMyNFT" v-if="list.length > 7">
                 <img class="top" src="@/assets/images/border-arrow-top.png" />
                 <img class="bottom" src="@/assets/images/border-arrow-bottom.png" />
                 <div class="more">MORE ></div>
@@ -30,48 +32,26 @@ export default {
     },
     data() {
         return {
-            list: [
-                {
-                    name: "NOMANKIND",
-                    property_url:
-                        "https://ipfs.pixura.io/ipfs/QmYD7vv6g7UoWrx2t1ru9aKwH6Lituuy6Gi6bxr4b7BgLY/nomankind.jpg",
-                },
-                {
-                    name: "Lost In The Data Flow",
-                    property_url:
-                        "https://ipfs.pixura.io/ipfs/QmVtPmHik3zgm4QSUL22Kp8HALgUMUTBTbK777JEXUyZzz/lost-in-the-data-flow.jpg",
-                },
-                {
-                    name: "Paradise",
-                    property_url:
-                        "https://ipfs.pixura.io/ipfs/QmVx6RZW6CQcSK47ZWUaXQt86HEMBVQcrxYf74JkHsUABv/paradise.jpg",
-                },
-                {
-                    name: "TRANSHUMAN ROMANCE",
-                    property_url:
-                        "https://ipfs.pixura.io/ipfs/QmXMKBFnr5oceJhrZJ2k23tPUqXFfiCGE6pBbGo9QJ5dFj/transhuman-romance.png",
-                },
-                {
-                    name: "NOMANKIND",
-                    property_url:
-                        "https://ipfs.pixura.io/ipfs/QmYD7vv6g7UoWrx2t1ru9aKwH6Lituuy6Gi6bxr4b7BgLY/nomankind.jpg",
-                },
-                {
-                    name: "Lost In The Data Flow",
-                    property_url:
-                        "https://ipfs.pixura.io/ipfs/QmVtPmHik3zgm4QSUL22Kp8HALgUMUTBTbK777JEXUyZzz/lost-in-the-data-flow.jpg",
-                },
-                {
-                    name: "Paradise",
-                    property_url:
-                        "https://ipfs.pixura.io/ipfs/QmVx6RZW6CQcSK47ZWUaXQt86HEMBVQcrxYf74JkHsUABv/paradise.jpg",
-                },
-            ],
+            list: [],
         };
     },
+    mounted() {
+        this.requestData();
+    },
     methods: {
-        goNFT() {
-            this.$router.push("/nftdetail");
+        requestData() {
+            this.$http
+                .globalGetPopArts({})
+                .then((res) => {
+                    this.list = res;
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.code);
+                });
+        },
+        goNFT(id) {
+            this.$router.push("/marketplaceDetail/" + id);
         },
         goMyNFT() {
             this.$router.push("/mynft");
@@ -152,6 +132,12 @@ export default {
         text-align: left;
         color: #a0a2a5;
         line-height: 25px;
+        min-height: 25px;
+        overflow: hidden;
+        display: block;
+        width: 80%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         margin-bottom: 14px;
     }
     .price {

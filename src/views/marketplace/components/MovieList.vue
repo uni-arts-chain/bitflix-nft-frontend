@@ -1,6 +1,6 @@
 <template>
     <div class="movie-list">
-        <div v-for="(item, index) in list" :key="index" @click="onClick(item)">
+        <div class="item-wrapper" v-for="(item, index) in list" :key="index" @click="onClick(item)">
             <div class="movie">
                 <!-- <img class="movie-poster" src="@/assets/images/marketplace/movie2@2x.png" /> -->
                 <!-- <img class="movie-poster" :src="item.img_main_file1.url" /> -->
@@ -48,8 +48,15 @@ export default {
 <style lang="scss" scoped>
 .movie-list {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    .item-wrapper {
+        margin-right: 23px;
+        margin-bottom: 20px;
+    }
+    .item-wrapper:nth-child(3n) {
+        margin-right: 0;
+    }
     .movie {
         cursor: pointer;
         width: 391px;

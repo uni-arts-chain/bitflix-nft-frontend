@@ -108,6 +108,7 @@ export default {
     },
     mounted() {
         this.requestData("movie");
+        this.requestNFTData();
     },
     methods: {
         requestData(type) {
@@ -119,23 +120,40 @@ export default {
             }
             this.isMovieLoading = true;
             this.isActorLoading = true;
-            this.isTypeLoading = true;
-            this.isLastLoading = true;
             this.$http
                 .globalGetMarketList(params)
                 .then((res) => {
                     if (type == "movie") {
                         this.isMovieLoading = false;
                         this.isActorLoading = false;
-                        this.isTypeLoading = false;
-                        this.isLastLoading = false;
                         this.movieList.splice(0, 0, ...res.list.filter((_, i) => i < 3));
                         this.starList.splice(0, 0, ...res.list.filter((_, i) => i >= 3 && i < 8));
-                        this.nftList.splice(0, 0, ...res.list.reverse());
-                        this.latestList.splice(0, 0, ...res.list);
                     }
                 })
                 .catch((err) => {
+                    this.isMovieLoading = false;
+                    this.isActorLoading = false;
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.code);
+                });
+        },
+        requestNFTData() {
+            let params = {
+                sort_type: "create_lth",
+            };
+            this.isTypeLoading = true;
+            this.isLastLoading = true;
+            this.$http
+                .globalGetMarketList(params)
+                .then((res) => {
+                    this.isTypeLoading = false;
+                    this.isLastLoading = false;
+                    this.nftList = res.list.reverse();
+                    this.latestList = res.list.reverse();
+                })
+                .catch((err) => {
+                    this.isTypeLoading = false;
+                    this.isLastLoading = false;
                     console.log(err);
                     this.$notify.error(err.head && err.head.code);
                 });
@@ -154,7 +172,7 @@ export default {
             this.$router.push("/marketplaceDetail/" + item.id);
         },
         goSearchList() {
-            this.$router.push("/marketplaceSearchList");
+            this.$router.push("/marketplaceSearch");
         },
     },
 };

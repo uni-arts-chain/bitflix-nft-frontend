@@ -93,7 +93,7 @@
                     </div>
                 </transition>
             </div> -->
-            <div class="more-moments" v-if="isLogin">
+            <div class="more-moments">
                 <div class="more-moments-title">MORE MOMENTS</div>
                 <ActionMovieList :list="momentList" class="more-moments-list" />
             </div>
@@ -146,6 +146,23 @@ export default {
                 this.$notify.error(err.head && err.head.code);
             });
         if (this.isLogin) {
+            this.requestSimilarData();
+        }
+    },
+    watch: {
+        isLogin(value) {
+            if (value) {
+                this.requestSimilarData();
+            }
+        },
+    },
+    computed: {
+        isLogin() {
+            return this.$store.state.user.info.token;
+        },
+    },
+    methods: {
+        requestSimilarData() {
             this.isMomentLoading = true;
             this.$http
                 .userGetArtSimilar({})
@@ -158,14 +175,7 @@ export default {
                     console.log(err);
                     this.$notify.error(err.head && err.head.code);
                 });
-        }
-    },
-    computed: {
-        isLogin() {
-            return this.$store.state.user.info.token;
         },
-    },
-    methods: {
         goback() {
             // this.$router.push("/");
             history.go(-1);
