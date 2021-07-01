@@ -11,6 +11,18 @@
                 v-if="viewType == 'img'"
                 :url="nft.property_url"
             />
+            <AdaptiveAudio
+                @click.native="showPreview"
+                :width="width"
+                @ImgLoaded="imgLoaded"
+                :height="height"
+                :preload="preload"
+                v-else-if="viewType == 'audio'"
+                :isPlay="!isPreview"
+                :isPreview="isPreview"
+                :cover="nft.img_main_file1.url"
+                :source="nft.property_url"
+            />
             <AdaptiveVideo
                 @click.native="showPreview"
                 :width="width"
@@ -20,6 +32,8 @@
                 v-else-if="viewType == 'video'"
                 :isResponsive="isResponsive"
                 :isPlay="!isPreview"
+                :isPreview="isPreview"
+                :cover="nft.img_main_file1.url"
                 :source="nft.property_url"
             />
             <div
@@ -48,6 +62,12 @@
                 :style="`top: ${typeLabelPosition.top}px;right: ${typeLabelPosition.right}px`"
                 icon-class="video"
             />
+            <icon-svg
+                v-if="isPreview && viewType == 'audio'"
+                class="video-label"
+                :style="`top: ${typeLabelPosition.top}px;right: ${typeLabelPosition.right}px;font-size: 23px`"
+                icon-class="music"
+            />
         </div>
         <Dialog :visible.sync="isDialogPreview" type="fullscreen" :close="handlePreviewClose">
             <div class="dialog-content">
@@ -58,6 +78,11 @@
                     :isResponsive="false"
                     :isOrigin="true"
                     :url="dialogPreviewUrl"
+                />
+                <AdaptiveAudio
+                    v-else-if="viewType == 'audio'"
+                    :isPlay="true"
+                    :source="dialogPreviewUrl"
                 />
                 <AdaptiveVideo
                     v-else-if="viewType == 'video'"
@@ -73,6 +98,7 @@
 import Dialog from "@/components/Dialog/Dialog";
 import AdaptiveImage from "@/components/AdaptiveImage";
 import AdaptiveVideo from "@/components/AdaptiveVideo";
+import AdaptiveAudio from "@/components/AdaptiveAudio";
 
 export default {
     name: "adaptiveview",
@@ -80,6 +106,7 @@ export default {
         Dialog,
         AdaptiveImage,
         AdaptiveVideo,
+        AdaptiveAudio,
     },
     props: {
         nft: {
@@ -131,17 +158,30 @@ export default {
                 left: 0,
                 top: 0,
             },
+            videoType: ["mp4", "wmv", "rm", "rmvb", "mov", "m4v", "mkv", "flv", "avi"],
+            imgType: ["jpg", "jpeg", "gif", "png"],
+            audioType: ["mp3", "aac", "wav", "flac"],
         };
     },
     computed: {
         viewType() {
-            if (
-                /\.mp4$/.test(this.nft.property_url) ||
-                /^data:video\/mp4;/.test(this.nft.property_url)
-            ) {
+            let source = (this.nft.property_url ? this.nft.property_url : "").split("?");
+            source = source.length > 0 ? source[0] : "";
+            let isVideo = new RegExp(`${this.videoType.map((v) => "\\." + v).join("|")}$`).test(
+                source
+            );
+            let isImg = new RegExp(`${this.imgType.map((v) => "\\." + v).join("|")}$`).test(source);
+            let isAudio = new RegExp(`${this.audioType.map((v) => "\\." + v).join("|")}$`).test(
+                source
+            );
+            if (isVideo) {
                 return "video";
-            } else {
+            } else if (isImg) {
                 return "img";
+            } else if (isAudio) {
+                return "audio";
+            } else {
+                return "";
             }
         },
     },
@@ -169,7 +209,7 @@ export default {
             let boxHeight = this.$refs.adaptiveView.offsetHeight;
             this.auctionLabelPosition.left = (boxWidth - imgWidth) / 2;
             this.auctionLabelPosition.top = (boxHeight - imgHeight) / 2 + 15;
-            if (this.viewType === "video") {
+            if (this.viewType === "video" || this.viewType === "audio") {
                 console.log(this.viewType, info);
                 this.typeLabelPosition.right = (boxWidth - imgWidth) / 2 + 5;
                 this.typeLabelPosition.top = (boxHeight - imgHeight) / 2 + 5;

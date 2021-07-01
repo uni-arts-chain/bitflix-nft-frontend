@@ -29,6 +29,7 @@
             <img
                 v-else
                 :src="cover"
+                @load="canplay"
                 ref="video"
                 :class="{
                     'responsive-horizontal': isResponsive && isResponsiveHorizontal,
@@ -91,6 +92,11 @@ export default {
             type: Boolean,
             default: true,
         },
+    },
+    created() {
+        if (this.isPreview) {
+            this.isLoading = false;
+        }
     },
     data() {
         return {
