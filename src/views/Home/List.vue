@@ -21,6 +21,12 @@
                 <div class="more">MORE ></div>
             </div>
         </div>
+        <div
+            v-if="list.length <= 0 && !isLoading"
+            style="min-height: 100px; line-height: 100px; color: white; text-align: center"
+        >
+            NO DATA
+        </div>
     </div>
 </template>
 <script>
@@ -33,6 +39,7 @@ export default {
     data() {
         return {
             list: [],
+            isLoading: false,
         };
     },
     mounted() {
@@ -40,13 +47,16 @@ export default {
     },
     methods: {
         requestData() {
+            this.isLoading = true;
             this.$http
                 .globalGetPopArts({})
                 .then((res) => {
                     this.list = res;
+                    this.isLoading = false;
                 })
                 .catch((err) => {
                     console.log(err);
+                    this.isLoading = false;
                     this.$notify.error(err.head && err.head.code);
                 });
         },
