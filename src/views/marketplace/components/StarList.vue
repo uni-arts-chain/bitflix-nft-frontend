@@ -45,12 +45,13 @@ export default {
 <style lang="scss" scoped>
 .star-list {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     // overflow: hidden;
     .item-wrapper {
         margin-right: 23px;
         margin-bottom: 20px;
+        margin-right: 18px;
     }
     .item-wrapper:nth-child(3n) {
         margin-right: 0;

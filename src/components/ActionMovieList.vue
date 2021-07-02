@@ -12,7 +12,7 @@
                     <!-- <div class="label">DROPS 2:00 AM CST MAY 15</div>
                     <div class="recommend">RECOMMENDED PACK</div>-->
                     <ActionMovie
-                        title="MOVIE NFT"
+                        :title="v.art_type.toUpperCase() + ' NFT'"
                         :coverUrl="v.img_main_file1.url"
                         :coinUrl="`${require('@/assets/images/cate-coin2.png')}`"
                     />

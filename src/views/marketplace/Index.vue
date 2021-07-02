@@ -109,30 +109,28 @@ export default {
     mounted() {
         this.requestData("movie");
         this.requestNFTData();
+        this.requestStarData();
     },
     methods: {
         requestData(type) {
             let params = {
                 sort_type: "create_lth",
+                art_type: "movie",
             };
             if (type) {
                 params.art_type = type;
             }
             this.isMovieLoading = true;
-            this.isActorLoading = true;
             this.$http
                 .globalGetMarketList(params)
                 .then((res) => {
                     if (type == "movie") {
                         this.isMovieLoading = false;
-                        this.isActorLoading = false;
                         this.movieList.splice(0, 0, ...res.list.filter((_, i) => i < 3));
-                        this.starList.splice(0, 0, ...res.list.filter((_, i) => i >= 3 && i < 8));
                     }
                 })
                 .catch((err) => {
                     this.isMovieLoading = false;
-                    this.isActorLoading = false;
                     console.log(err);
                     this.$notify.error(err.head && err.head.code);
                 });
@@ -158,9 +156,27 @@ export default {
                     this.$notify.error(err.head && err.head.code);
                 });
         },
-        requestMovie() {
-            this.$requestMoive("movie");
+        requestStarData() {
+            let params = {
+                sort_type: "create_lth",
+                art_type: "star",
+            };
+            this.isActorLoading = true;
+            this.$http
+                .globalGetMarketList(params)
+                .then((res) => {
+                    this.isActorLoading = false;
+                    this.starList.splice(0, 0, ...res.list.filter((_, i) => i < 5));
+                })
+                .catch((err) => {
+                    this.isActorLoading = false;
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.code);
+                });
         },
+        // requestMovie() {
+        //     this.$requestMoive("movie");
+        // },
         goSearch() {
             let path = "/marketplaceSearch";
             if (this.searchVal) {
