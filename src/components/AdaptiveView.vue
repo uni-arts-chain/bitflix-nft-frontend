@@ -7,6 +7,7 @@
                 @ImgLoaded="imgLoaded"
                 :width="width"
                 :height="height"
+                :isResponsive="isResponsive"
                 :isOrigin="!isResponsive"
                 v-if="viewType == 'img'"
                 :url="nft.property_url"
@@ -20,6 +21,7 @@
                 v-else-if="viewType == 'audio'"
                 :isPlay="!isPreview"
                 :isPreview="isPreview"
+                :isResponsive="isResponsive"
                 :cover="nft.img_main_file1.url"
                 :source="nft.property_url"
             />

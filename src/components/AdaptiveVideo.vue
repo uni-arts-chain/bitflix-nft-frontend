@@ -106,6 +106,24 @@ export default {
     },
     methods: {
         imgLoad() {
+            if (!this.isResponsive) {
+                let width = this.$refs.video.offsetWidth;
+                let height = this.$refs.video.offsetHeight;
+                this.isHorizontal = width > height ? true : false;
+            } else {
+                let obj = this.$refs.video;
+                let width = obj ? obj.offsetWidth : "100%";
+                let height = obj ? obj.offsetHeight : "230px";
+                let boxWidth = this.width;
+                let boxHeight = this.height;
+                boxWidth = this.$refs.videoContainer ? this.$refs.videoContainer.offsetWidth : 0;
+                boxHeight = this.$refs.videoContainer ? this.$refs.videoContainer.offsetHeight : 0;
+                if (width < height) {
+                    this.isResponsiveHorizontal = height <= boxHeight ? false : true;
+                } else {
+                    this.isResponsiveHorizontal = width <= boxWidth ? true : false;
+                }
+            }
             this.$emit("ImgLoaded", {
                 height: this.$refs.videoPlay.offsetHeight,
                 width: this.$refs.videoPlay.offsetWidth,
@@ -225,6 +243,25 @@ export default {
     }
 
     video.responsive-vertical {
+        height: 100%;
+        width: auto;
+    }
+
+    img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        transition: opacity 0.3s ease;
+        opacity: 1;
+    }
+
+    img.responsive-horizontal {
+        width: 100%;
+        height: auto;
+    }
+
+    img.responsive-vertical {
         height: 100%;
         width: auto;
     }
