@@ -30,6 +30,7 @@
                 v-else
                 :src="cover"
                 ref="video"
+                @load="imgLoad"
                 :class="{
                     'responsive-horizontal': isResponsive && isResponsiveHorizontal,
                     'responsive-vertical': isResponsive && !isResponsiveHorizontal,
@@ -104,12 +105,18 @@ export default {
         };
     },
     methods: {
+        imgLoad() {
+            this.$emit("ImgLoaded", {
+                height: this.$refs.videoPlay.offsetHeight,
+                width: this.$refs.videoPlay.offsetWidth,
+            });
+            this.isLoading = false;
+        },
         canplay() {
             if (!this.isResponsive) {
                 let width = this.$refs.video.offsetWidth;
                 let height = this.$refs.video.offsetHeight;
                 this.isHorizontal = width > height ? true : false;
-                this.isLoading = false;
             } else {
                 let obj = this.$refs.video;
                 let width = obj ? obj.offsetWidth : "100%";
@@ -123,7 +130,6 @@ export default {
                 } else {
                     this.isResponsiveHorizontal = width <= boxWidth ? true : false;
                 }
-                this.isLoading = false;
             }
             let width = this.$refs.video.offsetWidth;
             let height = this.$refs.video.offsetHeight;
@@ -162,6 +168,7 @@ export default {
             if (this.isPlay) {
                 this.$refs.video.play();
             }
+            this.isLoading = false;
         },
         replay() {
             this.$refs.video.currentTime = 0;

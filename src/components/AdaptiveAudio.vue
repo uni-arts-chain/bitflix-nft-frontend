@@ -29,7 +29,7 @@
             <img
                 v-else
                 :src="cover"
-                @load="canplay"
+                @load="imgLoad"
                 ref="video"
                 :class="{
                     'responsive-horizontal': isResponsive && isResponsiveHorizontal,
@@ -110,6 +110,13 @@ export default {
         };
     },
     methods: {
+        imgLoad() {
+            this.$emit("ImgLoaded", {
+                height: this.$refs.videoPlay.offsetHeight,
+                width: this.$refs.videoPlay.offsetWidth,
+            });
+            this.isLoading = false;
+        },
         canplay() {
             if (!this.isResponsive) {
                 let width = this.$refs.video.offsetWidth;

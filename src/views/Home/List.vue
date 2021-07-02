@@ -1,6 +1,11 @@
 /** * Created by Lay Hunt on 2021-05-24 16:08:43. */
 <template>
-    <div class="list">
+    <div
+        class="list"
+        v-loading="isLoading"
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0)"
+    >
         <div class="container">
             <div class="item" v-for="(v, i) in list" :key="i" @click="goNFT(v.id)">
                 <img class="top" src="@/assets/images/border-arrow-top.png" />
@@ -71,10 +76,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .list {
-    min-height: 1100px;
+    min-height: 400px;
     background-image: url(~@/assets/images/home-bg2.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    margin-bottom: 200px;
 }
 .container {
     display: flex;
