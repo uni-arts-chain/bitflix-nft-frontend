@@ -88,11 +88,16 @@ export default {
         };
     },
     mounted() {
+        this.setFilter();
         this.requestFilter();
         this.requestSort();
         this.requestSeach();
     },
     methods: {
+        setFilter() {
+            this.selectFilter = this.$route.query.art_type;
+            this.selectSorter = this.$route.query.sort_type;
+        },
         replace() {
             let path = "/marketplaceSearch";
             if (this.searchVal) {

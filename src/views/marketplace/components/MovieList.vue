@@ -5,8 +5,9 @@
                 <!-- <img class="movie-poster" src="@/assets/images/marketplace/movie2@2x.png" /> -->
                 <!-- <img class="movie-poster" :src="item.img_main_file1.url" /> -->
                 <AdaptiveImage
+                    :isPreview="true"
+                    :cover="item.img_main_file1.url"
                     :isOrigin="false"
-                    :url="item.img_main_file1.url"
                     width="341px"
                     height="175px"
                 />

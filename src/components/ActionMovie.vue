@@ -10,7 +10,8 @@
                     class="cover"
                     width="100%"
                     height="100%"
-                    :url="coverUrl"
+                    :isPreview="true"
+                    :cover="coverUrl"
                     :isOrigin="false"
                 />
             </div>
@@ -82,7 +83,7 @@ export default {
         height: 68%;
         position: absolute;
         bottom: 0%;
-        left: 3.1%;
+        left: 3%;
         transform: rotateZ(-6.5deg);
         z-index: 1;
     }
@@ -92,6 +93,7 @@ export default {
         top: 30%;
         right: 15px;
         width: 21%;
+        transform: rotateZ(-14deg);
     }
     .status {
         position: absolute;

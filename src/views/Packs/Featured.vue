@@ -40,42 +40,7 @@ export default {
     },
     data() {
         return {
-            movies: [
-                {
-                    name: "KHEM NIRCH",
-                    series:
-                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
-                    price: "1200",
-                    img_main_file1: { url: "" },
-                    id: 1,
-                },
-                {
-                    name: "KHEM NIRCH",
-                    series:
-                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
-                    price: "1200",
-                    img_main_file1: { url: "" },
-                    id: 2,
-                },
-                {
-                    name: "KHEM NIRCH",
-                    series:
-                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
-                    price: "1200",
-                    status: "out",
-                    img_main_file1: { url: "" },
-                    id: 3,
-                },
-                {
-                    name: "KHEM NIRCH",
-                    series:
-                        " To be addedo be addedo be addedo be addedo be addedobe addedo be added",
-                    price: "1200",
-                    status: "out",
-                    img_main_file1: { url: "" },
-                    id: 4,
-                },
-            ],
+            movies: [],
         };
     },
     methods: {

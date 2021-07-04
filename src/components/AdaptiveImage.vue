@@ -4,12 +4,11 @@
         class="adaptive-image"
         ref="imgBox"
         :class="{ 'img-loading': isLoading }"
-        :style="`${width ? `width:${width};` : ``}${
-            height ? `height:${height};` : ``
-        }`"
+        :style="`${width ? `width:${width};` : ``}${height ? `height:${height};` : ``}`"
     >
         <img
             ref="img"
+            v-if="!isPreview"
             :class="{
                 'img-horizontal': !isOrigin && isHorizontal,
                 'img-vertical': !isOrigin && !isHorizontal,
@@ -17,6 +16,17 @@
             }"
             @load="imgOnLoad"
             :src="url"
+        />
+        <img
+            ref="img"
+            v-else
+            :class="{
+                'img-horizontal': !isOrigin && isHorizontal,
+                'img-vertical': !isOrigin && !isHorizontal,
+                'img-origin': isOrigin,
+            }"
+            @load="imgOnLoad"
+            :src="cover"
         />
     </div>
 </template>
@@ -26,7 +36,7 @@ export default {
     props: {
         url: {
             type: String,
-            required: true,
+            default: "",
         },
         width: {
             type: String,
@@ -37,6 +47,14 @@ export default {
             default: "100%",
         },
         isOrigin: {
+            type: Boolean,
+            default: true,
+        },
+        cover: {
+            type: String,
+            default: "",
+        },
+        isPreview: {
             type: Boolean,
             default: true,
         },
@@ -64,17 +82,13 @@ export default {
 
             let boxWidth = this.width;
             let boxHeight = this.height;
-            boxWidth = boxWidth.includes("px")
-                ? boxWidth.split("px")[0]
-                : boxWidth;
+            boxWidth = boxWidth.includes("px") ? boxWidth.split("px")[0] : boxWidth;
             boxWidth = boxWidth.includes("%")
                 ? this.$refs.imgBox
                     ? this.$refs.imgBox.offsetWidth
                     : 0
                 : boxWidth;
-            boxHeight = boxHeight.includes("px")
-                ? boxHeight.split("px")[0]
-                : boxHeight;
+            boxHeight = boxHeight.includes("px") ? boxHeight.split("px")[0] : boxHeight;
             boxHeight = boxHeight.includes("%")
                 ? this.$refs.imgBox
                     ? this.$refs.imgBox.offsetHeight

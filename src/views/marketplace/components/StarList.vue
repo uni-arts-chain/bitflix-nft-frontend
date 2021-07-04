@@ -4,8 +4,9 @@
             <div class="star">
                 <!-- <img class="star-image" src="@/assets/images/marketplace/star.png" /> -->
                 <AdaptiveImage
+                    :isPreview="true"
+                    :cover="item.img_main_file1.url"
                     :isOrigin="false"
-                    :url="item.img_main_file1.url"
                     width="230px"
                     height="333px"
                 />

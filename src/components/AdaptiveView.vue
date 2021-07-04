@@ -8,6 +8,8 @@
                 :width="width"
                 :height="height"
                 :isResponsive="isResponsive"
+                :isPreview="isPreview"
+                :cover="nft.img_main_file1.url"
                 :isOrigin="!isResponsive"
                 v-if="viewType == 'img'"
                 :url="nft.property_url"

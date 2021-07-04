@@ -14,7 +14,7 @@
                     <ActionMovie
                         :title="v.art_type.toUpperCase() + ' NFT'"
                         :coverUrl="v.img_main_file1.url"
-                        :coinUrl="`${require('@/assets/images/cate-coin2.png')}`"
+                        :coinUrl="getNFTCoinLogo(v)"
                     />
                     <div class="info">
                         <div class="name">{{ v.name }}</div>
@@ -37,6 +37,11 @@
 </template>
 <script>
 import ActionMovie from "@/components/ActionMovie";
+import STAR_LOGO from "@/assets/images/cate-coin1.png";
+import MOVIE_LOGO from "@/assets/images/cate-coin2.png";
+import ACTIVIST_LOGO from "@/assets/images/cate-coin3.png";
+import MUSIC_LOGO from "@/assets/images/cate-coin4.png";
+import TROHPY_LOGO from "@/assets/images/cate-coin5.png";
 export default {
     name: "MovieList",
     components: {
@@ -53,11 +58,38 @@ export default {
         },
     },
     data() {
-        return {};
+        return {
+            STAR_LOGO,
+            MOVIE_LOGO,
+            ACTIVIST_LOGO,
+            MUSIC_LOGO,
+            TROHPY_LOGO,
+        };
     },
     methods: {
         goDetail(item) {
             this.$emit("onItemClick", item);
+        },
+        getNFTCoinLogo(item) {
+            let coin = "";
+            switch (item.art_type) {
+                case "movie":
+                    coin = MOVIE_LOGO;
+                    break;
+                case "star":
+                    coin = STAR_LOGO;
+                    break;
+                case "activist":
+                    coin = ACTIVIST_LOGO;
+                    break;
+                case "music":
+                    coin = MUSIC_LOGO;
+                    break;
+                case "trohpy":
+                    coin = TROHPY_LOGO;
+                    break;
+            }
+            return coin;
         },
     },
 };

@@ -33,7 +33,7 @@
             </text>
         </svg>
         <div class="card-cate-group container">
-            <div class="card-cate-item" @click="goMarketplaceDetail">
+            <div class="card-cate-item" @click="goMarketplaceDetail('star')">
                 <ActionMovie
                     title="STAR NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
@@ -41,7 +41,7 @@
                 />
                 <span>STAR</span>
             </div>
-            <div class="card-cate-item" @click="goMarketplaceDetail">
+            <div class="card-cate-item" @click="goMarketplaceDetail('movie')">
                 <ActionMovie
                     title="MOVIE NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
@@ -49,15 +49,15 @@
                 />
                 <span>MOVIE</span>
             </div>
-            <div class="card-cate-item" @click="goMarketplaceDetail">
+            <div class="card-cate-item" @click="goMarketplaceDetail('music')">
                 <ActionMovie
                     title="MUISC NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
-                    :coinUrl="`${require('@/assets/images/cate-coin3.png')}`"
+                    :coinUrl="`${require('@/assets/images/cate-coin4.png')}`"
                 />
                 <span>MUISC</span>
             </div>
-            <div class="card-cate-item" @click="goMarketplaceDetail">
+            <div class="card-cate-item" @click="goMarketplaceDetail('activist')">
                 <ActionMovie
                     title="ACTIVIST NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
@@ -65,11 +65,11 @@
                 />
                 <span>ACTIVIST</span>
             </div>
-            <div class="card-cate-item" @click="goMarketplaceDetail">
+            <div class="card-cate-item" @click="goMarketplaceDetail('trophy')">
                 <ActionMovie
                     title="TROPHY NFT"
                     :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
-                    :coinUrl="`${require('@/assets/images/cate-coin3.png')}`"
+                    :coinUrl="`${require('@/assets/images/cate-coin5.png')}`"
                 />
                 <span>TROPHY</span>
             </div>
@@ -96,8 +96,8 @@ export default {
         goLockUp() {
             this.$router.push("/lockup");
         },
-        goMarketplaceDetail() {
-            this.$router.push("/marketplaceDetail");
+        goMarketplaceDetail(artType) {
+            this.$router.push("/marketplaceSearch?art_type=" + artType);
         },
     },
 };
