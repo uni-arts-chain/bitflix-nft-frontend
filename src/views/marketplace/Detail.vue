@@ -143,7 +143,7 @@ export default {
             .catch((err) => {
                 this.isLoading = false;
                 console.log(err);
-                this.$notify.error(err.head && err.head.code);
+                this.$notify.error(err.head && err.head.msg);
             });
         if (this.isLogin) {
             this.requestSimilarData();
@@ -173,7 +173,7 @@ export default {
                 .catch((err) => {
                     this.isMomentLoading = false;
                     console.log(err);
-                    this.$notify.error(err.head && err.head.code);
+                    this.$notify.error(err.head && err.head.msg);
                 });
         },
         goback() {

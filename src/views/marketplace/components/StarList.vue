@@ -54,7 +54,7 @@ export default {
         margin-bottom: 20px;
         margin-right: 18px;
     }
-    .item-wrapper:nth-child(3n) {
+    .item-wrapper:nth-child(5n) {
         margin-right: 0;
     }
     .star {
@@ -68,12 +68,17 @@ export default {
         }
         .star-name-con {
             position: absolute;
-            left: 12px;
+            padding: 0 12px;
+            width: 100%;
             bottom: 27px;
             .star-name {
                 font-size: 15px;
                 font-family: Montserrat-ExtraBold, Montserrat;
                 font-weight: bolder;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 100%;
                 color: #ffffff;
             }
             .short-line {

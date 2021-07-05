@@ -172,10 +172,11 @@ export default {
                         height: this.$refs.videoContainer.offsetWidth / rato,
                         width: this.$refs.videoContainer.offsetWidth,
                     });
-                    this.bottomHeight =
+                    this.bottomHeight = Math.floor(
                         (this.$refs.videoContainer.offsetHeight -
                             this.$refs.videoContainer.offsetWidth / rato) /
-                        2;
+                            2
+                    );
                 } else {
                     this.$emit("ImgLoaded", {
                         height: this.$refs.video.offsetHeight,
@@ -283,7 +284,7 @@ export default {
         transparent 0,
         rgb(0, 0, 0, 0.02) 10%,
         rgb(0, 0, 0, 0.1) 30%,
-        rgba(0, 0, 0, 0.3) 90%
+        rgba(0, 0, 0, 0.3) 100%
     );
     .icon {
         font-size: 22px;

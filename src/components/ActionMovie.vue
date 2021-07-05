@@ -2,21 +2,22 @@
 <template>
     <div class="action-movie">
         <div class="wrapper">
-            <img class="bg" src="@/assets/images/action-bg@2x.png" />
-            <div class="title">{{ title }}</div>
-            <!-- <img class="cover" :src="coverUrl" /> -->
-            <div class="cover">
-                <AdaptiveImage
-                    class="cover"
-                    width="100%"
-                    height="100%"
-                    :isPreview="true"
-                    :cover="coverUrl"
-                    :isOrigin="false"
-                />
+            <div class="content">
+                <div class="title">{{ title }}</div>
+                <!-- <img class="cover" :src="coverUrl" /> -->
+                <div class="cover">
+                    <AdaptiveImage
+                        class="cover"
+                        width="100%"
+                        height="100%"
+                        :isPreview="true"
+                        :cover="coverUrl"
+                        :isOrigin="false"
+                    />
+                </div>
+                <img class="coin" v-if="coinUrl" :src="coinUrl" />
+                <div class="status" v-if="status === 'out'">SOLD OUT</div>
             </div>
-            <img class="coin" v-if="coinUrl" :src="coinUrl" />
-            <div class="status" v-if="status === 'out'">SOLD OUT</div>
         </div>
     </div>
 </template>
@@ -53,15 +54,16 @@ export default {
         width: 100%;
         height: 100%;
         position: relative;
+        padding-top: 75px;
+        padding-left: 5px;
+        background: url(~@/assets/images/action-bg@2x.png) no-repeat;
+        background-size: 100% 100%;
+        transform: rotateZ(-12deg);
     }
-    .bg {
+    .content {
         width: 100%;
         height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 0;
-        transform: rotateZ(-13deg);
+        position: relative;
     }
     .title {
         font-size: inherit;
@@ -71,29 +73,26 @@ export default {
         color: #ffffff;
         line-height: 35px;
         letter-spacing: 1px;
-        width: 60%;
+        width: calc(100% - 80px);
         position: absolute;
-        top: 40%;
-        left: 21px;
-        transform: rotateZ(-13deg);
+        top: 10px;
+        left: 10px;
         z-index: 2;
     }
     .cover {
-        width: 98%;
-        height: 68%;
+        width: 100%;
+        height: 100%;
         position: absolute;
-        bottom: 0%;
-        left: 3%;
-        transform: rotateZ(-6.5deg);
+        left: 0;
+        top: 0;
         z-index: 1;
     }
     .coin {
         position: absolute;
         z-index: 1;
-        top: 30%;
-        right: 15px;
+        top: 10px;
+        right: 10px;
         width: 21%;
-        transform: rotateZ(-14deg);
     }
     .status {
         position: absolute;
@@ -106,7 +105,7 @@ export default {
         text-align: center;
         color: #000;
         font-family: "Montserrat-Bold";
-        transform: rotateZ(-13deg) scale(1.15);
+        transform: scale(1.15);
     }
 }
 </style>

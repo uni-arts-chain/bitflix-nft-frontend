@@ -154,7 +154,7 @@ export default {
     }
     ::v-deep .el-dialog .el-dialog__close {
         position: relative;
-        z-index: 1;
+        z-index: 2001;
     }
     ::v-deep .el-dialog .el-dialog__headerbtn:hover .el-dialog__close {
         color: #999;

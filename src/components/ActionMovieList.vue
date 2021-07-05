@@ -169,6 +169,10 @@ export default {
         font-family: "Montserrat-Bold";
         font-weight: Bold;
         text-align: left;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         color: #ffffff;
         letter-spacing: 1px;
         margin-bottom: 5px;

@@ -78,6 +78,9 @@ export default {
             font-weight: bolder;
             color: #ffffff;
             width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             text-align: center;
             padding-bottom: 18px;
             border-bottom: 3px solid #ffffff;

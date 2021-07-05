@@ -132,7 +132,7 @@ export default {
                 .catch((err) => {
                     console.log(err);
                     this.isLoading = false;
-                    this.$notify.error(err.head && err.head.code);
+                    this.$notify.error(err.head && err.head.msg);
                 });
         },
         requestFilter() {
@@ -148,7 +148,7 @@ export default {
                 })
                 .catch((err) => {
                     console.log(err);
-                    this.$notify.error(err.head && err.head.code);
+                    this.$notify.error(err.head && err.head.msg);
                 });
         },
         requestSort() {
@@ -164,7 +164,7 @@ export default {
                 })
                 .catch((err) => {
                     console.log(err);
-                    this.$notify.error(err.head && err.head.code);
+                    this.$notify.error(err.head && err.head.msg);
                 });
         },
         goDetail() {

@@ -132,7 +132,7 @@ export default {
                 .catch((err) => {
                     this.isMovieLoading = false;
                     console.log(err);
-                    this.$notify.error(err.head && err.head.code);
+                    this.$notify.error(err.head && err.head.msg);
                 });
         },
         requestNFTData() {
@@ -153,7 +153,7 @@ export default {
                     this.isTypeLoading = false;
                     this.isLastLoading = false;
                     console.log(err);
-                    this.$notify.error(err.head && err.head.code);
+                    this.$notify.error(err.head && err.head.msg);
                 });
         },
         requestStarData() {
@@ -171,7 +171,7 @@ export default {
                 .catch((err) => {
                     this.isActorLoading = false;
                     console.log(err);
-                    this.$notify.error(err.head && err.head.code);
+                    this.$notify.error(err.head && err.head.msg);
                 });
         },
         // requestMovie() {
