@@ -2,6 +2,7 @@
 <template>
     <div
         class="video"
+        :class="{ origin: !isPreview }"
         ref="videoPlay"
         v-loading="isLoading"
         element-loading-spinner="el-icon-loading"
@@ -12,20 +13,18 @@
             :class="{ responsive: isResponsive }"
             ref="videoContainer"
         >
-            <video
-                v-if="!isPreview"
-                :preload="preload"
-                :src="source"
-                ref="video"
-                :class="{
-                    'responsive-horizontal': isResponsive && isResponsiveHorizontal,
-                    'responsive-vertical': isResponsive && !isResponsiveHorizontal,
-                    horizontal: isHorizontal && !isResponsive,
-                }"
-                @canplay="canplay"
-                :loop="isLoop"
-                :muted="isMute"
-            ></video>
+            <div class="audio-wrapper" v-if="!isPreview">
+                <audio
+                    :preload="preload"
+                    :src="source"
+                    ref="video"
+                    class="audio-player"
+                    @canplay="canplay"
+                    :loop="isLoop"
+                    :muted="isMute"
+                ></audio>
+                <img :src="cover" @load="imgLoad" class="audio-poster" />
+            </div>
             <img
                 v-else
                 :src="cover"
@@ -39,19 +38,26 @@
             />
         </div>
         <div class="video-control" :style="`bottom: ${bottomHeight}px`" v-if="isPlay && !isCover">
-            <div class="icon" @click.stop="replay">
-                <icon-svg icon-class="replay" />
+            <div class="progress">
+                <div class="progress-bar"></div>
+                <div class="progress-circle"></div>
+            </div>
+            <div class="icon" @click.stop="play" v-if="!isPause">
+                <icon-svg icon-class="play" />
+            </div>
+            <div class="icon" @click.stop="pause" v-else>
+                <icon-svg icon-class="pause" />
             </div>
             <div class="icon" @click.stop="mute">
                 <icon-svg v-if="!isMute" icon-class="volume" class="volume" />
                 <icon-svg v-else icon-class="mute" class="volume" />
             </div>
-            <div class="icon" @click.stop="fullscreen" v-if="!isFullscreen">
+            <!-- <div class="icon" @click.stop="fullscreen" v-if="!isFullscreen">
                 <icon-svg icon-class="fullscreen" class="fullscreen" />
             </div>
             <div class="icon" @click.stop="smallscreen" v-else>
                 <icon-svg icon-class="smallscreen" class="fullscreen" />
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -101,12 +107,13 @@ export default {
     data() {
         return {
             isHorizontal: false,
-            isMute: true,
+            isMute: false,
             isFullscreen: false,
             isLoading: true,
             isResponsiveHorizontal: false,
             bottomHeight: 0,
             isOpting: false,
+            isPause: true,
         };
     },
     methods: {
@@ -190,12 +197,14 @@ export default {
                     });
                 }
             }
-            if (this.isPlay) {
-                this.$refs.video.play();
-            }
         },
-        replay() {
-            this.$refs.video.currentTime = 0;
+        play() {
+            this.$refs.video.play();
+            this.isPause = false;
+        },
+        pause() {
+            this.$refs.video.pause();
+            this.isPause = true;
         },
         mute() {
             this.isMute = !this.isMute;
@@ -215,6 +224,12 @@ export default {
 .video {
     width: 100%;
     height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.video.origin {
+    width: 296px;
+    height: 296px;
     position: relative;
     overflow: hidden;
 }
@@ -301,5 +316,19 @@ export default {
 
 .video:hover .video-control {
     opacity: 1;
+}
+
+.audio-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    img.audio-poster {
+        position: absolute;
+        max-width: 100%;
+        max-height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
 }
 </style>

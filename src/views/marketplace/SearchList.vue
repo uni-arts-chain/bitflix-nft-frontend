@@ -2,7 +2,7 @@
     <div class="searchlist-page">
         <div class="list-content">
             <span class="back-btn" @click="goBack">&lt; BACK</span>
-            <ActionMovieList class="list" @onMovieClick="goDetail" />
+            <ActionMovieList class="list" @onItemClick="goDetail" />
         </div>
     </div>
 </template>
@@ -16,8 +16,9 @@ export default {
         ActionMovieList,
     },
     methods: {
-        goDetail() {
-            this.$router.push("/marketplaceDetail");
+        goDetail(item) {
+            console.log(item);
+            this.$router.push("/marketplaceDetail/" + item.id);
         },
         goBack() {
             this.$router.push("/marketplace");

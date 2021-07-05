@@ -78,7 +78,8 @@ module.exports = {
         port: 5100,
         proxy: {
             "/test/api": {
-                target: "http://33a1578f5fab.ngrok.io", // 接口的域名 测试
+                // target: "http://33a1578f5fab.ngrok.io", // 接口的域名 测试
+                target: "http://192.168.0.118:3000", // 接口的域名 测试
                 pathRewrite: {
                     "^/test/api": "/api",
                 },

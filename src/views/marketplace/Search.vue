@@ -59,7 +59,7 @@
                 class="list-container"
                 :isLoading="isLoading"
                 :list="list"
-                @onMovieClick="goDetail"
+                @onItemClick="goDetail"
             />
             <div
                 class="pagination"
@@ -196,8 +196,8 @@ export default {
                     this.$notify.error(err.head && err.head.msg);
                 });
         },
-        goDetail() {
-            this.$router.push("/marketplaceDetail");
+        goDetail(item) {
+            this.$router.push("/marketplaceDetail/" + item.id);
         },
         next() {
             if (this.currentPage < this.totalPage) {
