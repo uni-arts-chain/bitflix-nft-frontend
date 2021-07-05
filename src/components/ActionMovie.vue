@@ -54,8 +54,8 @@ export default {
         width: 100%;
         height: 100%;
         position: relative;
-        padding-top: 75px;
-        padding-left: 5px;
+        padding-top: 34%;
+        padding-left: 2.3%;
         background: url(~@/assets/images/action-bg@2x.png) no-repeat;
         background-size: 100% 100%;
         transform: rotateZ(-12deg);

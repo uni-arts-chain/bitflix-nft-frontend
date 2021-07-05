@@ -61,6 +61,24 @@
                 :list="list"
                 @onMovieClick="goDetail"
             />
+            <div
+                class="pagination"
+                v-if="!isLoading && this.currentPage > 1 && this.list.length > 0"
+            >
+                <icon-svg
+                    @click="prev"
+                    :disabled="currentPage <= 1"
+                    icon-class="left"
+                    :class="{ disabled: currentPage <= 1 }"
+                />
+                <icon-svg
+                    @click="next"
+                    :disabled="currentPage >= totalPage"
+                    style="transform: rotateZ(180deg)"
+                    :class="{ disabled: currentPage >= totalPage }"
+                    icon-class="left"
+                />
+            </div>
         </div>
     </div>
 </template>
@@ -85,6 +103,9 @@ export default {
             options: [],
             sorts: [],
             list: [],
+            perPage: 30,
+            currentPage: 1,
+            total_count: 0,
         };
     },
     mounted() {
@@ -92,6 +113,11 @@ export default {
         this.requestFilter();
         this.requestSort();
         this.requestSeach();
+    },
+    computed: {
+        totalPage() {
+            return Math.ceil(this.total_count / this.perPage);
+        },
     },
     methods: {
         setFilter() {
@@ -110,6 +136,8 @@ export default {
         requestSeach() {
             let params = {
                 sort_type: "create_lth",
+                per_page: this.perPage,
+                page: this.currentPage,
             };
             if (this.selectFilter) {
                 params.art_type = this.selectFilter;
@@ -127,6 +155,7 @@ export default {
                 .globalGetMarketList(params)
                 .then((res) => {
                     this.list = res.list;
+                    this.total = res.total_count;
                     this.isLoading = false;
                 })
                 .catch((err) => {
@@ -169,6 +198,18 @@ export default {
         },
         goDetail() {
             this.$router.push("/marketplaceDetail");
+        },
+        next() {
+            if (this.currentPage < this.totalPage) {
+                this.currentPage++;
+                this.requestSeach();
+            }
+        },
+        prev() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.requestSeach();
+            }
         },
     },
 };
@@ -318,5 +359,22 @@ export default {
 .custom-input ::v-deep .el-input__inner {
     background-color: transparent;
     color: white;
+}
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 40px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    .svg-icon {
+        margin: 0 50px;
+        cursor: pointer;
+    }
+    .svg-icon.disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+    }
 }
 </style>

@@ -146,8 +146,8 @@ export default {
                 .then((res) => {
                     this.isTypeLoading = false;
                     this.isLastLoading = false;
-                    this.nftList = res.list.reverse();
-                    this.latestList = res.list.reverse();
+                    this.nftList = res.list.filter((v, i) => i < 8).reverse();
+                    this.latestList = res.list.filter((v, i) => i < 8).reverse();
                 })
                 .catch((err) => {
                     this.isTypeLoading = false;

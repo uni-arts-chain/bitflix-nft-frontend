@@ -7,7 +7,7 @@
         element-loading-background="rgba(0, 0, 0, 0)"
     >
         <div class="container">
-            <div class="item" v-for="(v, i) in list" :key="i" @click="goNFT(v.id)">
+            <div class="item" v-for="(v, i) in listData" :key="i" @click="goNFT(v.id)">
                 <img class="top" src="@/assets/images/border-arrow-top.png" />
                 <img class="bottom" src="@/assets/images/border-arrow-bottom.png" />
                 <div class="cover">
@@ -20,7 +20,7 @@
                     {{ v.price }} {{ v.currency_code ? v.currency_code.toUpperCase() : "" }}
                 </div>
             </div>
-            <div class="item" @click="goMyNFT" v-if="list.length > 7">
+            <div class="item" @click="goMarket" v-if="list.length > 7">
                 <img class="top" src="@/assets/images/border-arrow-top.png" />
                 <img class="bottom" src="@/assets/images/border-arrow-bottom.png" />
                 <div class="more">MORE ></div>
@@ -47,6 +47,11 @@ export default {
             isLoading: false,
         };
     },
+    computed: {
+        listData() {
+            return this.list.filter((v, i) => i < 7);
+        },
+    },
     mounted() {
         this.requestData();
     },
@@ -68,8 +73,8 @@ export default {
         goNFT(id) {
             this.$router.push("/marketplaceDetail/" + id);
         },
-        goMyNFT() {
-            this.$router.push("/mynft");
+        goMarket() {
+            this.$router.push("/marketplaceSearch");
         },
     },
 };
@@ -127,6 +132,10 @@ export default {
         font-size: 18px;
         font-family: "Montserrat-Bold";
         text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        white-space: nowrap;
         color: #ffffff;
         line-height: 33px;
         margin-bottom: 8px;
