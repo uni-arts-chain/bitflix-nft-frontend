@@ -14,6 +14,25 @@
                 <div class="start-button" @click="requestSeach">SERACH</div>
             </div>
             <div class="filter-container">
+                <div class="tag-container">
+                    <el-select
+                        class="select-input custom-input"
+                        multiple
+                        v-model="selectTag"
+                        placeholder="Select"
+                    >
+                        <el-option
+                            v-for="item in tags"
+                            :key="item.id"
+                            :label="item.title"
+                            :value="item.id"
+                        ></el-option>
+                    </el-select>
+                    <!-- <div class="v-br"></div>
+                    <div class="search-icon-con">
+                        <img class="search-icon" src="@/assets/images/marketplace/search@2x.png" />
+                    </div>-->
+                </div>
                 <div class="input-container">
                     <el-select
                         class="select-input custom-input"
@@ -34,7 +53,7 @@
                     </div>-->
                 </div>
 
-                <div class="filters" @click="requestSeach">FILTERS</div>
+                <!-- <div class="filters" @click="requestSeach">FILTERS</div> -->
 
                 <span class="sort-by">SORT BY</span>
 
@@ -47,13 +66,13 @@
                     ></el-option>
                 </el-select>
 
-                <div class="more-btn">
+                <!-- <div class="more-btn">
                     <img
                         width="20"
                         class="search-icon"
                         src="@/assets/images/marketplace/more@2x.png"
                     />
-                </div>
+                </div> -->
             </div>
             <ActionMovieList
                 class="list-container"
@@ -100,8 +119,10 @@ export default {
             searchVal: this.$route.query.keyword ? this.$route.query.keyword : "",
             selectFilter: "",
             selectSorter: "",
+            selectTag: "",
             options: [],
             sorts: [],
+            tags: [],
             list: [],
             perPage: 30,
             currentPage: 1,
@@ -112,6 +133,7 @@ export default {
         this.setFilter();
         this.requestFilter();
         this.requestSort();
+        this.requestTag();
         this.requestSeach();
     },
     computed: {
@@ -123,11 +145,23 @@ export default {
         setFilter() {
             this.selectFilter = this.$route.query.art_type;
             this.selectSorter = this.$route.query.sort_type;
+            this.selectTag = this.$route.query.tags
+                ? this.$route.query.tags.split(",").map((v) => parseInt(v))
+                : "";
         },
         replace() {
             let path = "/marketplaceSearch";
             if (this.searchVal) {
                 path += "?keyword=" + encodeURIComponent(this.searchVal);
+            }
+            if (this.selectFilter) {
+                path += "?art_type=" + encodeURIComponent(this.selectFilter);
+            }
+            if (this.selectSorter) {
+                path += "?sort_type=" + encodeURIComponent(this.selectSorter);
+            }
+            if (this.selectTag && this.selectTag.length > 0) {
+                path += "?tags=" + encodeURIComponent(this.selectTag.join(","));
             }
             if (path != this.$route.path + "?keyword=" + this.$route.query.keyword) {
                 this.$router.replace(path);
@@ -144,6 +178,10 @@ export default {
             }
             if (this.selectSorter) {
                 params.sort_type = this.selectSorter;
+            }
+            if (this.selectTag && this.selectTag.length > 0) {
+                params.tag_group_ids = this.selectTag.join(",");
+                this.replace();
             }
             if (this.searchVal) {
                 params.keyword = this.searchVal;
@@ -174,6 +212,17 @@ export default {
                             title: "Default",
                         },
                     ].concat(res);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.msg);
+                });
+        },
+        requestTag() {
+            this.$http
+                .globalGetTagGroup({})
+                .then((res) => {
+                    this.tags = res;
                 })
                 .catch((err) => {
                     console.log(err);
@@ -236,7 +285,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     .search-content {
-        width: 872px;
+        width: 873px;
         border: 2px solid #ffffff;
         display: flex;
         align-items: center;
@@ -267,7 +316,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 263px;
+        width: 269px;
         background: linear-gradient(to right, #ba45c8, #2b6bd2);
         cursor: pointer;
         // text-align: center;
@@ -288,10 +337,28 @@ export default {
     align-items: center;
 
     .input-container {
-        width: 640px;
+        width: 180px;
         border: 2px solid #ffffff;
         display: flex;
         align-items: center;
+    }
+    .tag-container {
+        width: 680px;
+        border: 2px solid #ffffff;
+        display: flex;
+        align-items: center;
+        .select-input ::v-deep .el-tag.el-tag--info {
+            color: black;
+        }
+        .select-input ::v-deep .el-tag__close.el-icon-close:hover {
+            background-color: black;
+        }
+        .select-input ::v-deep .el-tag__close.el-icon-close {
+            background-color: black;
+        }
+    }
+    .input-container,
+    .tag-container {
         .select-input {
             font-family: Montserrat-SemiBold, Montserra;
             flex: 1;

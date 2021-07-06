@@ -5,13 +5,13 @@
                 <!-- <img class="star-image" src="@/assets/images/marketplace/star.png" /> -->
                 <AdaptiveImage
                     :isPreview="true"
-                    :cover="item.img_main_file1.url"
+                    :cover="item.img.url"
                     :isOrigin="false"
                     width="230px"
                     height="333px"
                 />
                 <div class="star-name-con">
-                    <div class="star-name">{{ item.name.toUpperCase() }}</div>
+                    <div class="star-name">{{ item.title.toUpperCase() }}</div>
                     <div class="short-line"></div>
                 </div>
             </div>

@@ -39,6 +39,17 @@ const apiList = [
         },
     },
     {
+        name: "GetTagGroup",
+        method: "GET",
+        desc: "搜索TAG列表",
+        path: "/tag_groups",
+        mockPath: "/tag_groups",
+        params: {},
+        options: {
+            unSignature: false,
+        },
+    },
+    {
         name: "GetArtInfo",
         method: "GET",
         desc: "艺术品详情",
@@ -55,6 +66,39 @@ const apiList = [
         desc: "获取热门作品",
         path: "/arts/popular",
         mockPath: "/arts/popular",
+        params: {},
+        options: {
+            unSignature: true,
+        },
+    },
+    {
+        name: "GetMovieSet",
+        method: "GET",
+        desc: "获取推荐MOVIE集合",
+        path: "/tag_groups/movies",
+        mockPath: "/tag_groups/movies",
+        params: {},
+        options: {
+            unSignature: true,
+        },
+    },
+    {
+        name: "GetStarSet",
+        method: "GET",
+        desc: "获取推荐STAR集合",
+        path: "/tag_groups/stars",
+        mockPath: "/tag_groups/stars",
+        params: {},
+        options: {
+            unSignature: true,
+        },
+    },
+    {
+        name: "GetLatestNFT",
+        method: "GET",
+        desc: "最新上架NFT",
+        path: "/arts/latest",
+        mockPath: "/arts/latest",
         params: {},
         options: {
             unSignature: true,

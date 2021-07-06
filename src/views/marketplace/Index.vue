@@ -26,7 +26,7 @@
                     :isLoading="isMovieLoading"
                     class="move-list"
                     :list="movieList"
-                    @onItemClick="goDetail"
+                    @onItemClick="goDetail($event, true)"
                 />
             </div>
         </div>
@@ -38,7 +38,7 @@
                     :isLoading="isActorLoading"
                     :list="starList"
                     class="star-list"
-                    @onItemClick="goDetail"
+                    @onItemClick="goDetail($event, true)"
                 />
             </div>
             <img class="line" src="@/assets/images/packs-line@2x.png" />
@@ -61,7 +61,7 @@
         <div class="latest-container">
             <div class="latest-content">
                 <div class="latest-title-con">
-                    <BaseTitle>LATEST LASTINGS</BaseTitle>
+                    <BaseTitle>LATEST LISTINGS</BaseTitle>
                     <div class="more-btn" @click="goSearchList">EXPLORE MARKETPLACE</div>
                 </div>
                 <ActionMovieList
@@ -107,27 +107,19 @@ export default {
         };
     },
     mounted() {
-        this.requestData("movie");
+        this.requestMovieData("movie");
         this.requestNFTData();
         this.requestStarData();
+        this.requestLatestData();
     },
     methods: {
-        requestData(type) {
-            let params = {
-                sort_type: "create_lth",
-                art_type: "movie",
-            };
-            if (type) {
-                params.art_type = type;
-            }
+        requestMovieData() {
             this.isMovieLoading = true;
             this.$http
-                .globalGetMarketList(params)
+                .globalGetMovieSet({})
                 .then((res) => {
-                    if (type == "movie") {
-                        this.isMovieLoading = false;
-                        this.movieList.splice(0, 0, ...res.list.filter((_, i) => i < 3));
-                    }
+                    this.isMovieLoading = false;
+                    this.movieList = res;
                 })
                 .catch((err) => {
                     this.isMovieLoading = false;
@@ -140,33 +132,42 @@ export default {
                 sort_type: "create_lth",
             };
             this.isTypeLoading = true;
-            this.isLastLoading = true;
             this.$http
                 .globalGetMarketList(params)
                 .then((res) => {
                     this.isTypeLoading = false;
-                    this.isLastLoading = false;
                     this.nftList = res.list.filter((v, i) => i < 8).reverse();
-                    this.latestList = res.list.filter((v, i) => i < 8).reverse();
                 })
                 .catch((err) => {
                     this.isTypeLoading = false;
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.msg);
+                });
+        },
+        requestLatestData() {
+            this.isLastLoading = true;
+            this.$http
+                .globalGetLatestNFT({
+                    per_page: 4,
+                    page: 1,
+                })
+                .then((res) => {
+                    this.isLastLoading = false;
+                    this.latestList = res;
+                })
+                .catch((err) => {
                     this.isLastLoading = false;
                     console.log(err);
                     this.$notify.error(err.head && err.head.msg);
                 });
         },
         requestStarData() {
-            let params = {
-                sort_type: "create_lth",
-                art_type: "star",
-            };
             this.isActorLoading = true;
             this.$http
-                .globalGetMarketList(params)
+                .globalGetStarSet({})
                 .then((res) => {
                     this.isActorLoading = false;
-                    this.starList.splice(0, 0, ...res.list.filter((_, i) => i < 5));
+                    this.starList = res;
                 })
                 .catch((err) => {
                     this.isActorLoading = false;
@@ -174,18 +175,20 @@ export default {
                     this.$notify.error(err.head && err.head.msg);
                 });
         },
-        // requestMovie() {
-        //     this.$requestMoive("movie");
-        // },
         goSearch() {
             let path = "/marketplaceSearch";
+            let queryStr = "";
             if (this.searchVal) {
-                path = "/marketplaceSearch?keyword=" + encodeURIComponent(this.searchVal);
+                queryStr += "?keyword=" + encodeURIComponent(this.searchVal);
             }
-            this.$router.push(path);
+            this.$router.push(path + queryStr);
         },
-        goDetail(item) {
-            this.$router.push("/marketplaceDetail/" + item.id);
+        goDetail(item, isTag = false) {
+            if (isTag) {
+                this.$router.push("/marketplaceSearch?tags=" + item.id);
+            } else {
+                this.$router.push("/marketplaceDetail/" + item.id);
+            }
         },
         goSearchList() {
             this.$router.push("/marketplaceSearch");
@@ -304,6 +307,7 @@ export default {
 .latest-container {
     padding-top: 83px;
     padding-bottom: 50px;
+    min-height: 500px;
     background: #0d1c33;
     .latest-content {
         width: 1222px;

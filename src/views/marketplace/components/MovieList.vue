@@ -6,15 +6,15 @@
                 <!-- <img class="movie-poster" :src="item.img_main_file1.url" /> -->
                 <AdaptiveImage
                     :isPreview="true"
-                    :cover="item.img_main_file1.url"
+                    :cover="item.img.url"
                     :isOrigin="false"
                     width="341px"
                     height="175px"
                 />
-                <div class="movie-tire">{{ item.name.toUpperCase() }}</div>
-                <div class="movie-size"></div>
+                <div class="movie-tire">{{ item.title.toUpperCase() }}</div>
+                <div class="movie-size">Contains {{ item.art_count }} NFTs</div>
                 <div class="size-value">
-                    Price: {{ item.price }} {{ item.currency_code.toUpperCase() }}
+                    Price: {{ item.lowest_price }} ~ {{ item.highest_price }} USDT
                 </div>
                 <!-- <div class="value-unit">MIN</div> -->
             </div>
