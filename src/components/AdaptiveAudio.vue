@@ -39,17 +39,19 @@
         </div>
         <div class="video-control" :style="`bottom: ${bottomHeight}px`" v-if="isPlay && !isCover">
             <div class="progress">
-                <div class="progress-bar"></div>
-                <div class="progress-circle"></div>
+                <div class="progress-body">
+                    <div class="progress-bar" :style="`width:${progress}%`"></div>
+                    <div class="progress-circle" :style="`left:calc(${progress}% - 3px)`"></div>
+                </div>
             </div>
-            <div class="icon" @click.stop="play" v-if="!isPause">
+            <div class="icon" @click.stop="play" v-if="isPause">
                 <icon-svg icon-class="play" />
             </div>
             <div class="icon" @click.stop="pause" v-else>
                 <icon-svg icon-class="pause" />
             </div>
             <div class="icon" @click.stop="mute">
-                <icon-svg v-if="!isMute" icon-class="volume" class="volume" />
+                <icon-svg v-if="isMute" icon-class="volume" class="volume" />
                 <icon-svg v-else icon-class="mute" class="volume" />
             </div>
             <!-- <div class="icon" @click.stop="fullscreen" v-if="!isFullscreen">
@@ -62,6 +64,7 @@
     </div>
 </template>
 <script>
+import { BigNumber } from "bignumber.js";
 export default {
     name: "video-player",
     props: {
@@ -84,7 +87,7 @@ export default {
         },
         isLoop: {
             type: Boolean,
-            default: true,
+            default: false,
         },
         cover: {
             type: String,
@@ -114,7 +117,39 @@ export default {
             bottomHeight: 0,
             isOpting: false,
             isPause: true,
+            currentTime: 0,
+            duration: 0,
         };
+    },
+    computed: {
+        progress() {
+            return new BigNumber(this.currentTime).div(this.duration).times(100).toFixed(0, 1);
+        },
+        curTime() {
+            let ct = new BigNumber(this.currentTime);
+            let minutes = ct.div(60);
+            let seconds = ct.mod(60);
+            return (
+                (minutes.lt(10) ? "0" + minutes.toFixed(0, 1) : minutes.toFixed(0, 1)) +
+                ":" +
+                (seconds.lt(10) ? "0" + seconds.toFixed(0, 1) : seconds.toFixed(0, 1))
+            );
+        },
+        totalTime() {
+            let ct = new BigNumber(this.duration);
+            let minutes = ct.div(60);
+            let seconds = ct.mod(60);
+            return (
+                (minutes.lt(10) ? "0" + minutes.toFixed(0, 1) : minutes.toFixed(0, 1)) +
+                ":" +
+                (seconds.lt(10) ? "0" + seconds.toFixed(0, 1) : seconds.toFixed(0, 1))
+            );
+        },
+    },
+    mounted() {
+        this.$refs.video.addEventListener("timeupdate", () => {
+            this.currentTime = this.$refs.video.currentTime;
+        });
     },
     methods: {
         imgLoad() {
@@ -197,6 +232,8 @@ export default {
                     });
                 }
             }
+
+            this.duration = this.$refs.video.duration;
         },
         play() {
             this.$refs.video.play();
@@ -208,6 +245,7 @@ export default {
         },
         mute() {
             this.isMute = !this.isMute;
+            this.$refs.video.muted = !this.isMute;
         },
         fullscreen() {
             this.$refs.videoPlay.requestFullscreen();
@@ -310,7 +348,42 @@ export default {
         font-size: 22px;
         color: white;
         margin: 0 5px;
+        display: flex;
+        align-items: center;
         cursor: pointer;
+    }
+
+    .progress {
+        width: 100%;
+        padding: 0 20px;
+        height: 100%;
+        position: relative;
+        .progress-body {
+            position: absolute;
+            height: 3px;
+            width: calc(90% - 40px);
+            left: 50%;
+            border-radius: 2px;
+            background-color: rgba(218, 218, 218, 0.32);
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        .progress-bar {
+            position: absolute;
+            width: 0%;
+            height: 3px;
+            border-radius: 2px;
+            background-color: white;
+        }
+        .progress-circle {
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: white;
+        }
     }
 }
 

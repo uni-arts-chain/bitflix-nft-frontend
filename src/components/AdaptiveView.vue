@@ -15,7 +15,6 @@
                 :url="nft.property_url"
             />
             <AdaptiveAudio
-                @click.native="showPreview"
                 :width="width"
                 @ImgLoaded="imgLoaded"
                 :height="height"
@@ -82,11 +81,6 @@
                     :isResponsive="false"
                     :isOrigin="true"
                     :url="dialogPreviewUrl"
-                />
-                <AdaptiveAudio
-                    v-else-if="viewType == 'audio'"
-                    :isPlay="true"
-                    :source="dialogPreviewUrl"
                 />
                 <AdaptiveVideo
                     v-else-if="viewType == 'video'"
