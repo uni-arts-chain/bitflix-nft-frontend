@@ -1,7 +1,7 @@
 /** * Created by Lay Hunt on 2021-05-24 15:25:12. */
 <template>
     <div class="cate">
-        <div class="cate-top">
+        <!-- <div class="cate-top">
             <div class="cate-item" style="width: 32%" @click="goLockUp">
                 <div class="item-title1">Lock up</div>
                 <div class="item-title2">BITFLIX</div>
@@ -20,7 +20,7 @@
                 <div class="item-title2">COLLECTION</div>
                 <img src="@/assets/images/card.png" />
             </div>
-        </div>
+        </div> -->
         <svg class="desc-title" id="s9" width="760" height="90">
             <defs>
                 <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="0">
