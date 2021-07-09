@@ -17,15 +17,14 @@
                 poster=""
                 autoplay
                 loop
-                muted
             ></video>
         </div>
 
         <!-- <h2 class="second-title">MOVIE NFT & IMOs</h2> -->
         <p class="desc">
-            A Movie NFT is a collectible behind-the-scenes moment from a movie. If Terminator was
+            <!-- A Movie NFT is a collectible behind-the-scenes moment from a movie. If Terminator was
             the BITFLIX IMO, then the BTS video clip of Arnold Schwarzenegger’s iconic phrase “I’ll
-            be back” would be the Movie NFT.
+            be back” would be the Movie NFT. -->
         </p>
         <button class="start-button" @click="goMarketplace">START YOUR COLLECTION</button>
     </div>
@@ -72,6 +71,7 @@ export default {
     margin-top: 515px;
     max-width: 930px;
     font-size: 17px;
+    min-height: 20px;
     font-family: "Montserrat-Regular";
     font-weight: 600;
     text-align: left;

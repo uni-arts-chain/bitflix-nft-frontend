@@ -62,11 +62,11 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <router-link to="/lockup" :class="{ active: activeTab == 'lockup' }"
                         >LOCK UP BFX</router-link
                     >
-                </li>
+                </li> -->
             </ul>
             <div class="session">
                 <span class="user-address" v-if="connectedAccount">{{ connectedAccount }}</span>

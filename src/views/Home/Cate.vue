@@ -21,7 +21,7 @@
                 <img src="@/assets/images/card.png" />
             </div>
         </div> -->
-        <svg class="desc-title" id="s9" width="760" height="90">
+        <svg class="desc-title" id="s9" width="830" height="90">
             <defs>
                 <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="0">
                     <stop offset="0%" stop-color="#ffbcfd" />
@@ -29,7 +29,7 @@
                 </linearGradient>
             </defs>
             <text font-size="110" x="0" y="90" fill="url(#g3)">
-                SELECT YOUR FAVORITE MOVIE HIGHLIGHTS
+                COLLECT MOVIE NFTS - CONNECT WITH STARS
             </text>
         </svg>
         <div class="card-cate-group container">
