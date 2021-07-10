@@ -3,7 +3,10 @@
     <footer>
         <div class="container v-br">
             <!-- <span class="desc">Copyright © 2021 Bitflix Foundation -All Rights Reserved.</span> -->
-            <span class="desc">Power by UniArts Networks</span>
+            <div class="desc">
+                <img class="network-logo" src="@/assets/images/uniarts.png" alt="" />Power by
+                UniArts Networks
+            </div>
         </div>
     </footer>
 </template>
@@ -32,6 +35,10 @@ footer {
 }
 .v-br {
     border-top: 2px solid #c9caca;
+}
+.network-logo {
+    width: 100px;
+    transform: translateX(25px);
 }
 .desc {
     display: flex;

@@ -107,7 +107,7 @@ export default {
     background-image: url(~@/assets/images/home-bg1.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    min-height: 1000px;
+    min-height: 600px;
 }
 .cate-top {
     margin: 0 auto;
