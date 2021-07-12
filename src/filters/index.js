@@ -38,9 +38,7 @@ let filter = [
                 hour = parseInt((jetLag / 3600) % 24),
                 day = parseInt((jetLag / 3600 / 24) % 30),
                 month = parseInt((jetLag / 3600 / 24 / 30) % 12),
-                year = parseInt(
-                    new Number(jetLag / 3600 / 24 / 30 / 12).toFixed(2)
-                );
+                year = parseInt(new Number(jetLag / 3600 / 24 / 30 / 12).toFixed(2));
             let str = "";
             if (year > 0) {
                 str += year + "年";
@@ -133,12 +131,22 @@ let filter = [
             BigNumber.config({ EXPONENTIAL_AT: [-9, 20] });
             var priceObj = new BigNumber(price);
             return priceObj
-                .div(
-                    new BigNumber(10).pow(
-                        store.state.global.chain.tokenDecimals
-                    )
-                )
+                .div(new BigNumber(10).pow(store.state.global.chain.tokenDecimals))
                 .toString();
+        },
+    },
+    {
+        name: "priceFixed",
+        /**
+         * 格式化小数位
+         * @param price
+         * @returns {*}
+         */
+        callback: (price) => {
+            if (!price) return "";
+            BigNumber.config({ EXPONENTIAL_AT: [-9, 20] });
+            var priceObj = new BigNumber(price);
+            return new BigNumber(priceObj.toFixed(2, 1)).toNumber();
         },
     },
 ];

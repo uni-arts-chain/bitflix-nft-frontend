@@ -21,7 +21,7 @@
                         <div class="series webkit-ellipsis-2">
                             {{ v.series }}
                         </div>
-                        <div class="price">{{ v.price }} USDT</div>
+                        <div class="price">{{ v.price | priceFixed }} USDT</div>
                         <!-- <div class="notice">Only 1 left</div> -->
                     </div>
                 </div>

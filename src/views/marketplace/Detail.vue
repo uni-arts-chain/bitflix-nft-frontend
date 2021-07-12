@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="price-con">
-                        {{ info.price }}
+                        {{ info.price | priceFixed }}
                         <span class="price-unit">{{
                             info.currency_code ? info.currency_code.toUpperCase() : "USDT"
                         }}</span>

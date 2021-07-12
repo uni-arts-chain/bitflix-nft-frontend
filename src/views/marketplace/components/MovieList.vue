@@ -14,7 +14,8 @@
                 <div class="movie-tire">{{ item.title.toUpperCase() }}</div>
                 <div class="movie-size">Contains {{ item.art_count }} NFTs</div>
                 <div class="size-value">
-                    Price: {{ item.lowest_price }} ~ {{ item.highest_price }} USDT
+                    Price: {{ item.lowest_price | priceFixed }} ~
+                    {{ item.highest_price | priceFixed }} USDT
                 </div>
                 <!-- <div class="value-unit">MIN</div> -->
             </div>

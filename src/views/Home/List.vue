@@ -17,7 +17,8 @@
                 <!-- <div class="set-name">Base Set</div> -->
                 <div class="common-name webkit-ellipsis-2">{{ v.details }}</div>
                 <div class="price">
-                    {{ v.price }} {{ v.currency_code ? v.currency_code.toUpperCase() : "" }}
+                    {{ v.price | priceFixed }}
+                    {{ v.currency_code ? v.currency_code.toUpperCase() : "" }}
                 </div>
             </div>
             <div class="item" @click="goMarket" v-if="list.length > 7">
