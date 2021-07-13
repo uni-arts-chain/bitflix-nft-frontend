@@ -101,6 +101,14 @@ export function responseFailFunc(responseError) {
             }
             return Promise.reject(responseError.response.data);
         }
+        if (responseError.response.status == 403) {
+            let errorHead = responseError.response.data.head;
+            if (errorHead.code == 1032) {
+                store.dispatch("user/Quit");
+                axiosInstance.push("/login");
+            }
+            return Promise.reject(responseError.response.data);
+        }
         if (responseError.response.status == 404) {
             return Promise.reject(responseError.response.data);
         }

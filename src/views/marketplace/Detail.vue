@@ -31,7 +31,7 @@
                             <div class="label">number</div>
                         </div>
                         <div>
-                            <div class="label2">0</div>
+                            <div class="label2">{{ info.trades_count }}</div>
                             <div class="label" style="text-align: center">Time</div>
                         </div>
                     </div>
@@ -42,7 +42,16 @@
                         }}</span>
                         <!-- <div class="price-desc">Top Sale</div> -->
                     </div>
-                    <div class="buy-btn">BUY</div>
+                    <div
+                        class="buy-btn"
+                        :disabled="isOwner || !isSelling"
+                        v-loading="isPurchasing || isApproving"
+                        element-loading-spinner="el-icon-loading"
+                        element-loading-background="rgba(0, 0, 0, 0.7)"
+                        @click="buy"
+                    >
+                        {{ isOwner ? "MINE" : isSelling ? "BUY" : "Unpurchasable".toUpperCase() }}
+                    </div>
                     <!-- <div class="share-con">
                         <div class="share-btn">BUYING AVAILABLE</div>
                         <div class="share-icon-con">
@@ -103,8 +112,11 @@
 
 <script>
 import ActionMovieList from "@/components/ActionMovieList";
-import Mp4 from "@/assets/video/banner-mp4.mp4";
 import AdaptiveView from "@/components/AdaptiveView";
+import config from "@/config/network";
+import ERC20 from "@/plugins/contracts/Erc20";
+import MarketPlace from "@/plugins/contracts/MarketPlace";
+import { BigNumber } from "bignumber.js";
 
 export default {
     name: "MarketplaceDetail",
@@ -116,7 +128,6 @@ export default {
         return {
             showDetails: true,
             showHistorys: true,
-            videoUrl: Mp4,
             isMuted: true,
             id: this.$route.params.id,
             isLoading: false,
@@ -125,28 +136,16 @@ export default {
                 property_url: "",
             },
             momentList: [],
+            ERC20: {},
+            MarketPlace: {},
+            isApproving: false,
+            isPurchasing: false,
+            allowance: new BigNumber(0),
         };
     },
     mounted() {
-        this.isLoading = true;
-        this.$http
-            .globalGetArtInfo(
-                {},
-                {
-                    id: this.id,
-                }
-            )
-            .then((res) => {
-                this.isLoading = false;
-                this.info = res;
-            })
-            .catch((err) => {
-                this.isLoading = false;
-                console.log(err);
-                this.$notify.error(err.head && err.head.msg);
-            });
-        if (this.isLogin) {
-            this.requestSimilarData();
+        if (this.connectedAccount) {
+            this.init();
         }
     },
     watch: {
@@ -155,13 +154,66 @@ export default {
                 this.requestSimilarData();
             }
         },
+        connectedAccount(value) {
+            if (value) {
+                this.init();
+            }
+        },
     },
     computed: {
         isLogin() {
             return this.$store.state.user.info.token;
         },
+        connectedAccount() {
+            return this.$wallet.connectedAccount;
+        },
+        isApproved() {
+            return new BigNumber(this.allowance).gte(9999999);
+        },
+        isOwner() {
+            return this.info.is_owner;
+        },
+        isSelling() {
+            return this.info.offer_state == "selling";
+        },
     },
     methods: {
+        async init() {
+            this.isLoading = true;
+            this.$http
+                .globalGetArtInfo(
+                    {},
+                    {
+                        id: this.id,
+                    }
+                )
+                .then(async (res) => {
+                    this.isLoading = false;
+                    this.info = res;
+
+                    let token = config.tokens.find(
+                        (v) => v.symbol.toLowerCase() == this.info.currency_code.toLowerCase()
+                    );
+
+                    this.ERC20 = new ERC20(token.address, token.symbol, token.decimals);
+
+                    this.allowance = (
+                        await this.ERC20.allowance(
+                            this.connectedAccount,
+                            config.contracts.MarketPlace
+                        )
+                    ).toNumber();
+                    this.MarketPlace = new MarketPlace();
+                })
+                .catch((err) => {
+                    this.isLoading = false;
+                    console.log(err);
+                    this.$notify.error(err.head && err.head.msg);
+                });
+            if (this.isLogin) {
+                this.requestSimilarData();
+            }
+        },
         requestSimilarData() {
             this.isMomentLoading = true;
             this.$http
@@ -177,7 +229,6 @@ export default {
                 });
         },
         goback() {
-            // this.$router.push("/");
             history.go(-1);
         },
         copy(str) {
@@ -197,6 +248,78 @@ export default {
             if (this.$refs.video) {
                 this.$refs.video.requestFullscreen();
             }
+        },
+        async buy() {
+            if (this.isOwner || !this.isSelling || this.isApproving || this.isPurchasing) return;
+            if (!this.connectedAccount) {
+                this.$router.push("/login?back=" + encodeURIComponent(this.$route.path));
+                return;
+            }
+            if (!this.isApproved) {
+                this.approve();
+                return;
+            }
+            this.buyItem();
+        },
+        async buyItem() {
+            this.isPurchasing = true;
+            console.log("allowance: ", this.allowance);
+            console.log("account: ", this.connectedAccount);
+            console.log("Offer ID: ", this.info.offer_id);
+            this.MarketPlace.buyItem(this.connectedAccount, this.info.offer_id, (err, txHash) => {
+                if (err) {
+                    console.log(err);
+                }
+                if (txHash) {
+                    console.log(txHash);
+                    this.isPurchasing = false;
+                    this.$notify.success(txHash);
+                    this.init();
+                }
+                this.isApproving = false;
+            })
+                .then((receipt) => {
+                    console.log("receipt: ", receipt);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.isPurchasing = false;
+                    this.$notify.error((err.head && err.head.msg) || (err.message && err.message));
+                });
+        },
+        async approve() {
+            this.isApproving = true;
+            console.log(this.connectedAccount, config.contracts.MarketPlace);
+            this.ERC20.approveMax(
+                this.connectedAccount,
+                config.contracts.MarketPlace,
+                async (err, txHash) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    if (txHash) {
+                        console.log(txHash);
+                    }
+                    this.isApproving = false;
+                }
+            )
+                .then(async (receipt) => {
+                    console.log("receipt: ", receipt);
+                    this.allowance = (
+                        await this.ERC20.allowance(
+                            this.connectedAccount,
+                            config.contracts.MarketPlace
+                        )
+                    ).toNumber();
+                    this.buyItem();
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.isApproving = false;
+                    this.$notify.error(
+                        (err.head && err.head.msg) || (err.data && err.data.message)
+                    );
+                });
         },
     },
 };
@@ -369,7 +492,13 @@ export default {
         font-weight: 700;
         text-align: center;
         color: #ffffff;
+        cursor: pointer;
         letter-spacing: 1px;
+    }
+    .buy-btn[disabled] {
+        background: #666;
+        opacity: 0.7;
+        cursor: not-allowed;
     }
     .share-con {
         margin-top: 27px;

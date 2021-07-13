@@ -19,7 +19,9 @@
 export default {
     name: "login",
     data() {
-        return {};
+        return {
+            back: this.$route.query.back ? decodeURIComponent(this.$route.query.back) : "",
+        };
     },
     created() {
         if (this.$store.state.user.info.token) {
@@ -44,7 +46,11 @@ export default {
                             });
                             await this.$store.dispatch("user/SetInfo", info);
                             this.$notify.success("Logged");
-                            this.$router.push("/");
+                            if (this.back) {
+                                this.$router.push(this.back);
+                            } else {
+                                this.$router.push("/");
+                            }
                         } catch (error) {
                             this.$notify.error(error.head ? error.head.msg : error.message);
                         }

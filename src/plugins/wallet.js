@@ -1,6 +1,8 @@
 import { BigNumber } from "bignumber.js";
 import Web3Utils from "web3-utils";
 import Vue from "vue";
+import store from "@/store";
+import routerInstance from "@/plugins/router";
 
 class Wallet {
     constructor() {
@@ -59,10 +61,15 @@ class Wallet {
         }
         if (this.provider.on) {
             this.provider.on("accountsChanged", (accounts) => {
+                console.log(accounts);
                 this.state.connectedAccount = accounts[0];
+                store.dispatch("user/Quit");
+                routerInstance.push("/login");
             });
             this.provider.on("chainChanged", (chainId) => {
                 this.state.chainId = parseInt(chainId);
+                store.dispatch("user/Quit");
+                routerInstance.push("/login");
             });
         }
         await this.provider.request({
