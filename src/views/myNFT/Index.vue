@@ -5,7 +5,7 @@
                 <BaseTitle>MY NFT</BaseTitle>
                 <div class="display-name">{{ connectedAccount }}</div>
             </div>
-            <ActionMovieList class="list" @onMovieClick="goDetail" />
+            <ActionMovieList :list="cardList" class="list" @onMovieClick="goDetail" />
         </div>
     </div>
 </template>
@@ -20,14 +20,25 @@ export default {
         BaseTitle,
         ActionMovieList,
     },
+    data: () => ({
+        cardList: [],
+    }),
     computed: {
         connectedAccount() {
             return this.$store.state.user.connectedAccount;
         },
     },
+    created() {
+        this.requestCardData(1, 30);
+    },
     methods: {
         goDetail() {
             this.$router.push("/nftdetail");
+        },
+        requestCardData(page, per_page) {
+            this.$http.userOwnArts({ page, per_page }).then((res) => {
+                this.cardList = res.list;
+            });
         },
     },
 };

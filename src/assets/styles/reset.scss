@@ -45,4 +45,20 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
         background-color: white;
     }
 }
-    
+
+.el-menu--horizontal{
+    padding-left: 40px;
+    background-color: #00000000 !important;
+    ul{
+        background-color: #00000000 !important;
+        li{
+            border-top: white 1px solid;
+            margin-left: 40px;
+            text-align: center;
+            background-color: #0c306199 !important;
+            &:first-child {
+                border-top: unset !important;
+            }
+        }
+    }
+}

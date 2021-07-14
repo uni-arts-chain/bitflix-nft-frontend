@@ -6,6 +6,10 @@ import {
     Tabs,
     TabPane,
     Radio,
+    Menu,
+    Submenu,
+    MenuItem,
+    MenuItemGroup,
 } from "element-ui";
 import lang from "element-ui/lib/locale/lang/en";
 import locale from "element-ui/lib/locale";
@@ -22,5 +26,9 @@ export default {
         vue.use(Radio);
         vue.use(Tabs);
         vue.use(TabPane);
+        vue.use(Menu);
+        vue.use(Submenu);
+        vue.use(MenuItem);
+        vue.use(MenuItemGroup);
     },
 };

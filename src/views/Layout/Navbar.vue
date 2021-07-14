@@ -69,9 +69,29 @@
                 </li> -->
             </ul>
             <div class="session">
-                <span class="user-address" v-if="connectedAccount">{{ connectedAccount }}</span>
-                <router-link v-else to="/login" class="login">LOG IN</router-link>
-                <!-- <router-link to="/signup" class="sign-up">SIGN UP</router-link> -->
+                <el-menu
+                    mode="horizontal"
+                    background-color="#0c306199"
+                    text-color="#eeeeee"
+                    active-text-color="#eeeeee"
+                >
+                    <el-submenu v-if="connectedAccount" :index="connectedAccount">
+                        <template slot="title">
+                            <span class="user-address">{{ connectedAccount }}</span>
+                        </template>
+                        <el-menu-item index="/mynft">
+                            <router-link to="/mynft">MY NFT</router-link>
+                        </el-menu-item>
+                        <!--                        <el-menu-item index="/meail">-->
+                        <!--&lt;!&ndash;                            <router-link>MEAIL</router-link>&ndash;&gt;-->
+                        <!--                            <span class="router-link-exact-active router-link-active">MEAIL</span>-->
+                        <!--                        </el-menu-item>-->
+                    </el-submenu>
+                    <el-menu-item v-else index="2-1">
+                        <router-link to="/login" class="login">LOG IN</router-link>
+                        <!-- <router-link to="/signup" class="sign-up">SIGN UP</router-link> -->
+                    </el-menu-item>
+                </el-menu>
             </div>
         </div>
     </nav>
@@ -273,12 +293,29 @@ ul {
                 }
                 .icon-desc {
                     font-size: 14px;
-                    font-family: Montserrat-Bold, Montserrat;
+                    font-family: Montserrat-Bold, Montserrat, serif;
                     // font-weight: 700;
                     color: #c9caca;
                     line-height: 26px;
                     letter-spacing: 1px;
                 }
+            }
+        }
+    }
+}
+::v-deep .el-menu {
+    border-bottom: unset !important;
+    background-color: #00000000 !important;
+    li {
+        background-color: #00000000 !important;
+        &:hover {
+            background-color: #00000000 !important;
+        }
+        div {
+            border-bottom-color: #00000000 !important;
+            background-color: #00000000 !important;
+            i {
+                display: none !important;
             }
         }
     }
