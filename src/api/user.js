@@ -13,6 +13,15 @@ const apiList = [
         options: {},
     },
     {
+        name: "logout",
+        method: "POST",
+        desc: "退出登录",
+        path: "/members/logout",
+        mockPath: "/members/logout",
+        params: {},
+        options: {},
+    },
+    {
         name: "loginMessage",
         method: "GET",
         desc: "获取登录凭证",

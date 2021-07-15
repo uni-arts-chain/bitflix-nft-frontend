@@ -82,6 +82,16 @@ const routes = [
             import(/* webpackChunkName: "marketplaceDetail" */ "@/views/marketplace/Detail"),
     },
     {
+        path: "/resell",
+        name: "resell",
+        component: () => import(/* webpackChunkName: "resell" */ "@/views/resell/Index"),
+    },
+    {
+        path: "/resellSearch",
+        name: "resellSearch",
+        component: () => import(/* webpackChunkName: "resellSearch" */ "@/views/resell/Search"),
+    },
+    {
         path: "/lockup",
         name: "lockup",
         component: () => import(/* webpackChunkName: "lockup" */ "@/views/lockupBFX/Index"),

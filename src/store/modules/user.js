@@ -60,6 +60,7 @@ export default {
             commit("SET_INFO", info);
         },
         Quit({ commit }) {
+            http.userLogout({});
             removeLocalStore("user_token");
             commit("SET_INFO", {
                 token: "",

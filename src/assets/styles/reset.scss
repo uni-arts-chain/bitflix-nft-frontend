@@ -52,6 +52,8 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
     ul{
         background-color: #00000000 !important;
         li{
+            height: 48px !important;
+            line-height: 48px !important;
             border-top: white 1px solid;
             margin-left: 40px;
             text-align: center;
