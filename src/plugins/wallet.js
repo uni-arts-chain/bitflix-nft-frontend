@@ -32,6 +32,7 @@ class Wallet {
                 code: 100,
             };
         }
+        this.setListener();
         let account = await this.provider.request({
             method: "eth_accounts",
         });
@@ -53,7 +54,7 @@ class Wallet {
         this.state.isConnected = true;
         return;
     }
-    async connect() {
+    async setListener() {
         if (!this.provider) {
             throw {
                 code: 100,
@@ -61,16 +62,34 @@ class Wallet {
         }
         if (this.provider.on) {
             this.provider.on("accountsChanged", (accounts) => {
-                console.log(accounts);
                 this.state.connectedAccount = accounts[0];
-                store.dispatch("user/Quit");
-                routerInstance.push("/login");
+                if (store.state.user.info.token) {
+                    store.dispatch("user/Quit");
+                    routerInstance.push(
+                        "/login?back=" + location.pathname == "/"
+                            ? encodeURIComponent(location.pathname)
+                            : ""
+                    );
+                }
             });
             this.provider.on("chainChanged", (chainId) => {
                 this.state.chainId = parseInt(chainId);
-                store.dispatch("user/Quit");
-                routerInstance.push("/login");
+                if (store.state.user.info.token) {
+                    store.dispatch("user/Quit");
+                    routerInstance.push(
+                        "/login?back=" + location.pathname == "/"
+                            ? encodeURIComponent(location.pathname)
+                            : ""
+                    );
+                }
             });
+        }
+    }
+    async connect() {
+        if (!this.provider) {
+            throw {
+                code: 100,
+            };
         }
         await this.provider.request({
             method: "eth_requestAccounts",

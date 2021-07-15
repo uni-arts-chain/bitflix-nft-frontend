@@ -251,7 +251,7 @@ export default {
         },
         async buy() {
             if (this.isOwner || !this.isSelling || this.isApproving || this.isPurchasing) return;
-            if (!this.connectedAccount) {
+            if (!this.connectedAccount || !this.isLogin) {
                 this.$router.push("/login?back=" + encodeURIComponent(this.$route.path));
                 return;
             }
@@ -317,7 +317,7 @@ export default {
                     console.log(err);
                     this.isApproving = false;
                     this.$notify.error(
-                        (err.head && err.head.msg) || (err.data && err.data.message)
+                        (err.head && err.head.msg) || err.message || (err.data && err.data.message)
                     );
                 });
         },
