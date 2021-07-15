@@ -95,7 +95,11 @@
                         <!--                            <span class="router-link-exact-active router-link-active">MEAIL</span>-->
                         <!--                        </el-menu-item>-->
                     </el-submenu>
-                    <el-menu-item v-else index="2-1">
+                    <el-menu-item
+                        v-else
+                        index="2-1"
+                        style="height: 37px; display: block; line-height: 30px"
+                    >
                         <router-link to="/login" class="login">LOG IN</router-link>
                         <!-- <router-link to="/signup" class="sign-up">SIGN UP</router-link> -->
                     </el-menu-item>
@@ -227,6 +231,7 @@ ul {
         font-family: "Montserrat-Bold";
         font-size: 20px;
         font-weight: 600;
+        height: 100%;
         text-align: center;
         color: #ffffff;
         padding: 0 24px;
