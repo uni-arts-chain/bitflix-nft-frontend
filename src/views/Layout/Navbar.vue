@@ -14,6 +14,11 @@
                         >MARKETPLACE</router-link
                     >
                 </li>
+                <li>
+                    <router-link to="/resell" :class="{ active: activeTab == 'resell' }"
+                        >RESELL</router-link
+                    >
+                </li>
                 <li class="questions">
                     <router-link to="/questions" :class="{ active: activeTab == 'questions' }"
                         >COMMON QUESTIONS</router-link
@@ -79,8 +84,11 @@
                         <template slot="title">
                             <span class="user-address">{{ connectedAccount }}</span>
                         </template>
-                        <el-menu-item index="/mynft">
+                        <el-menu-item index="mynft">
                             <router-link to="/mynft">MY NFT</router-link>
+                        </el-menu-item>
+                        <el-menu-item index="logout">
+                            <span @click="logout">LOG OUT</span>
                         </el-menu-item>
                         <!--                        <el-menu-item index="/meail">-->
                         <!--&lt;!&ndash;                            <router-link>MEAIL</router-link>&ndash;&gt;-->
@@ -116,7 +124,15 @@ export default {
     },
     watch: {
         "$route.name"(nav) {
-            const navNames = ["Home", "Packs", "marketplace", "questions", "lockup", "Packs"];
+            const navNames = [
+                "Home",
+                "Packs",
+                "marketplace",
+                "resell",
+                "questions",
+                "lockup",
+                "Packs",
+            ];
             if (navNames.includes(nav)) {
                 this.activeTab = nav;
             }
@@ -131,6 +147,9 @@ export default {
         },
         goQuestions() {
             this.$router.push("/questions");
+        },
+        async logout() {
+            await this.$store.dispatch("user/Quit");
         },
     },
 };
@@ -210,7 +229,7 @@ ul {
         font-weight: 600;
         text-align: center;
         color: #ffffff;
-        padding: 8px 24px;
+        padding: 0 24px;
         background: linear-gradient(to right, #ba45c8, #2b6bd2);
     }
     .user-address {
