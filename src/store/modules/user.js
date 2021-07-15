@@ -61,13 +61,23 @@ export default {
         },
         Quit({ commit, state }) {
             if (state.info.token) {
-                http.userLogout({});
-                removeLocalStore("user_token");
-                commit("SET_INFO", {
-                    token: "",
-                    expire_at: "",
-                    address: "",
-                });
+                http.userLogout({})
+                    .then(() => {
+                        removeLocalStore("user_token");
+                        commit("SET_INFO", {
+                            token: "",
+                            expire_at: "",
+                            address: "",
+                        });
+                    })
+                    .catch(() => {
+                        removeLocalStore("user_token");
+                        commit("SET_INFO", {
+                            token: "",
+                            expire_at: "",
+                            address: "",
+                        });
+                    });
             }
         },
     },
