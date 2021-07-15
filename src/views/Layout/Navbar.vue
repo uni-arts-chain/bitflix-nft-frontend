@@ -97,6 +97,7 @@
                     </el-submenu>
                     <el-menu-item
                         v-else
+                        class="login-item"
                         index="2-1"
                         style="height: 37px; display: block; line-height: 30px"
                     >
@@ -343,5 +344,9 @@ ul {
             }
         }
     }
+}
+
+.login-item.el-menu-item.is-active {
+    border-color: transparent !important;
 }
 </style>
