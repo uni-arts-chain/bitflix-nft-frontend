@@ -116,6 +116,7 @@ import AdaptiveView from "@/components/AdaptiveView";
 import config from "@/config/network";
 import ERC20 from "@/plugins/contracts/Erc20";
 import MarketPlace from "@/plugins/contracts/MarketPlace";
+import Resell from "@/plugins/contracts/Resell";
 import { BigNumber } from "bignumber.js";
 
 export default {
@@ -255,18 +256,19 @@ export default {
                 this.$router.push("/login?back=" + encodeURIComponent(this.$route.path));
                 return;
             }
-            if (!this.isApproved) {
-                this.approve();
+            if (!this.isApproved || this.$route.query.type === "resell") {
+                await this.approve();
                 return;
             }
-            this.buyItem();
+            await this.buyItem();
         },
         async buyItem() {
             this.isPurchasing = true;
-            console.log("allowance: ", this.allowance);
+            const mk = this.info.offer_state === "selling" ? Resell : this.MarketPlace;
+            // console.log("allowance: ", this.allowance);
             console.log("account: ", this.connectedAccount);
             console.log("Offer ID: ", this.info.offer_id);
-            this.MarketPlace.buyItem(this.connectedAccount, this.info.offer_id, (err, txHash) => {
+            mk.buyItem(this.connectedAccount, this.info.offer_id, (err, txHash) => {
                 if (err) {
                     console.log(err);
                 }
@@ -292,7 +294,9 @@ export default {
             console.log(this.connectedAccount, config.contracts.MarketPlace);
             this.ERC20.approveMax(
                 this.connectedAccount,
-                config.contracts.MarketPlace,
+                this.info.offer_state === "selling"
+                    ? config.contracts.OtcMarketPlace
+                    : config.contracts.MarketPlace,
                 async (err, txHash) => {
                     if (err) {
                         console.log(err);
@@ -300,7 +304,6 @@ export default {
                     if (txHash) {
                         console.log(txHash);
                     }
-                    this.isApproving = false;
                 }
             )
                 .then(async (receipt) => {
@@ -311,7 +314,7 @@ export default {
                             config.contracts.MarketPlace
                         )
                     ).toNumber();
-                    this.buyItem();
+                    await this.buyItem();
                 })
                 .catch((err) => {
                     console.log(err);

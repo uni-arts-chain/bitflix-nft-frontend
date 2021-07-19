@@ -14,11 +14,11 @@
                         >MARKETPLACE</router-link
                     >
                 </li>
-                <!--                <li>-->
-                <!--                    <router-link to="/resell" :class="{ active: activeTab == 'resell' }"-->
-                <!--                        >RESELL</router-link-->
-                <!--                    >-->
-                <!--                </li>-->
+                <li>
+                    <router-link to="/resell" :class="{ active: activeTab == 'resell' }"
+                        >RESELL</router-link
+                    >
+                </li>
                 <li class="questions">
                     <router-link to="/questions" :class="{ active: activeTab == 'questions' }"
                         >COMMON QUESTIONS</router-link

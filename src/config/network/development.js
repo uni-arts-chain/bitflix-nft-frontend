@@ -3,6 +3,7 @@ module.exports = {
     contracts: {
         BitflixPoint: "0x7768c5e38Ad2DF9aFf54E1e36219dB968CEaccA7",
         MarketPlace: "0xad3b1EC016347931769B327f7b6d705e5698D920",
+        OtcMarketPlace: "0x1dEb41725A1D56d32972C3C9b09bF6e9D5eF9E59",
     },
     nfts: {
         BitflixNFT: {

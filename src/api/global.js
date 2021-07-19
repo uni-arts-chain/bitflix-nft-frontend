@@ -17,6 +17,23 @@ const apiList = [
         },
     },
     {
+        name: "GetResellList",
+        method: "GET",
+        desc: "获取二手市场",
+        path: "/arts/resell",
+        mockPath: "/arts/resell",
+        params: {
+            keyword: "",
+            art_type: "",
+            page: "",
+            per_page: "",
+            sort_type: "",
+        },
+        options: {
+            unSignature: false,
+        },
+    },
+    {
         name: "GetFilterCate",
         method: "GET",
         desc: "搜索过滤项",

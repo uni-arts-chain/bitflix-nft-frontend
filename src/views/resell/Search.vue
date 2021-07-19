@@ -150,7 +150,7 @@ export default {
                 : "";
         },
         replace() {
-            let path = "/marketplaceSearch";
+            let path = "/resellSearch";
             if (this.searchVal) {
                 path += "?keyword=" + encodeURIComponent(this.searchVal);
             }
@@ -190,7 +190,7 @@ export default {
             this.list = [];
             this.isLoading = true;
             this.$http
-                .globalGetMarketList(params)
+                .globalGetResellList(params)
                 .then((res) => {
                     this.list = res.list;
                     this.total = res.total_count;
@@ -246,7 +246,7 @@ export default {
                 });
         },
         goDetail(item) {
-            this.$router.push("/marketplaceDetail/" + item.id);
+            this.$router.push({ path: "/Detail/" + item.id, query: { type: "resell" } });
         },
         next() {
             if (this.currentPage < this.totalPage) {

@@ -129,11 +129,12 @@ export default {
         },
         requestNFTData() {
             let params = {
-                sort_type: "create_lth",
+                per_page: 8,
+                page: 1,
             };
             this.isTypeLoading = true;
             this.$http
-                .globalGetMarketList(params)
+                .globalGetResellList(params)
                 .then((res) => {
                     this.isTypeLoading = false;
                     this.nftList = res.list.filter((v, i) => i < 8).reverse();
@@ -188,7 +189,10 @@ export default {
             if (isTag) {
                 this.$router.push("/resellSearch?tags=" + item.id);
             } else {
-                this.$router.push("/marketplaceDetail/" + item.id);
+                this.$router.push({
+                    path: "/marketplaceDetail/" + item.id,
+                    query: { type: "resell" },
+                });
             }
         },
         goSearchList() {

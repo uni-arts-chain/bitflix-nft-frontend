@@ -10,6 +10,7 @@ import {
     Submenu,
     MenuItem,
     MenuItemGroup,
+    Button,
 } from "element-ui";
 import lang from "element-ui/lib/locale/lang/en";
 import locale from "element-ui/lib/locale";
@@ -30,5 +31,6 @@ export default {
         vue.use(Submenu);
         vue.use(MenuItem);
         vue.use(MenuItemGroup);
+        vue.use(Button);
     },
 };

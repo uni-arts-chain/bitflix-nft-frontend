@@ -12,6 +12,7 @@
                     <!-- <div class="label">DROPS 2:00 AM CST MAY 15</div>
                     <div class="recommend">RECOMMENDED PACK</div>-->
                     <ActionMovie
+                        class="item-img"
                         :title="v.art_type.toUpperCase() + ' NFT'"
                         :coverUrl="v.img_main_file1.url"
                         :coinUrl="getNFTCoinLogo(v)"
@@ -23,6 +24,18 @@
                         </div>
                         <div class="price">{{ v.price | priceFixed }} USDT</div>
                         <!-- <div class="notice">Only 1 left</div> -->
+                        <button
+                            v-if="v.is_owner === true && v.offer_state === 'selling'"
+                            @click="() => $emit('resellOrCancelItem', v, false)"
+                        >
+                            CANCEL
+                        </button>
+                        <button
+                            @click="() => $emit('resellOrCancelItem', v, true)"
+                            v-else-if="v.is_owner === true"
+                        >
+                            RESELL
+                        </button>
                     </div>
                 </div>
             </div>
@@ -123,13 +136,15 @@ export default {
     overflow: hidden;
 }
 .item {
-    cursor: pointer;
     width: 260px;
     margin-right: 50px;
     float: left;
     margin-top: 64px;
     margin-bottom: 60px;
     text-align: left;
+    .item-img {
+        cursor: pointer;
+    }
 }
 .item:nth-child(4n) {
     margin-right: 0;
@@ -169,6 +184,7 @@ export default {
 .info {
     margin-left: 36px;
     .name {
+        cursor: pointer;
         font-size: 18px;
         font-family: "Montserrat-Bold";
         font-weight: Bold;
@@ -207,6 +223,15 @@ export default {
         text-align: left;
         color: #d63ed5;
         letter-spacing: -1px;
+    }
+    button {
+        width: 100px;
+        height: 34px;
+        border-radius: 5px;
+        background-color: #00000000;
+        color: #eeeeee;
+        border: 1px solid #eeeeee;
+        margin-top: 24px;
     }
 }
 </style>
