@@ -145,9 +145,7 @@ export default {
         };
     },
     mounted() {
-        if (this.connectedAccount) {
-            this.init();
-        }
+        this.init();
     },
     watch: {
         isLogin(value) {
@@ -196,15 +194,16 @@ export default {
                         (v) => v.symbol.toLowerCase() == this.info.currency_code.toLowerCase()
                     );
 
-                    this.ERC20 = new ERC20(token.address, token.symbol, token.decimals);
-
-                    this.allowance = (
-                        await this.ERC20.allowance(
-                            this.connectedAccount,
-                            config.contracts.MarketPlace
-                        )
-                    ).toNumber();
-                    this.MarketPlace = new MarketPlace();
+                    if (this.connectedAccount) {
+                        this.ERC20 = new ERC20(token.address, token.symbol, token.decimals);
+                        this.allowance = (
+                            await this.ERC20.allowance(
+                                this.connectedAccount,
+                                config.contracts.MarketPlace
+                            )
+                        ).toNumber();
+                        this.MarketPlace = new MarketPlace();
+                    }
                 })
                 .catch((err) => {
                     this.isLoading = false;
