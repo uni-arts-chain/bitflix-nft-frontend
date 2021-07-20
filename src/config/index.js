@@ -22,5 +22,5 @@ export const ROUTER_DEFAULT_CONFIG = {
 
 export const CHAIN_DEFAULT_CONFIG = window.NODE_CONFIG || {};
 
-export const MobileLocation = "http://mobile.btflx.com";
+export const MobileLocation = "https://mobile.btflx.com";
 // export const RPC_DEFAULT_CONFIG = rpcConfig;
