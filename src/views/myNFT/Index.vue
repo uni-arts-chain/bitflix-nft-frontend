@@ -6,6 +6,9 @@
                 <div class="display-name">{{ connectedAccount }}</div>
             </div>
             <ActionMovieList
+                :is-loading="isLoading"
+                :is-approving="isApproving"
+                :item-id="itemId"
                 :list="cardList"
                 class="list"
                 @onMovieClick="goDetail"
@@ -35,6 +38,7 @@ import ERC721 from "@/plugins/contracts/Erc721";
 import config from "@/config/network";
 import { BigNumber } from "bignumber.js";
 import ElDialogHelper from "@/components/Dialog/ElDialogHelper";
+import { toBN } from "web3-utils";
 
 export default {
     name: "mynft",
@@ -44,8 +48,11 @@ export default {
         ActionMovieList,
     },
     data: () => ({
+        isLoading: false,
+        isApproving: false,
         cardList: [],
         itemPrice: 0,
+        itemId: null,
     }),
     computed: {
         connectedAccount() {
@@ -60,11 +67,14 @@ export default {
             this.$router.push("/nftdetail");
         },
         requestCardData(page, per_page) {
+            this.isLoading = true;
             this.$http.userOwnArts({ page, per_page }).then((res) => {
+                this.isLoading = false;
                 this.cardList = res.list;
             });
         },
         async resellOrCancelItem(item, bool) {
+            this.itemId = item.token_id;
             this.itemPrice = item.price;
             if (bool) {
                 await this.resellItem(item);
@@ -106,15 +116,14 @@ export default {
                             console.log(err);
                         }
                         if (txHash) {
+                            this.$notify.success(txHash);
                             console.log(txHash);
                         }
-                        this.isApproving = false;
                     }
                 )
                 .then(async (receipt) => {
                     console.log("receipt: ", receipt);
-                    this.isApproving = false;
-                    let price = new BigNumber(this.itemPrice).shiftedBy(unitToken.decimals);
+                    let price = toBN(new BigNumber(this.itemPrice).shiftedBy(unitToken.decimals));
                     await Resell.createOffer(
                         this.connectedAccount,
                         item.token_id,
@@ -124,6 +133,7 @@ export default {
                                 console.log(err);
                             }
                             if (txHash) {
+                                this.isApproving = false;
                                 console.log(txHash);
                                 this.$notify.success(txHash);
                             }
@@ -133,6 +143,7 @@ export default {
                             console.log("receipt: ", receipt);
                         })
                         .catch((err) => {
+                            this.isApproving = false;
                             console.log(err);
                             this.$notify.error(
                                 (err.head && err.head.msg) ||
@@ -157,10 +168,12 @@ export default {
                 }
                 if (txHash) {
                     console.log(txHash);
+                    this.isApproving = false;
                     this.$notify.success(txHash);
                 }
             })
                 .then(async (receipt) => {
+                    this.isApproving = false;
                     console.log("receipt: ", receipt);
                 })
                 .catch((err) => {

@@ -25,16 +25,18 @@
                         <div class="price">{{ v.price | priceFixed }} USDT</div>
                         <!-- <div class="notice">Only 1 left</div> -->
                         <button
+                            :disabled="itemId === v.token_id && isApproving"
                             v-if="v.is_owner === true && v.offer_state === 'selling'"
                             @click="() => $emit('resellOrCancelItem', v, false)"
                         >
-                            CANCEL
+                            CANCEL{{ itemId === v.token_id && isApproving ? "..." : "" }}
                         </button>
                         <button
+                            :disabled="itemId === v.token_id && isApproving"
                             @click="() => $emit('resellOrCancelItem', v, true)"
                             v-else-if="v.is_owner === true"
                         >
-                            RESELL
+                            RESELL{{ itemId === v.token_id && isApproving ? "..." : "" }}
                         </button>
                     </div>
                 </div>
@@ -61,9 +63,16 @@ export default {
         ActionMovie,
     },
     props: {
+        itemId: {
+            default: null,
+        },
         list: {
             type: Array,
             default: () => [],
+        },
+        isApproving: {
+            type: Boolean,
+            default: false,
         },
         isLoading: {
             type: Boolean,
@@ -225,6 +234,7 @@ export default {
         letter-spacing: -1px;
     }
     button {
+        cursor: pointer;
         width: 100px;
         height: 34px;
         border-radius: 5px;
@@ -232,6 +242,11 @@ export default {
         color: #eeeeee;
         border: 1px solid #eeeeee;
         margin-top: 24px;
+        &:disabled {
+            cursor: default;
+            color: #eeeeee55;
+            border: 1px solid #eeeeee55;
+        }
     }
 }
 </style>
