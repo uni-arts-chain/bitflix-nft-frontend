@@ -257,13 +257,19 @@ export default {
             }
             if (!this.isApproved || this.$route.query.type === "resell") {
                 await this.approve();
-                return;
+            } else {
+                await this.buyItem();
             }
-            await this.buyItem();
         },
         async buyItem() {
             this.isPurchasing = true;
-            const mk = this.info.offer_state === "selling" ? Resell : this.MarketPlace;
+            let mk;
+            // 取marketplace合约
+            if (this.info.market_level === "primary") mk = this.MarketPlace;
+            // 取OtcMarketPlace合约
+            else if (this.info.market_level === "otc") mk = Resell;
+            else return this.$notify.error("contract is null");
+
             // console.log("allowance: ", this.allowance);
             console.log("account: ", this.connectedAccount);
             console.log("Offer ID: ", this.info.offer_id);
@@ -291,27 +297,24 @@ export default {
         async approve() {
             this.isApproving = true;
             console.log(this.connectedAccount, config.contracts.MarketPlace);
-            this.ERC20.approveMax(
-                this.connectedAccount,
-                this.info.offer_state === "selling"
-                    ? config.contracts.OtcMarketPlace
-                    : config.contracts.MarketPlace,
-                async (err, txHash) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    if (txHash) {
-                        console.log(txHash);
-                    }
+            let contract;
+            // 取marketplace合约
+            if (this.info.market_level === "primary") contract = config.contracts.MarketPlace;
+            // 取OtcMarketPlace合约
+            else if (this.info.market_level === "otc") contract = config.contracts.OtcMarketPlace;
+            else return this.$notify.error("contract is null");
+            this.ERC20.approveMax(this.connectedAccount, contract, async (err, txHash) => {
+                if (err) {
+                    console.log(err);
                 }
-            )
+                if (txHash) {
+                    console.log(txHash);
+                }
+            })
                 .then(async (receipt) => {
                     console.log("receipt: ", receipt);
                     this.allowance = (
-                        await this.ERC20.allowance(
-                            this.connectedAccount,
-                            config.contracts.MarketPlace
-                        )
+                        await this.ERC20.allowance(this.connectedAccount, contract)
                     ).toNumber();
                     await this.buyItem();
                 })
