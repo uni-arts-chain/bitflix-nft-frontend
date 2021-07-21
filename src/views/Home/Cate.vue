@@ -36,7 +36,7 @@
             <div class="card-cate-item" @click="goMarketplaceDetail('star')">
                 <ActionMovie
                     title="STAR NFT"
-                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coverUrl="`${require('@/assets/images/nftType/star.png')}`"
                     :coinUrl="`${require('@/assets/images/cate-coin1.png')}`"
                 />
                 <span>STAR</span>
@@ -44,7 +44,7 @@
             <div class="card-cate-item" @click="goMarketplaceDetail('movie')">
                 <ActionMovie
                     title="MOVIE NFT"
-                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coverUrl="`${require('@/assets/images/nftType/movie.png')}`"
                     :coinUrl="`${require('@/assets/images/cate-coin2.png')}`"
                 />
                 <span>MOVIE</span>
@@ -52,7 +52,7 @@
             <div class="card-cate-item" @click="goMarketplaceDetail('music')">
                 <ActionMovie
                     title="MUSIC NFT"
-                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coverUrl="`${require('@/assets/images/nftType/music.png')}`"
                     :coinUrl="`${require('@/assets/images/cate-coin4.png')}`"
                 />
                 <span>MUSIC</span>
@@ -60,7 +60,7 @@
             <div class="card-cate-item" @click="goMarketplaceDetail('activist')">
                 <ActionMovie
                     title="ACTIVIST NFT"
-                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coverUrl="`${require('@/assets/images/nftType/activist.png')}`"
                     :coinUrl="`${require('@/assets/images/cate-coin3.png')}`"
                 />
                 <span>ACTIVIST</span>
@@ -68,7 +68,7 @@
             <div class="card-cate-item" @click="goMarketplaceDetail('trophy')">
                 <ActionMovie
                     title="TROPHY NFT"
-                    :coverUrl="`${require('@/assets/images/action-cover@2x.png')}`"
+                    :coverUrl="`${require('@/assets/images/nftType/trophy.png')}`"
                     :coinUrl="`${require('@/assets/images/cate-coin5.png')}`"
                 />
                 <span>TROPHY</span>

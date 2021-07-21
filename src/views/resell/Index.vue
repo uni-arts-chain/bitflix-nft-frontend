@@ -5,7 +5,7 @@
             <div class="search-container">
                 <input
                     class="search-input"
-                    placeholder="Search by Actor, Director, Movie title and genre, and NFT type"
+                    placeholder="Search Actor, Director, Movie, Genre"
                     v-model="searchVal"
                 />
                 <div class="v-br"></div>
