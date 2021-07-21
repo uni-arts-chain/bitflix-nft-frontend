@@ -10,7 +10,7 @@ import { MobileLocation } from "@/config";
 
 const up = new UaParser();
 up.setUA(window.navigator.userAgent);
-if (up.getDevice().type === "mobild") {
+if (up.getDevice().type === "mobile") {
     window.location.href = MobileLocation;
 }
 
