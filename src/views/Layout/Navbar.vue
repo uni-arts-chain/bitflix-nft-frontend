@@ -85,7 +85,7 @@
                             <span class="user-address">{{ connectedAccount }}</span>
                         </template>
                         <el-menu-item index="mynft">
-                            <router-link to="/mynft">MY NFT</router-link>
+                            <router-link to="/mynft">MY COLLECTION</router-link>
                         </el-menu-item>
                         <el-menu-item index="logout">
                             <span @click="logout">LOG OUT</span>

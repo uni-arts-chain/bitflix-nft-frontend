@@ -116,7 +116,7 @@ export default {
                             console.log(err);
                         }
                         if (txHash) {
-                            this.$notify.success(txHash);
+                            // this.$notify.success(txHash);
                             console.log(txHash);
                         }
                     }
