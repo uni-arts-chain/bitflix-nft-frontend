@@ -27,13 +27,13 @@
                         <button
                             :disabled="itemId === v.token_id && isApproving"
                             v-if="v.is_owner === true && v.offer_state === 'selling'"
-                            @click="() => $emit('resellOrCancelItem', v, false)"
+                            @click.stop="() => $emit('resellOrCancelItem', v, false)"
                         >
                             CANCEL{{ itemId === v.token_id && isApproving ? "..." : "" }}
                         </button>
                         <button
                             :disabled="itemId === v.token_id && isApproving"
-                            @click="() => $emit('resellOrCancelItem', v, true)"
+                            @click.stop="() => $emit('resellOrCancelItem', v, true)"
                             v-else-if="v.is_owner === true"
                         >
                             RESELL{{ itemId === v.token_id && isApproving ? "..." : "" }}
