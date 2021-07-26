@@ -11,19 +11,19 @@
                 :item-id="itemId"
                 :list="cardList"
                 class="list"
-                @onMovieClick="goDetail"
+                @onItemClick="goDetail"
                 @resellOrCancelItem="resellOrCancelItem"
             />
             <el-dialog-helper ref="priseDialog" width="30%">
                 <div class="priceForm">
-                    <div>转售价格</div>
+                    <div>Sale price</div>
                     <div>
                         <input v-model="itemPrice" />
                         <span>USDT</span>
                     </div>
                 </div>
                 <div slot="footer" slot-scope="scope" class="priceButton">
-                    <el-button @click="scope.close(true)" type="primary"> 出售 </el-button>
+                    <el-button @click="scope.close(true)" type="primary"> Sell </el-button>
                 </div>
             </el-dialog-helper>
         </div>
@@ -63,8 +63,8 @@ export default {
         this.requestCardData(1, 30);
     },
     methods: {
-        goDetail() {
-            this.$router.push("/nftdetail");
+        goDetail(item) {
+            this.$router.push("/marketplaceDetail/" + item.id);
         },
         requestCardData(page, per_page) {
             this.isLoading = true;
